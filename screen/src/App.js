@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import Home from './Home/home';
-import axios from "axios";
+import Home from './FindProject/FindProject';
+
 
 function App() {
   return (
