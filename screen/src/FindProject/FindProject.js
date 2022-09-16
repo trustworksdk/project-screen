@@ -65,6 +65,17 @@ const Home = () => {
                             <Card.Title className="cardtitle" > {project.name} </Card.Title>
                             <Card.Text>
                                 <div>  {project.description} </div>
+                                <br></br>
+                                <br></br>
+
+                                <b> Trustworkere på projektet: </b>
+                                { project.projectDescriptionUserList?.map(user => (
+                                    <div> 
+                                    <div> Id: {user.useruuid} </div>
+                                    <div> Beskrivelse: {user.description } </div>
+                                    <br></br>
+                                    </div>
+                                )) }
                             </Card.Text>
                         </Card.Body>
                     </Card>
