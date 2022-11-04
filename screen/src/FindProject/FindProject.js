@@ -8,8 +8,7 @@ import { Base64 } from "js-base64";
 const FindProject = () => {
     const navigate = useNavigate();
 
-    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NjM3NzA1MjUsImV4cCI6MTY2MzgwNjUyNSwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiZDI0ZjQ0ODQtNjkwNS00YTU2LTk4MjgtOTExNWMyMDA5OGJlIn0.LGPB5VGGL6vTwrweROTl3BFxsEBF-Jm_pZMHJoDThZUhUn8mtOU3cLSp0qzn_iAy48SUUn3eB8DcbqfbtAKrhtnrruxSycrhcTycf5gkIJ_Xbf4yWLALXTyjMVH8vbXX0DasiLxcZf4chaHAbJuACrG8DrNbiyEmHPbNtysVY7Ay5z_Gt7nAsnArtBV4SShZE6Qqv8ktgcvK75cNK1fbHvw-o6fnPCp4ix8eyBqdVdSyU85Y8nSyHlIgSZX_oeDn1CE8PQ9GLP6-RAJqTu1YotinpWHJjAT9LMQkL5dfACnPxelPlQBUfDCftKsngmwfk2n65VHtljxDLLo84-KrWUUMh_jxNWwu4grZjPkKe0o69yz46zW5lFoRiS2Qof3-ejj2xWzmQGTAKXbGPMurnrra4WRxYputveeHyC69_9jfn9q_bON8mpo9jkr_BDR5zW8PVZBb8dgzCVRmSnXZYWwuhY9c7Bz1QDN_Mf-zyBNC2Z6Mh1-BSz4pbTZDZhEh0KwJT6-5VH89QEYm5noZO_NJ3LaZFja9l8rApm36lIAVpGb4sysXjYIoCu_D3PH7AdxMLXh_1-wd1iBZm9FCK5Nol3BCSqykW2oMfQbBLHtj9yyYntEUK7RcvNk2ufMwyMBcweAa_EfdT8-LxFAxXVryu9Ww7QBvttKK6XpEU0E";
-
+    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NjYzNTIxMjgsImV4cCI6MTY2NjM4ODEyOCwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiNmQzNDA5YjktNjNhZC00MDVjLWJkZTItMDRiZmM5NWJkMmQ4In0.Le_8Aw9wZ2uhmX57EGSejjBfNfQzQ5_mUbnn9KI5p4amGKM1TjwE-QFXHY4QCvN3creTk1eOHjgFc-aGOuJM1uoUJtp54KlKZJX5wTOD02zVMbOR0BHudWir7k_4Vsc4OGif1IPXhHh_vxD-g-ZntAsBWInPxHRV8Xc2sKOzSB9kiEDMMEq5MXCcrGozNUH9ZHci7lEQoBi8g5QI7aYNDsgq9VYagXfTgaawIb1JxiHog4HM57vFl2cmE4Cv6RTEQCLBj8gDR1Sj-CaNBnEKfKG4qScUYgzziFnuEzFBZMdWrWxiuuXM_O9p7Fjes1e1O0QeTAsHgwxmdD8B_Xb89DYGxDwv9UyJAAOIusVUiSehNgaCw5Rk8XjW6vADd8kuDPmJ60bVfxykCk_6xgybWlcU2xB1jiL-KvPjDVViLIWu9pW6RF2PLYuPJTSiejelsDHNi8b1S3jGI-h3bAfSysEyym16vlzQF9IsE4EVI2FmhvBcPdp2VCmh0cHA1VZW4ycm68YOXThrgveqBKDX0Z9YwH1bM7WA-G9cvdiTzSKSRGQ_sy-eJ5RDtyoySDrvnuVc21v66_iS0yayBRCalOAM0_yzwvFFCiAsJ59U59oZpk1Nk71vXc3A-GZY6t6qkHQqn5PIk6r4pFX2SYDRK4l59f64fB6F9BfEya33yuI";
     const config = {
         headers: { Authorization: `Bearer ${token}`}
     };
@@ -18,21 +17,18 @@ const FindProject = () => {
     const [projectData, setProjectData] = useState();
     const [clientData, setClientData] = useState();
     const [clientID, setClientID] = useState();
+    const [clientLogo, setClientLogo] = useState();
     
 
     useEffect(() => {
         axios.get('https://api.trustworks.dk/knowledge/projects', config)
         .then(response => {
             setProjects(() => response.data)
-            console.log("Projects:", projects)
-            
-            
+            // console.log("Projects:", projects)   
         }).catch(error => {
             console.log(error)
         });
     }, []);
-
-   
 
    
     const printProjectsToConsole = () => {
@@ -50,30 +46,38 @@ const FindProject = () => {
         // console.log("projectData:", projectData);
     }, [projects]);
 
-  
 
-
-    useEffect(() => {
-        // axios.get('https://api.trustworks.dk/files/photos/7d34db42-9d11-4fe2-84df-449a46cdfcc9', config)
-        axios.get(`https://api.trustworks.dk/files/photos/${clientData?.uuid}`, config, )
-        .then(response => {
-            setClientData(() => response.data)
-            console.log("logo data: ", response.data)
-            console.log("id: ", clientData?.uuid);
-            
-            
-            // setClientID(projectData?.clientuuid);
-            // console.log("logo string: ", clientData.file)
-            // setClientLogo(() => clientData?.file)
-        }).catch(error => {
-            console.log(error)
-        });
-    }, []);
 
     useEffect(() => {
         setClientID(projectData?.clientuuid);
         // console.log("client id:", clientID);
     }, [projects])
+
+  
+
+
+    useEffect(() => {
+        projects?.map(project => (
+        // axios.get('https://api.trustworks.dk/files/photos/7d34db42-9d11-4fe2-84df-449a46cdfcc9', config)
+        axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config, )
+        .then(response => {
+            setClientData(() => response.data)
+            console.log(clientData)
+            // setClientLogo(() => clientData.file)
+            // console.log(clientLogo)
+
+
+            // setClientData(() => response.data)
+            
+            
+
+            
+        }).catch(error => {
+            console.log(error)
+        }) ));
+    }, []);
+
+    
    
 
 
@@ -89,6 +93,7 @@ const FindProject = () => {
             <br/>
             <br/>
             <h2> Projekter: </h2>
+            
             <div>
                 {projects?.map(project => (
                     <Card>
@@ -98,7 +103,7 @@ const FindProject = () => {
                             <Card.Text className="cardtext" >
                                 <div>  {project.description} </div>
                                 
-                                <img src={"data:image/png;base64," + clientData?.file} />
+                                {/* <img src={"data:image/png;base64," + clientLogo} /> */}
                                 <div>
                                     {/* <img src="data:image/png;base64, " /> */}
                                 </div>
