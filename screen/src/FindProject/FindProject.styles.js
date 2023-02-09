@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 
 export const Wrapper = styled.div`
-    background: #203369;
+    // background: #203369;
     font-family: 'Source Sans Pro';
     
 
