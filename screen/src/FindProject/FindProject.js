@@ -143,6 +143,7 @@ const FindProject = () => {
         .then(response => {
             // setEmployeePhoto(response.data.file)
             let fileString = response.data.file;
+            // console.log(fileString)
             
             let objIndex = employeeList.findIndex((obj => obj.id === {props}));
             console.log(objIndex)
