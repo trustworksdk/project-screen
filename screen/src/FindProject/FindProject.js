@@ -133,11 +133,6 @@ const FindProject = () => {
 
 
 
-
-
-
-    
-
     const getEmployeePhoto1 = (props) => {
         axios.get(`https://api.trustworks.dk/users/${props}/photo`, config)
         .then(response => {
