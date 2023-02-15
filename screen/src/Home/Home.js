@@ -1,8 +1,8 @@
 import { Button, Container, Row, Col, Card, CardGroup } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { Wrapper } from "./Home.styles";
-import dsb from "../img/dsb2.png"
-import kurt from "../img/kurt.jpg"
+// import dsb from "../img/dsb2.png"
+// import kurt from "../img/kurt.jpg"
 
 
 
@@ -18,24 +18,24 @@ const Home = () => {
             <CardGroup >
             <div className="col-sm-4">
                 <Card  className="card bg-transparent border-0" >
-                    <Card.Img class="mx-auto " variant="top" src={dsb} width={170} height={150} ></Card.Img>
+                    {/* <Card.Img class="mx-auto " variant="top" src={dsb} width={170} height={150} ></Card.Img> */}
                     <Card.Body className="people">
 
                         <Card className="person card bg-transparent border-0">
                             <Card.Body>
-                            <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img>
+                            {/* <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img> */}
                             <div className="person card text bg-transparent border-0" > Løsningsarkitekt- Hjælper med tekniks projektledelse, konceptualisering samt roadmaps. </div>
                             </Card.Body>
                         </Card>
                         <Card className="person card bg-transparent border-0">
                             <Card.Body>
-                            <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img>
+                            {/* <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img> */}
                             <div className="person card text bg-transparent border-0" > Løsningsarkitekt- Hjælper med tekniks projektledelse, konceptualisering samt roadmaps. </div>
                             </Card.Body>
                         </Card>
                         <Card className="person card bg-transparent border-0">
                             <Card.Body>
-                            <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img>
+                            {/* <Card.Img className="person card image" src={kurt} style={{ width: 140, height: 120, borderRadius: '50%', float: "left" }}  ></Card.Img> */}
                             <div className="person card text bg-transparent border-0" > Løsningsarkitekt- Hjælper med tekniks projektledelse, konceptualisering samt roadmaps. </div>
                             </Card.Body>
                         </Card>  

@@ -5,7 +5,7 @@ import { Wrapper } from "./FindProject.styles";
 import { useNavigate } from "react-router-dom";
 import { Base64 } from "js-base64";
 import Project from "../Project";
-import kurt from "../img/kurt.jpg";
+// import kurt from "../img/kurt.jpg";
 
 const FindProject = () => {
 
@@ -177,7 +177,7 @@ const FindProject = () => {
         return ( 
             <div>
                 <h1>Hello, {props.useruuid}</h1>
-                <img src={kurt} />
+                {/* <img src={kurt} /> */}
             </div>
         )
     }
