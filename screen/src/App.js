@@ -10,23 +10,7 @@ const styles = {
     backgroundImage:`url(${twlogo})`,
     backgroundRepeat:"no-repeat",
     backgroundSize:"contain",
-    // backgroundSize: '100% 100%',
-    //backgroundSize: 'cover',
-    
-    // height:800,
-    // width:800,
-  
-    
-    
-    
-    
   },
-
-  // content: {
-  //   height: '100%',
-  //   width: '100%',
-  //   backgroundColor: 'rgba(0, 0, 0, 0)',
-  // }
 }
 
 

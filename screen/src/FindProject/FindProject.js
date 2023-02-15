@@ -5,14 +5,23 @@ import { Wrapper } from "./FindProject.styles";
 import { useNavigate } from "react-router-dom";
 import { Base64 } from "js-base64";
 import Project from "../Project";
+import kurt from "../img/kurt.jpg";
 
 const FindProject = () => {
 
     const navigate = useNavigate();
 
-    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NzU5NTMwMjgsImV4cCI6MTY3NTk4OTAyOCwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiM2VlNGFmZTYtOGQ4MS00Y2Q1LTlkY2ItNGIwOGNjYTM1NzAxIn0.I3qfK2EQbqDLj4UrC49sUs58j1iwW7y0N7yzZzYSeVzCvc18G7nJvawW0H69q3qcR1tFkijcNf7DQgil7axaPKkahoGTAkgVmbM-UfbVYFxbN3ylCqsOIZs5nB_CXQaNTiuNHLXzzA6wbC4GXM9Gfd27Up2Sf1RbR0EE_pnj9TVe3i6QyH1HuSEvGDG2EjrGLtjnyTkV_hp3Q7ZXpbRxW84FREauqaDxaW7kzMbGJWKuPASIW9Rgpu3LMGrJ183ICIbYq2iZuOaCq0p-rc4hI1GgfCcdrd2vdxntcGVNSVM9CiGb8SSws3e55hEp4XmjUmj0REbRC6glo753krxv2RDYkZnuBm9U9jqu1LMBqz0mHImCdXLnRdKbeyWl3u3sxdWTQEn7sshYE5oz28T3hB_oWD9PtUiotaxtIslWEi0mqk6_or3N-dgL1N_Z8malvw7sv5ODy7atRWY4RvDKSiaTC6RE2vLefO8gGV6o1uKII_J5MUwpX4-kqzacQ4g3OWepswy8h3jLF_dnJgMxwscGJ-Ps0UgJMkzn5qq-ZLCgC67frxQ58ErDgYmKsgcnZ5YiQCDvlkFaWwcHNoT_5EUBdB9cEjg6zUtlo0A3l7WzbR53FeE8QW7ZwxqePM7dl6GdSLtK7VIGxEdQdPgKXUCLk5aaIy-f1dNqo3Eq7NE";
+    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NzY0NjMwOTgsImV4cCI6MTY3NjQ5OTA5OCwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiYTNhYTRlMjctYWEwYi00NTlkLWFjNmYtMWFiODEwMTkzZDM5In0.B3JHug7-oqJH2nMJufII3vpi2k8yeU9Pcy53IZUTwmx5S-s6pGh3M5blsiRbJqWpXjUZ03zoEp500LgpWOXqvztSSxafyGx6_vVSfl_3E5Ih1FkBG8Qzh7OjFYU6qPMlyiW3JsBiWdlWYZy2uiXUN9AUALg75XHbK6EQ3UapuLLYayI8Vp1NLkF6Wfi9zZRz1G0Jp_ruiyy8rLvADQisWNfyTdH9dPHUwo-MvxCG9eBZftztkFM073ybu0VVCc3KgDS6QC4RAdOE3MvWX8ZrvNUf_hRI9yzbWXgCKoXj72E85LElFAh4dDINDXnpJKzzFSD60BXR3s7zPAnW1f1UfxcKo-bpJh5abr1VXtKkXSnb9tiYXja6-FCjVQBAnT76WOqR8VVOKaPtoZEtl-dQxgQ-uE7h-o9uEJeF99LawVrelnCYpDPdR6BctfUG3KqrPiUcnI6DNLSbNAAy5qwpgyrWX1GJccTWyoP-JQeLXzbkJLYyH8VlYBNUVs3BMDjwyYy3RQJ_6cokI8lzLHuslkY48EM2IKHRC4fNQXk4Ka-S2ggb0LxUqEL3fr0aIu9pDcfXf9DKEPAe8vYsRzpUXo8pBXbb6FsbQQBjQUuT0_hDAZwEKOSzNebMDYxLSBiUnOWw88VojRbISRJSig_Z7JogBwevViFgnqh52jhy6gg";
     const config = {
-        headers: { Authorization: `Bearer ${token}`}
+        headers: { Authorization: `Bearer ${token}`},
+        // mode: 'no-cors',
+        // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+        // 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+        // 'Access-Control-Request-Headers': 'Content-Type, Authorization',
+        // withCredentials: true,
+        // credentials: 'same-origin',
+        
+      
     };
 
     const [projects, setProjects] = useState();
@@ -20,9 +29,15 @@ const FindProject = () => {
     const [clientData, setClientData] = useState();
     const [clientID, setClientID] = useState();
     const [clientLogo, setClientLogo] = useState();
-    const [useruuid, setUseruuid] = useState();
-    const [employeePhoto, setEmployeePhoto] = useState();
+    const [employeeId, setemployeeId] = useState();
+    const [employeePhotos, setEmployeePhotos] = useState([]);
+    const [employeePhoto, setEmployeePhoto] = useState("");
+    const [employeeDescription, setEmployeeDescription] = useState("");
     const [employeeList, setEmployeeList] = useState([]);
+    const [fileList, setFileList] = useState([]);
+    const [employeesOnProjectsList, setEmployeesOnProjectsList] = useState([]);
+
+
     
 
     useEffect(() => {
@@ -36,41 +51,159 @@ const FindProject = () => {
     }, []);
 
 
-    const getEmployee = () => {
-        projects.map(project => (
-            project.projectDescriptionUserList?.map(employee => {
-                console.log("employee:", employee.useruuid)
-            })
-        ) )
-    }
+    useEffect(() => {
+        setProjectData(projects);
+    }, []);
 
-    const getEmployeePhoto2 = (props) => {
-        axios.get(`https://api.trustworks.dk/users/${props}/photo`, config).then(response => {
-            console.log(response.data.file)
-            var photo = response.data.file
-            return photo
+
+    useEffect(() => {
+        projects?.map(project => {
+            project.projectDescriptionUserList?.map(user => {
+                employeeList.push(user)
+            })
+        })
+        employeeList.forEach((element) => {
+            element.file = "";
+        })
+        console.log(employeeList)
+    }, [projects]);
+
+
+
+
+    // useEffect(() => {
+    //     projects?.map(project => {
+    //         project.projectDescriptionUserList?.map(user => {
+    //             employeeList.push(user)
+    //         })
+    //     })
+    //     employeeList?.map(employee => {
+    //         let id = employee.useruuid;
+    //         axios.get(`https://api.trustworks.dk/users/${id}/photo`, config).then(response => {
+    //         fileList.push(response.data.file)
+    //     })
+    //     })
+    // }, []);
+
+
+
+    
+    // const getEmployee = () => {
+    //     projects.map(project => (
+    //         project.projectDescriptionUserList?.map(employee => {
+    //             console.log("employee:", employee.useruuid)
+    //         })
+    //     ) )
+    // }
+
+
+    // let getUser = (id) => {
+    //     axios.get(`https://api.trustworks.dk/users/${id}/photo`, config)
+    //     .then(response => {
             
+    //     })
+    // }
+
+    
+
+    // useEffect(() => {
+    //     axios.get('https://api.trustworks.dk/users', config)
+    //     .then(response => {
+    //         setEmployeeList(response.data)
+    //         console.log(employeeList)
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }, []);
+
+
+    // const getEmployee = () => {
+    //     const id = "d7a1061b-8de5-44f6-8bc2-ee52ed32a149";
+    //     const employeeId = employeeList.find((person) => person.uuid === id);
+    //     console.log(employeeId)
+    //     return <h1>userid: {employeeId.uuid}</h1>
+    // }
+
+
+
+    // const binaryToImage = (props) => {
+    //     return <img src={`data:image/jpeg;base64,${props}`} />
+    // }
+
+
+
+
+
+
+
+    
+
+    const getEmployeePhoto1 = (props) => {
+        axios.get(`https://api.trustworks.dk/users/${props}/photo`, config)
+        .then(response => {
+            // setEmployeePhoto(response.data.file)
+            let fileString = response.data.file;
             
+            let objIndex = employeeList.findIndex((obj => obj.id === {props}));
+            console.log(objIndex)
+            // employeeList[objIndex].file = fileString;
         }).catch(error => {
             console.log(error)
         })
+        // return <img src={`data:image/jpeg;base64,${employeePhoto}`} /> 
     }
+
+
 
     function getEmployeePhoto(props) {
-        axios.get(`https://api.trustworks.dk/users/${props}/photo`, config).then(response => {
-            console.log(response.data.file)
-            var photo = response.data.file
-            setEmployeePhoto(response.data.file)
-            return ( 
-                employeePhoto
-            )
+        axios.get(`https://api.trustworks.dk/users/${props}/photo`, config)
+        .then(response => {
+
+            // setEmployeeList(response.data)
             
-        
+            const photo = response.data.file
+            // console.log(employeeList)
+
+
+
+            // return <img src={props.src} lat="" />
         }).catch(error => {
             console.log(error)
         })
-
     }
+
+
+    function Test(props) {
+        return ( 
+            <div>
+                <h1>Hello, {props.useruuid}</h1>
+                <img src={kurt} />
+            </div>
+        )
+    }
+
+
+    // function printEmployeeList() {
+    //     console.log(employeeList)
+    // }
+
+    
+
+
+
+    // function getEmployeePhoto(props) {
+    //     axios.get(`https://api.trustworks.dk/users/${props}/photo`, config).then(response => {
+    //         // console.log(response.data.file)
+    //         var photo = response.data.file
+    //         setEmployeePhoto(response.data.file)
+    //         return ( 
+    //             employeePhoto
+    //         )
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+
+    // }
 
     // 8fa7f75a-57bf-4c6f-8db7-7e16067c1bcd
     // useEffect(() => {
@@ -96,31 +229,33 @@ const FindProject = () => {
     //     })
     // }
 
-    useEffect(() => {
-        setProjectData(projects);
-    }, []);
+   
 
 
 
-    const getLogo = (props) => {
-        axios.get(`https://api.trustworks.dk/files/photos/${props.clientuuid}`, config)
-        .then(response => {
-            // setClientData(() => response.data)
-            setClientData(() => response.data)
-            console.log("clientdata.file: ", clientData.file)  
-        })
-        return (
-            <div>
-                <img src={"data:image/png;base64," + clientLogo} />
-            </div>
-        )
-    }
+    // const getLogo = (props) => {
+    //     axios.get(`https://api.trustworks.dk/files/photos/${props.clientuuid}`, config)
+    //     .then(response => {
+    //         // setClientData(() => response.data)
+    //         setClientData(() => response.data)
+    //         console.log("clientdata.file: ", clientData.file)  
+    //     })
+    //     return (
+    //         <div>
+    //             <img src={"data:image/png;base64," + clientLogo} />
+    //         </div>
+    //     )
+    // }
+
+    
 
     
 
 
     return (
         <Wrapper>
+            
+            
             <h1>This is FindProject</h1>
             <h3>Test af API kald: </h3>
             {/* <Button onClick={printProjectsToConsole} >Print projects</Button> */}
@@ -135,66 +270,75 @@ const FindProject = () => {
 
             <div>
             {projects?.map(project => (
-            <Card>
+            <Card  >
                 <Card.Body>
             
                     <Card.Title className="cardtitle" > {project.name} </Card.Title>
                     <Card.Text className="cardtext" >
                         <div>  {project.description} </div>
-                        {/* {console.log(project)} */}
-                        
-                        {/* <img src={"data:image/png;base64," + clientLogo} /> */}
-                        
-                        
-                        {/* <div> {GetClientLogo(project)} </div> */}
-                        {/* { getLogo(() => project) } */}
-
-                       {/* {getLogo(project)} */}
-
-                       {/* <div> {getLogo} </div> */}
-
-                       {/* {getEmployee()} */}
-
-
-                        
-                       <br></br>
+             
+                        <br></br>
                         <br></br>
                         <b> Trustworkere på projektet: </b>
+
+
+
+                        
+                        {/* {setemployeeId(user.useruuid)}
+                        <h2> EmployeeId variable: {employeeId} </h2> */}
+
+                        
+
+                        
+
+                        
                         
                         
                         { project.projectDescriptionUserList?.map(user => (
+                            
+
                             <div> 
+                                
+                                
+
+                                
+
+                                {/* {setEmployeesOnProjectsList(user)}
+                                {console.log(employeesOnProjectsList)} */}
+
+                                {getEmployeePhoto1(user.useruuid)}
+                                
+
+                                
+                                
+                            
                             <div> Id: {user.useruuid} </div>
                             <div> Beskrivelse: {user.description } </div>
                             <br></br>
-                            {/* {getEmployeePhoto(user.useruuid)} */}
 
-                            <div> Employeefile: 
-                                <img src={"data:image/png;base64, " + getEmployeePhoto(user.useruuid)} />
+                            <div> 
+                                Employeefile:
                             </div>
-                            <span> span: {getEmployeePhoto(user.useruuid)} </span>
                             <br></br>
 
                             
                             </div>
                         )) }
+
+
+
                     </Card.Text>
                 </Card.Body>
             </Card>
             ))}
             </div>
-
-            
-
-
-            
-            
-
         </Wrapper>
     )
 }
 
 export default FindProject
+
+
 
 
 
