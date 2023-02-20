@@ -1,5 +1,5 @@
 import styled from "styled-components"
-// import twlogo from "../../src/img/iconlogo_white.png";
+import twlogo from "../../src/img/iconlogo_white.png";
 
 export const Wrapper = styled.div`
     // background: #203369;
