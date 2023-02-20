@@ -12,7 +12,7 @@ const FindProject = () => {
 
     const navigate = useNavigate();
 
-    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NzY4OTgxMzQsImV4cCI6MTY3NjkzNDEzNCwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiZWZlZDMyODQtOWQ3NC00MzcwLTkyYzItMTRhMmI2ZTRjYmEzIn0.gdKr3nT4jFjnGIJO9-o0YTLsWzTqXinzdlpyW-IdfwsrafIHilcuKd3WP1fZX6IYE7QJvGtjY_fEy3KqQQYyhtPIZx1ziYH24LPNUwgXSMuzjscFB_w2blWKt1SVShutmZ_S8OX_OAodtC6lQlkLE6neqORven8-xOKy-Idq-XXlo1kk9asA4_jfpNzO_f-xN9Gin9NyrJfWRwIGINxW2uh6Ksue2TnVl9qwzZfGDm_YXfYv69qlQlG1p78RWexWoKUJui5XF_CoiVCmdTzRjn1LTQjGZRRB_clbVF-yPxd-EWBGAJXCVpXMRlviC26uzet2o4KUNrRkLOPXosnd8tM-e6_wKQw3NxoKyMPiO924s-EyCsd2gatCEUl8SdArK47XX1H6ZFmcSHQL4ImBrvuBjW3se_Cs3f_Y0Ntu6e7KAWu5DJRcfEFH_h_fuWFHjns0henRCqnbVetue3xneRzB_FrB__DoA08iZQ1MjRf7IpeWaXnC-Y16azIge-g-CC0EwpWoxL8P73-7FKp6nnsBEbljuEwhP48IRV3RUu8jzMa3ZVEt6DRjYmzQGYAXWKxzimoJTqfmfb6hxM1HGk-8vcojfjpu_CwEW6TUGtlN6BYONdW7hFjmOnIgN7onMaaNTKupO9FjqqyQ1BtjFSpXtJx--kBE5gECrcjSRZI";
+    const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkaXR0ZS5oam9ydGgiLCJpYXQiOjE2NzY5MTIyNzksImV4cCI6MTY3Njk0ODI3OSwiZ3JvdXBzIjpbIlVTRVIiXSwianRpIjoiMDY4ZDRkNTctNTMwMi00NWJmLTgyZmMtNjE2NmE5NzY4NDc4In0.eoXxFlZWl_rz-LGT1pFzMtmc-rICbgnt4UBML0rksqJUpETS8_fQXDw5UiB0SsMhiR5iMuyVm12NBliLkKptrb5GwyZ-kIsab7rYuXhEGBAuVjmgerI9-cqo7UuDFc5CHNK4nqOLqe_Xv_wvajLNDOO4vDmio7PxFdER4TGb0l42lSO6HrG5VvjFmPSL6LjrmzXZ8omU1xOiJlGjoj_plCf6AG8TRYYIweHMDaxsipXWJqzgYZ_7jPIVE6KyGlgKJneQ2kiLTKmW0tDdJTBL0JXMEsmBk14h7c-rjFAP9pdXP0DbsWm0eyxmd2rAmqz2RrTeVIoPpksi4QDvfkuJEa86fJZvg2KJ-zd6e1SBpSsXjrWq9PTUTmlZvwOeMMzbT1qcoOoi5bAm2nKs_UGjfigrFuKFYFE8hiT-sPUhw_kT481ZbpA3fp9nmTWek0IUE3aVr1AyiiddPbrsf58_euBMYIgNALuXEBAjw3jKGs3beUCo2ZlZHJQfGfDCo4vdwHhCUYj-ls3wUUJ4XT6-rV2oChj-aABEuTXeUojFBtY7p7ZtrjBAF8HKA7sNlD70F0tQr-PKHROYZqHJ7Ee69gba-x_LCGzFn5nfhgF3eTrfi-xvq-ETtT8l9WcfHRDdCzNtr7sjNCRc-bceRc66qS5WdDosAy64xzhBUpRBwGg";
     const config = { headers: { Authorization: `Bearer ${token}`} };
 
     const [projects, setProjects] = useState();
@@ -22,6 +22,7 @@ const FindProject = () => {
     const [clientLogo, setClientLogo] = useState();
 
     const [employeeList, setEmployeeList] = useState([]);
+    const [clientList, setClientList] = useState([]);
    
     
 
@@ -34,7 +35,6 @@ const FindProject = () => {
             console.log(error)
         });
     }, []);
-
 
     
     useEffect(() => {
@@ -57,8 +57,6 @@ const FindProject = () => {
     }, [projects]);
 
 
-
-
     function handleEmployeeList() {
         // let pp = employeeList.filter( (ele, ind) => ind === employeeList.findIndex( elem => elem.useruuid === ele.useruuid && elem.file === ele.file))
         // setEmployeeList(pp)
@@ -66,13 +64,34 @@ const FindProject = () => {
     }
 
 
-
     function getEmployee(props) {
         const foundItem = employeeList.find(item => item.id === props);
         // console.log(foundItem)
         return foundItem ? foundItem.file : null;
-
     }
+
+
+
+    useEffect(() => {
+        projects?.map(project => {
+            axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config)
+            .then(response => {
+                setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
+            }).catch(error => {
+            console.log(error)
+            })
+        })
+    }, [projects]);
+
+
+    function getClientLogo(props) {
+        const foundItem = clientList.find(item => item.id === props);
+        return foundItem ? foundItem.file : null;
+    }
+
+
+
+
 
 
 
@@ -96,27 +115,23 @@ const FindProject = () => {
             {projects?.map(project => (
             <Card  >
                 <Card.Body>
+                    {/* {getClientLogo(project.clientuuid)} */}
+                    {/* <Card.Img  /> */}
+                    <img src={`data:image/jpeg;base64,${ getClientLogo(project.clientuuid) }`} style={{ width: 540, height: 230, borderRadius: '3%' }}/>
             
                     <Card.Title className="cardtitle" > {project.name} </Card.Title>
                     <Card.Text className="cardtext" >
                         <div>  {project.description} </div>
-             
                         <br></br>
                         <br></br>
                         <b> Trustworkere på projektet: </b>
                         
                         { project.projectDescriptionUserList?.map(user => (
                             <div>
-                                
                                  {<img src={`data:image/jpeg;base64,${ getEmployee(user.useruuid) }`} style={{ width: 140, height: 130, borderRadius: '50%' }}  />}
-                                 
                                 <div> {user.description } </div>
-                                
                             </div>
                         )) }
-
-
-
                     </Card.Text>
                 </Card.Body>
             </Card>
