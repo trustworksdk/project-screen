@@ -70,7 +70,7 @@ const Home = () => {
 
 
     return (
-        <Wrapper>
+        <Wrapper className="body::before" >
         <Button onClick={() => navigate('/findproject')} > Flere projekter</Button>
 
 

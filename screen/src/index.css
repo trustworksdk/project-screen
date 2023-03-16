@@ -11,13 +11,28 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #203369 !important;
-  /* font-family: 'Source Sans'; */
-
-  /* background-image: "url(../img/tw-logo.jpg" */
+  
+ 
+  background-image: url('./img/tw_white.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: 40% !important;
+  background-position: 70% 30% !important;
   
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* body::before {
+  background-image: url('./img/tw_white.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: 50% !important;
+  background-position: 70% 30% !important;
+  opacity: 0.75;
+  content: "";
+
+} */
