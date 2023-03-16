@@ -10,13 +10,13 @@ export const Wrapper = styled.div`
 
     h1 {
         color: #53D49C;
-        font-size: 55px;
+        font-size: 45px;
         font-weight: bold;
     }
 
     h2 {
         color: #53D49C;
-        font-size: 29px;
+        font-size: 23px;
         font-weight: bold;
     }
 
@@ -30,7 +30,9 @@ export const Wrapper = styled.div`
     }
 
     .col-sm-8{
-        padding-left: 200px;
+        padding-left: 150px;
+        padding-right: 150px;
+        
     }
 
 
@@ -39,6 +41,7 @@ export const Wrapper = styled.div`
         border-radius: 0px 90px 90px 0px;
         padding-top: 40px;
         padding-left: 10px;
+        height: 800px;
     }
 
     .card-img-top {
@@ -54,7 +57,7 @@ export const Wrapper = styled.div`
 
     .person.card.text.bg-transparent.border-0{
         font-size: 17px;
-        padding: 20px;
+        padding: 10px;
     }
 
     .btn.btn-primary {
@@ -63,16 +66,36 @@ export const Wrapper = styled.div`
         border: 0;
         color: #16215B;
     }
-
-
     
 
     .ydelser-og-tools{
-        background-color: #CAE2E1;
-        
-
+        margin-top: 300px;
+        padding-left: 30px;  
     }
 
+
+    .carousell{
+        height: 1000px;
+    }
+
+
+    .personcardbody{
+        display: table;
+        // text-align: center;
+    }
+
+    .userdescription{
+        font-size: 18px;
+        padding-left: 20px;
+        display: flex;
+        display: table-cell;
+        vertical-align: middle;
+        
+    
+      
+
+    }
+  
   
    
 
