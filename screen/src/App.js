@@ -3,13 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import FindProject from './FindProject/FindProject';
 import Home from "./Home/Home";
-import twlogo from "../src/img/iconlogo_white.png";
+import twlogo from "../src/img/tw_white.png";
 
 const styles = {
   header: {
-    backgroundImage:`url(${twlogo})`,
+    backgroundImage:`url(${twlogo})` ,
+    width:'100%',
+    height:'100%',
+    backgroundPosition: '800px 100px',
     backgroundRepeat:"no-repeat",
-    backgroundSize:"contain",
+    backgroundSize:"50% 70%",
+    // display: "inline-table"
   },
 }
 

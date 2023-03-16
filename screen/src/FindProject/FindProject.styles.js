@@ -29,6 +29,11 @@ export const Wrapper = styled.div`
     .cardtext {
         color: #CAE2E1;
     }
+
+    .dropdown.buttons{
+        
+
+    }
     
 
 
