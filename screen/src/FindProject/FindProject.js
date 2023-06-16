@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup } from "react-bootstrap";
+import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup, Carousel } from "react-bootstrap";
 import { Wrapper } from "./FindProject.styles";
 import { useNavigate } from "react-router-dom";
 import {config} from "../Components/API";
-import Carousel from 'react-multi-carousel';
+// import Carousel from 'react-multi-carousel';
+// import { useSpringCarousel } from 'react-spring-carousel'
 
 
 const FindProject = () => {
@@ -50,92 +51,91 @@ const FindProject = () => {
         });
     }, []);
 
-    //  Hente liste fra knwledge/projects
-    // liste clientuuid 
-    // omsat clientuuid til clientname via /client  
+
     
     
     useEffect(() => {
         projects?.map(project => {
 
             const foundClient = clients.find(item => item.uuid === project.clientuuid)
-            const foundClientName = foundClient.name
-            // console.log(foundClientName)        
+            const foundClientName = foundClient.name      
 
             setNewProjects( projectsList => [...projectsList, {clientname: foundClientName, projectname: project.name, startdate: project.from, enddate: project.to, description: project.description}] )
-
-            
-          
         })
     }, [projects]);
 
 
     // useEffect(() => {
     //     clients?.map(client => {
-
     //         const foundClientName = projects.find(item => item.clientuuid === client.uuid)
-            
     //         //console.log(foundClientName ? foundClientName.name : null)
-
     //         setProjects( projectsList => [...projectsList, {clientname: foundClientName.name}] )
-
     //         console.log(projects)
-
-          
     //     })
     // }, [projects]);
 
-
   
-
 
     useEffect(() => {
         axios.get('https://api.trustworks.dk/users', config)
-        .then(response => {
-            setAllConsultants(() => response.data)
+          .then(response => {
+            setAllConsultants(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
 
-            setActiveConsultants(
-                allConsultants.filter(x => 
-                   x.active === true &&
-                   (x.statuses.some(y => 
-                       y.type === "CONSULTANT") ||
-                   x.statuses.some(y => 
-                       y.type === "STUDENT"))
-               ) );
-             
-        }).catch(error => {
+      useEffect(() => {
+        setActiveConsultants(
+          allConsultants.filter(x =>
+            x.active === true &&
+            (x.statuses.some(y =>
+              y.type === "CONSULTANT") ||
+              x.statuses.some(y =>
+                y.type === "STUDENT")
+            )
+          )
+        );
+      }, [allConsultants]);
+
+
+
+      useEffect(() => {
+        projects?.map(project => {
+            axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config)
+            .then(response => {
+                setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
+            }).catch(error => {
             console.log(error)
-        });
-    }, []);
+            })
+        })
+    }, [projects]);
 
-   
+
+      function getClientLogo(props) {
+        const foundItem = clientList.find(item => item.id === props);
+        return foundItem ? foundItem.file : null;
+    }
 
 
+    // Split the projectList into chunks of size chunkSize for the carousel
+    const chunkSize = 4;
+    const projectChunks = [];
+    for (let i = 0; i < projects.length; i += chunkSize) {
+        projectChunks.push(projects.slice(i, i + chunkSize));
+    }
 
     return (
         <Wrapper>
-
-            {console.log(newProjects)}
-
-            {/* {console.log("Clients:", clients)   }
-            {console.log("Active clients:", activeClients)   } */}
-
             
-             {/* {() => getActiveallConsultants() } */}
-
-            {/* {console.log("active consultants:", activeConsultants)} */}
-
-            
-
             <h1>This is FindProject</h1>
             <br/>
             <Button onClick={() => navigate('/')}> Tilbage til home </Button>
             <br/>
             <br/>
             <br/>
-  
             <div>
-
                 <Row className="dropdown.buttons" >
                     <Col>
                     <DropdownButton title="Kunde" >
@@ -168,12 +168,41 @@ const FindProject = () => {
                     </Col>
                 </Row>
 
-            <br/>
-            <br/>
-            <br/>
 
 
                 <Row>
+
+
+            <Carousel>
+                {projectChunks.map((chunk, index) => (
+                    <Carousel.Item key={index} interval={100000}>
+                        <div className="carousel-contenct">
+                        <div className="row">
+                            {chunk.map((project, projectIndex) => (
+                                <div className="col" key={projectIndex}>
+                                    <Card className="card-1">
+                                    <div class="white-circle" >
+                                    <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${ getClientLogo(project.clientuuid) }`} />
+                                    </div>
+                                    <div className="content">
+                                        <p> {project.name} </p>
+                                    </div>
+                                        
+                                        
+                                    </Card>
+                                </div>
+                            ))}
+
+                        </div>
+                        </div>
+
+                    </Carousel.Item>
+                    
+
+                ))}
+            </Carousel>
+                    
+
                     
                     
                 </Row>
