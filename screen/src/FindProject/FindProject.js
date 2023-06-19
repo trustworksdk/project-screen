@@ -20,10 +20,8 @@ const FindProject = () => {
     const [activeConsultants, setActiveConsultants] = useState([]);
     const [value, setValue] = useState("");
     const [clientList, setClientList] = useState([]);
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
+    const [selectedClient, setSelectedClient] = useState("");
+  
 
     useEffect(() => {
         axios.get('https://api.trustworks.dk/clients', config)
@@ -118,16 +116,41 @@ const FindProject = () => {
         return foundItem ? foundItem.file : null;
     }
 
-
+   
     // Split the projectList into chunks of size chunkSize for the carousel
-    const chunkSize = 4;
     const projectChunks = [];
-    for (let i = 0; i < projects.length; i += chunkSize) {
-        projectChunks.push(projects.slice(i, i + chunkSize));
+    const chunkSize = 4;
+
+    const handleSelect = (e) => {
+        setSelectedClient(e);
     }
+
+    const isTextEmpty = selectedClient === "";
+
+    const filteredArray = projects.filter(project => project.clientuuid === selectedClient);
+
+    // For at vise alle projekter hvis intet filter er valgt, og den filtrerede liste hvis filter er valgt.
+    if (isTextEmpty) {
+        for (let i = 0; i < projects.length; i += chunkSize) {
+            projectChunks.push(projects.slice(i, i + chunkSize));
+        }
+    } else {
+        for (let i = 0; i < filteredArray.length; i += chunkSize) {
+            projectChunks.push(filteredArray.slice(i, i + chunkSize));
+        }
+    }
+   
+
 
     return (
         <Wrapper>
+
+            
+
+            {/* {console.log("projects: ", projects)} */}
+            {/* {console.log("clients: ", clients)} */}
+            {/* {console.log("projectchunks: ", projectChunks)} */}
+            
             
             <h1>This is FindProject</h1>
             <br/>
@@ -138,10 +161,13 @@ const FindProject = () => {
             <div>
                 <Row className="dropdown.buttons" >
                     <Col>
-                    <DropdownButton title="Kunde" >
-                        { clients.map(client => (
-                            <Dropdown.Item onClick={() => handleChange()} > {client.name} </Dropdown.Item>
-                        )) }
+                    <DropdownButton 
+                        title="Kunde"
+                        onSelect={handleSelect}
+                        >
+                            { clients.map(client => (
+                                <Dropdown.Item eventKey={client.uuid} > {client.name} </Dropdown.Item>
+                            )) }
                     </DropdownButton>
                     </Col>
 
@@ -168,12 +194,8 @@ const FindProject = () => {
                     </Col>
                 </Row>
 
-
-
                 <Row>
-
-
-            <Carousel>
+                <Carousel>
                 {projectChunks.map((chunk, index) => (
                     <Carousel.Item key={index} interval={100000}>
                         <div className="carousel-contenct">
@@ -181,34 +203,21 @@ const FindProject = () => {
                             {chunk.map((project, projectIndex) => (
                                 <div className="col" key={projectIndex}>
                                     <Card className="card-1">
-                                    <div class="white-circle" >
-                                    <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${ getClientLogo(project.clientuuid) }`} />
-                                    </div>
-                                    <div className="content">
-                                        <p> {project.name} </p>
-                                    </div>
-                                        
-                                        
+                                        <div class="white-circle" >
+                                        <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${ getClientLogo(project.clientuuid) }`} />
+                                        </div>
+                                        <div className="content">
+                                            <p> {project.name} </p>
+                                        </div>         
                                     </Card>
                                 </div>
                             ))}
-
                         </div>
                         </div>
-
                     </Carousel.Item>
-                    
-
                 ))}
-            </Carousel>
-                    
-
-                    
-                    
+                </Carousel>  
                 </Row>
-
-       
-            
             </div>
         </Wrapper>
     )
