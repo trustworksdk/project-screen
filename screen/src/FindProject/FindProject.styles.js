@@ -33,7 +33,7 @@ export const Wrapper = styled.div`
    
 
     .carousel{
-        padding-top: 10%;
+        padding-top: 6%;
         height: 100%;
     }
 
