@@ -4,6 +4,19 @@ import styled from "styled-components"
 export const Wrapper = styled.div`
     // background: #203369;
     font-family: 'Source Sans Pro';
+
+
+    h1 {
+      color: white;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
     
 
 
