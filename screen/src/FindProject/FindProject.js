@@ -13,7 +13,8 @@ const FindProject = () => {
     const [projects, setProjects] = useState([]);
     const [updatedProjects, setUpdatedProjects] = useState([]);
     const [clients, setClients] = useState([]);
-    const [activeClients, setActiveClients] = useState([]);
+    const [uniqueProjectClients, setUniqueProjectClients] = useState([]);
+    const [uniqueProjectConsultants, setUniqueProjectConsultants] = useState([]);
     const [allConsultants, setAllConsultants] = useState([]);
     const [activeConsultants, setActiveConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
@@ -25,7 +26,7 @@ const FindProject = () => {
     const [sortOption, setSortOption] = useState("default");
   
 
-    // Set clients (and active clients)
+    //Set clients (and active clients)
     useEffect(() => {
         axios.get('https://api.trustworks.dk/clients', config)
         .then(response => {
@@ -35,17 +36,8 @@ const FindProject = () => {
         });
     }, []);
 
-    // Set active clients 
-    useEffect(() => {
-        setActiveClients( 
-            clients.filter(x => 
-                x.active === true
-                )
-         );
-    }, [clients]);
-    
 
-    // Set projects
+    //Set projects
     useEffect(() => {
         axios.get('https://api.trustworks.dk/knowledge/projects', config)
         .then(response => {
@@ -56,7 +48,7 @@ const FindProject = () => {
     }, []);
   
 
-    // Set consultants
+    //Set consultants
     useEffect(() => {
         axios.get('https://api.trustworks.dk/users', config)
           .then(response => {
@@ -67,7 +59,7 @@ const FindProject = () => {
           });
       }, []);
 
-      // Set active consultants 
+      //Set active consultants 
       useEffect(() => {
         setActiveConsultants(
           allConsultants.filter(x =>
@@ -82,7 +74,7 @@ const FindProject = () => {
       }, [allConsultants]);
 
 
-      // Set list with client IDs and logos
+      //Set list with client IDs and logos
       useEffect(() => {
         projects?.map(project => {
             axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config)
@@ -95,44 +87,44 @@ const FindProject = () => {
     }, [projects]);
 
 
-    // add client name as a variable in projects
+    //Add clientName and consultantName as variables in updatedProjects
     useEffect(() => {
-        const addClientNameToProjects = () => {
-            return projects.map((project) => {
-              const client = clients.find((client) => client.uuid === project.clientuuid);
-              const clientName = client ? client.name : 'Kunde uden navn';
-              return { ...project, clientName };
+        const updatedProjectList = projects.map((project) => {
+            //Find client name
+            const client = clients.find((client) => client.uuid === project.clientuuid);
+            const clientName = client ? client.name : 'Kundenavn ukendt';
+
+            //Update projectDescriptionUserList with Consultant name
+            const updatedProjectDescriptionUserList = project.projectDescriptionUserList.map((employee) => {
+                const consultant = allConsultants.find((user) => user.uuid === employee.useruuid);
+                const consultantFirstName = consultant ? (consultant.firstname) : 'Konsulent fornavn ukendt';
+                const consultantLastName = consultant ? (consultant.lastname) : 'Konsulent efternavn ukendt';
+                return { ...employee, firstName: consultantFirstName, lastName: consultantLastName};
             });
-          };
 
-        setUpdatedProjects(addClientNameToProjects());
-    }, [projects]);
+            //Return list of modified projects
+            return {...project, clientName, projectDescriptionUserList: updatedProjectDescriptionUserList};
+        })
 
-
-    // Function called to get the client logo. Client ID is given as props. 
+        setUpdatedProjects(updatedProjectList);
+    }, [projects, clients, allConsultants]);   
+    
+    //Get the client logo. Client ID is given as props. 
     function getClientLogo(props) {
         const foundItem = clientList.find(item => item.id === props);
         return foundItem ? foundItem.file : null;
     }
-    
-    // Setting selected client when clicked in the dropdown
-    const handleSelectClient = (e) => {
-        setSelectedClient(e);
-        console.log("handleSelectClient has been called. Client id:", selectedClient)
-    }
 
-    // Setting selected consultant when clicked in the dropdown
+    //Set selected consultant when clicked in the dropdown
     const handleSelectConsultant = (e) => {
-        setSelectedConsultant(e);
         console.log("handleSelectConsultant has been called")
+        setSelectedConsultant(e);
     }
     
-
     const isClientEmpty = selectedClient === "";
     const isConsultantEmpty = selectedConsultant === "";
 
-
-    // Fjern valgte filtre
+    //Remove filters
     const removeFilters = () => {
         setSelectedClient("");
         setSelectedConsultant("");
@@ -140,10 +132,68 @@ const FindProject = () => {
         console.log("removeFilters has been called");
     }
 
+    //Set uniqueProjectConsultants list for drop-down based on unique values from updatedProjects
+    useEffect(() => {
+        console.log("useEffect: Unik liste af konsulenter");
+      
+        const uniqueConsultantsMap = new Map(); // Use a Map to efficiently keep track of unique consultants
+        updatedProjects.forEach((project) => {
+          project.projectDescriptionUserList.forEach((consultant) => {
+            const consultantKey = consultant.useruuid;
+            const consultantFirstName = consultant.firstName;
+            const consultantLastName = consultant.lastName;
+            //console.log("Navn: ", consultantFirstName, ", Konsulent id: ", consultantKey)
+      
+            if (
+              !uniqueConsultantsMap.has(consultantKey) &&
+              activeConsultants.some(
+                (activeConsultant) =>
+                activeConsultant.uuid === consultantKey
+              )
+            ) {
+              uniqueConsultantsMap.set(consultantKey, {
+                useruuid: consultantKey,
+                firstName: consultantFirstName,
+                lastName: consultantLastName
+              });
+            }
+          });
+        });
+      
+        const uniqueConsultantsList = Array.from(uniqueConsultantsMap.values());
+        const sortedUniqueConsultantsList = uniqueConsultantsList.sort(sortByConsultantName);
+        
+        setUniqueProjectConsultants(sortedUniqueConsultantsList);
+      }, [updatedProjects, activeConsultants]);
+      
+
+    useEffect(() => {
+        console.log("setUniqueProjectConsultants: ", uniqueProjectConsultants);
+    }, [uniqueProjectClients]);
+
+    //Set uniqueProjectClients list for drop-down based on unique values from updatedProjects
+      useEffect(() => {
+        console.log("useEffect: Unik liste af kunder");
+      
+        const uniqueClientsMap = new Map(); // Use a Map to efficiently keep track of unique clients
+        updatedProjects.forEach((project) => {
+          if (!uniqueClientsMap.has(project.clientName)) {
+            uniqueClientsMap.set(project.clientName, {
+                clientuuid: project.clientuuid,
+                clientName: project.clientName
+            });
+          }
+        });
+      
+        const uniqueClientList = Array.from(uniqueClientsMap.values());
+        const sortedUniqueClientsList = uniqueClientList.sort(sortByClientName);
+        setUniqueProjectClients(sortedUniqueClientsList);
+      }, [updatedProjects]);
+
     // Filtrering af projekter og visning af fire ad gangen
     const chunkSize = 4;
     useEffect(() => {
-        console.log("useEffect has been called");
+        console.log("useEffect: Filtrering af projekter og visning af fire ad gangen");
 
         const filteredArray = updatedProjects.filter(project => {
             const matchesClient = !selectedClient || project.clientuuid === selectedClient;
@@ -166,49 +216,46 @@ const FindProject = () => {
         setProjectChunks(newProjectChunks)
     }, [selectedClient, updatedProjects.length, isClientEmpty, selectedConsultant, isConsultantEmpty, updatedProjects] )
 
- 
-    // Funktion til at åbne pop up ved click på et projekt
+    //Set selected client when clicked in the dropdown
+    const handleSelectClient = (e) => {
+        setSelectedClient(e);
+        console.log("handleSelectClient has been called. Client id:", selectedClient)
+        // Filter consultants based on the selected client
+        // const filteredConsultantsBySelectedClient = filteredProjectsBySelectedClient.projectDescriptionUserList.filter(consultant => {
+
+        // });
+        // //filtrer konsulent dropdown
+        // setUniqueProjectConsultants();
+        // const sortedUniqueConsultantsList = uniqueConsultantsList.sort(sortConsultantBySelectedClient);
+    }
+
+    useEffect(() => {
+        const filterConsultantsBySelectedClient = () => {
+            // Filter updatedProjectList based on client
+            const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
+               const matchesClient = !selectedClient || project.clientuuid === selectedClient;
+               return matchesClient;
+           });
+   
+           console.log("XX", filteredProjectsBySelectedClient)
+       }
+
+    }, [])
+    
+
+    //Funktion til at åbne pop up ved click på et projekt
     const handleProjectClick = (chunkIndex, projectIndex) => {
         setSelectedProjectChunkIndex(chunkIndex);
         setSelectedProjectIndex(projectIndex);
       };
     
-    // Funktion til at lukke pop up
+    //Funktion til at lukke pop up
     const handleModalClose = () => {
         setSelectedProjectChunkIndex(null);
         setSelectedProjectIndex(null);
     };
 
-  
-    // Sorter projekter alfabetisk på projektnavn:
-    const sortByProjectName = (a, b) => {
-        const projectNameA = a.name.toUpperCase();
-        const projectNameB = b.name.toUpperCase();
-    
-        if (projectNameA < projectNameB) {
-          return -1;
-        }
-        if (projectNameA > projectNameB) {
-          return 1;
-        }
-        return 0;
-    };
-
-    // Sorter projekter alfabetisk på kundenavn:
-    const sortByClientName = (a, b) => {
-        const clientNameA = a.clientName.toUpperCase();
-        const clientNameB = b.clientName.toUpperCase();
-    
-        if (clientNameA < clientNameB) {
-          return -1;
-        }
-        if (clientNameA > clientNameB) {
-          return 1;
-        }
-        return 0;
-    };
-
-    // funktion der bliver kaldt for at sortere. Funktionen kalder ovenstående hjælpefunktioner.
+    //Funktion der bliver kaldt for at sortere. Funktionen kalder ovenstående hjælpefunktioner.
     const handleSortChange = (event) => {
         console.log("handleSortChange has been called")
         const selectedOption = event.target.textContent;
@@ -230,65 +277,101 @@ const FindProject = () => {
           default:
             setUpdatedProjects(updatedProjects);
         }
-      };
+    };
 
-      // useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
-      useEffect(() => {
+    //Sorter projekter alfabetisk på projektnavn:
+    const sortByProjectName = (a, b) => {
+        const projectNameA = a.name.toUpperCase();
+        const projectNameB = b.name.toUpperCase();
+        
+        if (projectNameA < projectNameB) {
+            return -1;
+        }
+        if (projectNameA > projectNameB) {
+            return 1;
+        }
+        return 0;
+    };
+
+    //Sort consultans based on firstname
+    const sortByConsultantName = (a, b) => {
+        const consultantNameA = a.firstName.toUpperCase();
+        const consultantNameB = b.firstName.toUpperCase();
+        
+        if (consultantNameA < consultantNameB) {
+            return -1;
+        }
+        if (consultantNameA > consultantNameB) {
+            return 1;
+        }
+        return 0;
+    };
+    
+    //Sorter projekter alfabetisk på kundenavn:
+    const sortByClientName = (a, b) => {
+        const clientNameA = a.clientName.toUpperCase();
+        const clientNameB = b.clientName.toUpperCase();
+        
+        if (clientNameA < clientNameB) {
+            return -1;
+        }
+        if (clientNameA > clientNameB) {
+            return 1;
+        }
+        return 0;
+    };
+
+    // Sort Consultant by selected client
+    const sortConsultantBySelectedClient = (client) => {
+        const clientId = client.clientuuid;
+
+        
+
+    };
+
+    //useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
+    useEffect(() => {
         console.log("Updated projects after sorting alphabetically:", updatedProjects);
-      }, [updatedProjects]);
-
+    }, [updatedProjects]);
 
 
     return (
         <Wrapper>    
-
-            
-            <h1>This is FindProject</h1>
+            <h1>This is FindProject2</h1>
             <br/>
             <Button onClick={() => navigate('/')}> Tilbage til home </Button>
             <br/>
             <Button onClick={() => removeFilters() } > Nulstil filtre </Button>
-            
             <br/>
             <br/>
             <br/>
             <div>
                 <Row className="dropdown.buttons" >
-
                     <Col>
                     <DropdownButton title="Sorter efter" >
                         <Dropdown.Item onClick={(event) => handleSortChange(event)} >Alfabetisk på projektnavn</Dropdown.Item>
-
                         <Dropdown.Item onClick={(event) => handleSortChange(event)} >Alfabetisk på kundenavn</Dropdown.Item>
-
                         <Dropdown.Item> Senest til tidligst </Dropdown.Item>
                         <Dropdown.Item> Tidligst til senest </Dropdown.Item>
                     </DropdownButton>
                     </Col>
 
                     <Col>
-                    <DropdownButton 
-                        title="Kunde"
-                        onSelect={handleSelectClient}
-                        >
-                            { clients.map(client => (
-                                <Dropdown.Item eventKey={client.uuid} > {client.name} </Dropdown.Item>
+                    <DropdownButton title="Kunde" onSelect={handleSelectClient} >
+                            {uniqueProjectClients.map(client => (
+                                <Dropdown.Item eventKey={client.clientuuid} > {client.clientName} </Dropdown.Item>
                             )) }
                     </DropdownButton>
                     </Col>
 
                     <Col>
-                    <DropdownButton 
-                        title="Konsulent"
-                        onSelect={handleSelectConsultant}
-                        >
-                        { activeConsultants.map(consultant => (
-                            <Dropdown.Item eventKey={consultant.uuid} > {consultant.firstname} {consultant.lastname} </Dropdown.Item>
+                    <DropdownButton title="Konsulent" onSelect={handleSelectConsultant} >
+                        { uniqueProjectConsultants.map(consultant => (
+                            <Dropdown.Item eventKey={consultant.useruuid} > {consultant.firstName} {consultant.lastName}</Dropdown.Item>
                         )) }
                     </DropdownButton>
                     </Col>
                     
-
                     <Col>
                     <DropdownButton title="Ydelse" >
                         <Dropdown.Item> Ydelse 1 </Dropdown.Item>
@@ -352,18 +435,6 @@ const FindProject = () => {
                 </Modal>
 
                 </Row>
-
-               
-
-                {/* <div>
-                    {updatedProjects.map((project) => (
-                    <div key={project.id}>
-                        <p>Client Name: {project.clientName}</p>
-                    </div>
-                    ))}
-                </div> */}
-
-
             </div>
         </Wrapper>
     )
