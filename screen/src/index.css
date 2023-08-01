@@ -10,12 +10,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #203369 !important;
+  /* background: #203369 !important; */
   
- 
-  background-image: url('./img/tw_white.png') !important;
+  /* SKIFT BAGGRUNDSBILLEDE HER */
+  background-image: url('./img/background.png') !important;
   background-repeat: no-repeat !important;
-  background-size: 40% !important;
+  background-size: 100% !important;
   background-position: 70% 30% !important;
   
 }
