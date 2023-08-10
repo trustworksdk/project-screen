@@ -5,6 +5,7 @@ import { Card, Button, CardGroup, Carousel, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Base64 } from "js-base64";
 import {config} from "../Components/API";
+import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
 
  
 const Home = () => {
@@ -71,7 +72,7 @@ const Home = () => {
 
     return (
         <Wrapper className="body::before" >
-        <Button  onClick={() => navigate('/findproject')} > ＜ Flere projekter</Button>
+        <Button  onClick={() => navigate('/findproject')} >  < ArrowIosBack size="24" /> Flere projekter</Button>
 
 
         <Carousel className="carousell" >

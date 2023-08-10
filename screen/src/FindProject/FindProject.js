@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup, Carousel, Modal } from "react-bootstrap";
+import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup, Carousel, Modal, ButtonGroup } from "react-bootstrap";
 import { Wrapper } from "./FindProject.styles";
 import { useNavigate } from "react-router-dom";
 import {config} from "../Components/API";
+import {ArrowBack} from '@styled-icons/boxicons-regular/ArrowBack';
+import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
+import {ArrowReset} from '@styled-icons/fluentui-system-filled/ArrowReset';
+import {BackInTime} from '@styled-icons/entypo/BackInTime';
 
 
 const FindProject = () => {
@@ -24,6 +28,16 @@ const FindProject = () => {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
     const [selectedProjectChunkIndex, setSelectedProjectChunkIndex] = useState(null);
     const [sortOption, setSortOption] = useState("default");
+
+    useEffect(() => {
+        // Add the 'no-background-image' class to the body element when the component mounts
+        document.body.classList.add('no-background-image');
+    
+        // Remove the 'no-background-image' class from the body element when the component unmounts
+        return () => {
+          document.body.classList.remove('no-background-image');
+        };
+      }, []);
   
 
     //Set clients (and active clients)
@@ -101,7 +115,6 @@ const FindProject = () => {
                 const consultantLastName = consultant ? (consultant.lastname) : 'Konsulent efternavn ukendt';
                 return { ...employee, firstName: consultantFirstName, lastName: consultantLastName};
             });
-
             //Return list of modified projects
             return {...project, clientName, projectDescriptionUserList: updatedProjectDescriptionUserList};
         })
@@ -132,7 +145,7 @@ const FindProject = () => {
         console.log("removeFilters has been called");
     }
 
-    //Set uniqueProjectConsultants list for drop-down based on unique values from updatedProjects
+    // Set uniqueProjectConsultants list for drop-down based on unique values from updatedProjects
     useEffect(() => {
         console.log("useEffect: Unik liste af konsulenter");
       
@@ -171,7 +184,7 @@ const FindProject = () => {
         console.log("setUniqueProjectConsultants: ", uniqueProjectConsultants);
     }, [uniqueProjectClients]);
 
-    //Set uniqueProjectClients list for drop-down based on unique values from updatedProjects
+    // Set uniqueProjectClients list for drop-down based on unique values from updatedProjects
       useEffect(() => {
         console.log("useEffect: Unik liste af kunder");
       
@@ -191,7 +204,7 @@ const FindProject = () => {
       }, [updatedProjects]);
 
     // Filtrering af projekter og visning af fire ad gangen
-    const chunkSize = 4;
+    const chunkSize = 3;
     useEffect(() => {
         console.log("useEffect: Filtrering af projekter og visning af fire ad gangen");
 
@@ -243,19 +256,19 @@ const FindProject = () => {
     }, [])
     
 
-    //Funktion til at åbne pop up ved click på et projekt
+    // Funktion til at åbne pop up ved click på et projekt
     const handleProjectClick = (chunkIndex, projectIndex) => {
         setSelectedProjectChunkIndex(chunkIndex);
         setSelectedProjectIndex(projectIndex);
       };
     
-    //Funktion til at lukke pop up
+    // Funktion til at lukke pop up
     const handleModalClose = () => {
         setSelectedProjectChunkIndex(null);
         setSelectedProjectIndex(null);
     };
 
-    //Funktion der bliver kaldt for at sortere. Funktionen kalder ovenstående hjælpefunktioner.
+    // Funktion der bliver kaldt for at sortere. Funktionen kalder ovenstående hjælpefunktioner.
     const handleSortChange = (event) => {
         console.log("handleSortChange has been called")
         const selectedOption = event.target.textContent;
@@ -279,7 +292,7 @@ const FindProject = () => {
         }
     };
 
-    //Sorter projekter alfabetisk på projektnavn:
+    // Sorter projekter alfabetisk på projektnavn:
     const sortByProjectName = (a, b) => {
         const projectNameA = a.name.toUpperCase();
         const projectNameB = b.name.toUpperCase();
@@ -293,7 +306,7 @@ const FindProject = () => {
         return 0;
     };
 
-    //Sort consultans based on firstname
+    // Sort consultans based on firstname
     const sortByConsultantName = (a, b) => {
         const consultantNameA = a.firstName.toUpperCase();
         const consultantNameB = b.firstName.toUpperCase();
@@ -307,7 +320,7 @@ const FindProject = () => {
         return 0;
     };
     
-    //Sorter projekter alfabetisk på kundenavn:
+    // Sorter projekter alfabetisk på kundenavn:
     const sortByClientName = (a, b) => {
         const clientNameA = a.clientName.toUpperCase();
         const clientNameB = b.clientName.toUpperCase();
@@ -329,26 +342,38 @@ const FindProject = () => {
 
     };
 
-    //useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
+    // useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
     useEffect(() => {
         console.log("Updated projects after sorting alphabetically:", updatedProjects);
     }, [updatedProjects]);
 
 
     return (
-        <Wrapper>    
-            <h1>This is FindProject2</h1>
+        <Wrapper style={{
+            backgroundImage: 'none',
+            // Add any other styles specific to this page if needed
+          }}>
+            
+
+            
+            <ButtonGroup style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ flex: 1, marginRight: '10px' }}>
+            <Button className="back" onClick={() => navigate('/')}> <ArrowIosBack size="24" /> Tilbage til home </Button>
             <br/>
-            <Button onClick={() => navigate('/')}> Tilbage til home </Button>
+            </div>
+            <div style={{ flex: 1, marginLeft: '10px' }}>
+            <Button className="nulstil" onClick={() => removeFilters() } > < BackInTime size="24" /> Nulstil filtre </Button>
+            </div>
+            </ButtonGroup>
+            
+            
             <br/>
-            <Button onClick={() => removeFilters() } > Nulstil filtre </Button>
             <br/>
             <br/>
-            <br/>
-            <div>
+            <div className="project-container" >
                 <Row className="dropdown.buttons" >
-                    <Col>
-                    <DropdownButton title="Sorter efter" >
+                    <Col className="dropdown-col d-flex justify-content-center" >
+                    <DropdownButton title="Sorter efter"  size="lg" >
                         <Dropdown.Item onClick={(event) => handleSortChange(event)} >Alfabetisk på projektnavn</Dropdown.Item>
                         <Dropdown.Item onClick={(event) => handleSortChange(event)} >Alfabetisk på kundenavn</Dropdown.Item>
                         <Dropdown.Item> Senest til tidligst </Dropdown.Item>
@@ -356,31 +381,31 @@ const FindProject = () => {
                     </DropdownButton>
                     </Col>
 
-                    <Col>
-                    <DropdownButton title="Kunde" onSelect={handleSelectClient} >
+                    <Col className="dropdown-col d-flex justify-content-center" >
+                    <DropdownButton title="Kunde" onSelect={handleSelectClient} size="lg" >
                             {uniqueProjectClients.map(client => (
                                 <Dropdown.Item eventKey={client.clientuuid} > {client.clientName} </Dropdown.Item>
                             )) }
                     </DropdownButton>
                     </Col>
 
-                    <Col>
-                    <DropdownButton title="Konsulent" onSelect={handleSelectConsultant} >
+                    <Col className="dropdown-col d-flex justify-content-center" >
+                    <DropdownButton title="Konsulent" onSelect={handleSelectConsultant} size="lg" >
                         { uniqueProjectConsultants.map(consultant => (
                             <Dropdown.Item eventKey={consultant.useruuid} > {consultant.firstName} {consultant.lastName}</Dropdown.Item>
                         )) }
                     </DropdownButton>
                     </Col>
                     
-                    <Col>
-                    <DropdownButton title="Ydelse" >
+                    <Col className="dropdown-col d-flex justify-content-center" >
+                    <DropdownButton title="Ydelse"  size="lg" >
                         <Dropdown.Item> Ydelse 1 </Dropdown.Item>
                         <Dropdown.Item> Ydelse 2 </Dropdown.Item>
                     </DropdownButton>
                     </Col>
 
-                    <Col>
-                    <DropdownButton title="Tool" >
+                    <Col className="dropdown-col d-flex justify-content-center" >
+                    <DropdownButton title="Tool" size="lg" >
                         <Dropdown.Item> Tool 1 </Dropdown.Item>
                         <Dropdown.Item> Tool 2 </Dropdown.Item>
                     </DropdownButton>
@@ -396,12 +421,12 @@ const FindProject = () => {
                         <div className="row">
                         {chunk.map((project, projectIndex) => (
                             <div className="col" key={projectIndex}>
-                            <Card className="card-1" onClick={() => handleProjectClick(chunkIndex, projectIndex)}>
+                            <Card className="card" onClick={() => handleProjectClick(chunkIndex, projectIndex)}>
                                 <div class="white-circle">
-                                <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`} />
+                                    <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`} />
                                 </div>
                                 <div className="content">
-                                <p>{project.name}</p>
+                                    <p>{project.name}</p>
                                 </div>
                             </Card>
                             </div>
@@ -412,7 +437,7 @@ const FindProject = () => {
                 ))} 
                 </Carousel>
 
-                <Modal show={selectedProjectIndex !== null} onHide={handleModalClose}>
+                <Modal show={selectedProjectIndex !== null} onHide={handleModalClose} centered>
                 <Modal.Body>
                     {selectedProjectIndex !== null && selectedProjectChunkIndex !== null && (
                     <div>

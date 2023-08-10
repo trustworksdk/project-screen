@@ -20,6 +20,10 @@ body {
   
 }
 
+body.no-background-image {
+  background-image: none !important;
+}
+
 
 
 code {
