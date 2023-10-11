@@ -6,8 +6,6 @@ export const Wrapper = styled.div`
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     
-  
-
 
     h1 {
         color: #192434;
