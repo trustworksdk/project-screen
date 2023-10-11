@@ -4,6 +4,7 @@ import './App.css';
 import FindProject from './FindProject/FindProject';
 import Home from "./Home/Home";
 import twlogo from "../src/img/tw_white.png";
+import { ToolProvider } from "./Contexts/ToolContext";
 
 const styles = {
   header: {
@@ -23,12 +24,14 @@ const styles = {
 function App() {
   return (
     <div className="App" style={styles.header}>
-      
+      <ToolProvider>
       <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/findproject" element={ <FindProject/> } />
+        
+          <Route path="/" element={ <Home/> } />
+          <Route path="/findproject" element={ <FindProject/> } />
+        
       </Routes>
-
+      </ToolProvider>
    
     
     

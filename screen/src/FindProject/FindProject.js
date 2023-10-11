@@ -1,13 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup, Carousel, Modal, ButtonGroup } from "react-bootstrap";
 import { Wrapper } from "./FindProject.styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {config} from "../Components/API";
 import {ArrowBack} from '@styled-icons/boxicons-regular/ArrowBack';
 import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
 import {ArrowReset} from '@styled-icons/fluentui-system-filled/ArrowReset';
 import {BackInTime} from '@styled-icons/entypo/BackInTime';
+import {AddToQueue} from '@styled-icons/boxicons-regular/AddToQueue';
+import {Add} from '@styled-icons/fluentui-system-filled/Add';
+import { useToolContext } from "../Contexts/ToolContext"; 
 
 
 const FindProject = () => {
@@ -18,16 +21,26 @@ const FindProject = () => {
     const [updatedProjects, setUpdatedProjects] = useState([]);
     const [clients, setClients] = useState([]);
     const [uniqueProjectClients, setUniqueProjectClients] = useState([]);
+    const [uniqueProjectOfferings, setUniqueProjectOfferings] = useState([]);
+    const [uniqueProjectTools, setUniqueProjectTools] = useState([]);
     const [uniqueProjectConsultants, setUniqueProjectConsultants] = useState([]);
     const [allConsultants, setAllConsultants] = useState([]);
     const [activeConsultants, setActiveConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
     const [selectedClient, setSelectedClient] = useState("");
     const [selectedConsultant, setSelectedConsultant] = useState("");
+    const [selectedOffering, setSelectedOffering] = useState("");
+    const [selectedTool, setSelectedTool] = useState("");
     const [projectChunks, setProjectChunks] = useState([]);
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
     const [selectedProjectChunkIndex, setSelectedProjectChunkIndex] = useState(null);
     const [sortOption, setSortOption] = useState("default");
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    const { selectedToolFromContext } = useToolContext();
+
+
+
 
     useEffect(() => {
         // Add the 'no-background-image' class to the body element when the component mounts
@@ -40,9 +53,9 @@ const FindProject = () => {
       }, []);
   
 
-    //Set clients (and active clients)
+    // Set clients (and active clients)
     useEffect(() => {
-        axios.get('https://api.trustworks.dk/clients', config)
+        axios.get('https://api.trustworks.dk/public/clients', config)
         .then(response => {
             setClients(() => response.data)   
         }).catch(error => {
@@ -51,7 +64,7 @@ const FindProject = () => {
     }, []);
 
 
-    //Set projects
+    // Set projects
     useEffect(() => {
         axios.get('https://api.trustworks.dk/knowledge/projects', config)
         .then(response => {
@@ -64,9 +77,10 @@ const FindProject = () => {
 
     //Set consultants
     useEffect(() => {
-        axios.get('https://api.trustworks.dk/users', config)
+        axios.get('https://api.trustworks.dk/public/users', config)
           .then(response => {
             setAllConsultants(response.data);
+            
           })
           .catch(error => {
             console.log(error);
@@ -76,22 +90,21 @@ const FindProject = () => {
       //Set active consultants 
       useEffect(() => {
         setActiveConsultants(
-          allConsultants.filter(x =>
-            x.active === true &&
-            (x.statuses.some(y =>
-              y.type === "CONSULTANT") ||
-              x.statuses.some(y =>
-                y.type === "STUDENT")
+
+            allConsultants.filter(consultant => 
+                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT" )
             )
-          )
         );
+        
       }, [allConsultants]);
+
+    
 
 
       //Set list with client IDs and logos
       useEffect(() => {
         projects?.map(project => {
-            axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config)
+            axios.get(`https://api.trustworks.dk/public/files/photos/${project.clientuuid}`, config)
             .then(response => {
                 setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
             }).catch(error => {
@@ -103,6 +116,8 @@ const FindProject = () => {
 
     //Add clientName and consultantName as variables in updatedProjects
     useEffect(() => {
+        console.log("all consultants: ", allConsultants)
+
         const updatedProjectList = projects.map((project) => {
             //Find client name
             const client = clients.find((client) => client.uuid === project.clientuuid);
@@ -111,8 +126,8 @@ const FindProject = () => {
             //Update projectDescriptionUserList with Consultant name
             const updatedProjectDescriptionUserList = project.projectDescriptionUserList.map((employee) => {
                 const consultant = allConsultants.find((user) => user.uuid === employee.useruuid);
-                const consultantFirstName = consultant ? (consultant.firstname) : 'Konsulent fornavn ukendt';
-                const consultantLastName = consultant ? (consultant.lastname) : 'Konsulent efternavn ukendt';
+                const consultantFirstName = consultant ? (consultant.firstName) : 'Konsulent fornavn ukendt';
+                const consultantLastName = consultant ? (consultant.lastName) : 'Konsulent efternavn ukendt';
                 return { ...employee, firstName: consultantFirstName, lastName: consultantLastName};
             });
             //Return list of modified projects
@@ -120,6 +135,7 @@ const FindProject = () => {
         })
 
         setUpdatedProjects(updatedProjectList);
+        // console.log("updatedProjects", updatedProjects)
     }, [projects, clients, allConsultants]);   
     
     //Get the client logo. Client ID is given as props. 
@@ -127,27 +143,25 @@ const FindProject = () => {
         const foundItem = clientList.find(item => item.id === props);
         return foundItem ? foundItem.file : null;
     }
-
-    //Set selected consultant when clicked in the dropdown
-    const handleSelectConsultant = (e) => {
-        console.log("handleSelectConsultant has been called")
-        setSelectedConsultant(e);
-    }
     
     const isClientEmpty = selectedClient === "";
     const isConsultantEmpty = selectedConsultant === "";
+    const isOfferingEmpty = selectedOffering === "";
+    const isToolEmpty = selectedTool === "";
 
-    //Remove filters
+    // Remove filters
     const removeFilters = () => {
         setSelectedClient("");
         setSelectedConsultant("");
+        setSelectedOffering("");
+        setSelectedTool("");
         
         console.log("removeFilters has been called");
     }
 
     // Set uniqueProjectConsultants list for drop-down based on unique values from updatedProjects
     useEffect(() => {
-        console.log("useEffect: Unik liste af konsulenter");
+        // console.log("useEffect: Unik liste af konsulenter");
       
         const uniqueConsultantsMap = new Map(); // Use a Map to efficiently keep track of unique consultants
         updatedProjects.forEach((project) => {
@@ -155,7 +169,7 @@ const FindProject = () => {
             const consultantKey = consultant.useruuid;
             const consultantFirstName = consultant.firstName;
             const consultantLastName = consultant.lastName;
-            //console.log("Navn: ", consultantFirstName, ", Konsulent id: ", consultantKey)
+            // console.log("Navn: ", consultantFirstName, ", Konsulent id: ", consultantKey)
       
             if (
               !uniqueConsultantsMap.has(consultantKey) &&
@@ -172,21 +186,22 @@ const FindProject = () => {
             }
           });
         });
-      
+
         const uniqueConsultantsList = Array.from(uniqueConsultantsMap.values());
         const sortedUniqueConsultantsList = uniqueConsultantsList.sort(sortByConsultantName);
         
         setUniqueProjectConsultants(sortedUniqueConsultantsList);
+        // console.log(uniqueConsultantsList)
       }, [updatedProjects, activeConsultants]);
       
 
     useEffect(() => {
-        console.log("setUniqueProjectConsultants: ", uniqueProjectConsultants);
+        // console.log("setUniqueProjectConsultants: ", uniqueProjectConsultants);
     }, [uniqueProjectClients]);
 
     // Set uniqueProjectClients list for drop-down based on unique values from updatedProjects
-      useEffect(() => {
-        console.log("useEffect: Unik liste af kunder");
+    useEffect(() => {
+        // console.log("useEffect: Unik liste af kunder");
       
         const uniqueClientsMap = new Map(); // Use a Map to efficiently keep track of unique clients
         updatedProjects.forEach((project) => {
@@ -199,24 +214,67 @@ const FindProject = () => {
         });
       
         const uniqueClientList = Array.from(uniqueClientsMap.values());
-        const sortedUniqueClientsList = uniqueClientList.sort(sortByClientName);
+        const sortedUniqueClientsList = uniqueClientList.sort(sortByClientName); // Hey Nicole, man kan også bare skrive ".sort()" og så sorteres den alfabetisk, se useEffect nedenfor.
         setUniqueProjectClients(sortedUniqueClientsList);
-      }, [updatedProjects]);
+    }, [updatedProjects]);
 
-    // Filtrering af projekter og visning af fire ad gangen
+
+    // Set uniqueOfferingList for drop-down based on unique values from updatedProjects
+    useEffect(() => {
+        // console.log("useEffect: Unik list of offerings");
+      
+        const uniqueOfferingMap = new Map(); // Use a Map to efficiently keep track of unique offerings
+        updatedProjects.forEach((project) => {
+            project.offeringList.forEach((offering) => {
+                if (!uniqueOfferingMap.has(offering)) {
+                    uniqueOfferingMap.set(offering, offering)
+                }
+            })
+        });
+      
+        const uniqueOfferingList = Array.from(uniqueOfferingMap.values());
+        
+        const sortedUniqueOfferingList = uniqueOfferingList.sort();
+        setUniqueProjectOfferings(sortedUniqueOfferingList);
+    }, [updatedProjects]);
+
+
+    // Set UniqueProjectTools for drop-down based on unique values from updatedProjects
+    useEffect(() => {
+        // console.log("useEffect: Unik list of tools");
+      
+        const uniqueToolMap = new Map(); // Use a Map to efficiently keep track of unique tools
+        updatedProjects.forEach((project) => {
+            project.toolsList.forEach((tool) => {
+                if (!uniqueToolMap.has(tool)) {
+                    uniqueToolMap.set(tool, tool)
+                }
+            })
+        });
+      
+        const uniqueToolList = Array.from(uniqueToolMap.values());
+        const sortedUniqueToolList = uniqueToolList.sort();
+        setUniqueProjectTools (sortedUniqueToolList);
+    }, [updatedProjects]);
+
+
+
+    // Filtrering af projekter og visning af tre ad gangen
     const chunkSize = 3;
     useEffect(() => {
-        console.log("useEffect: Filtrering af projekter og visning af fire ad gangen");
-
+        // console.log("useEffect: Filtrering af projekter og visning af tre ad gangen");
         const filteredArray = updatedProjects.filter(project => {
             const matchesClient = !selectedClient || project.clientuuid === selectedClient;
             const matchesConsultant = !selectedConsultant || project.projectDescriptionUserList.some(user => user.useruuid === selectedConsultant);
-            return matchesClient && matchesConsultant;
+            const matchesOffering = !selectedOffering || project.offeringList.some(offering => offering === selectedOffering);
+            const matchesTool = !selectedTool || project.toolsList.some(tool => tool === selectedTool);
+
+            return matchesClient && matchesConsultant && matchesOffering && matchesTool;
         });
 
         // Split the projectList into chunks of size chunkSize for the carousel
         let newProjectChunks = [];
-        if (isClientEmpty && isConsultantEmpty) {
+        if (isClientEmpty && isConsultantEmpty && isOfferingEmpty && isToolEmpty ) {
             for (let i = 0; i < updatedProjects.length; i += chunkSize) {
                 newProjectChunks.push(updatedProjects.slice(i, i + chunkSize));
             }
@@ -226,13 +284,29 @@ const FindProject = () => {
                 newProjectChunks.push(filteredArray.slice(i, i + chunkSize));
             }   
         }
+
+        // Reset the active slide index when consultant/client/offering/tool selection changes
+        setActiveSlide(0);
+
         setProjectChunks(newProjectChunks)
-    }, [selectedClient, updatedProjects.length, isClientEmpty, selectedConsultant, isConsultantEmpty, updatedProjects] )
+        // console.log("selected tool from use effect:", selectedTool)
+        console.log("project chunks:", projectChunks)
+    }, [selectedClient, updatedProjects.length, isClientEmpty, selectedConsultant, isConsultantEmpty, updatedProjects, selectedOffering, isOfferingEmpty, isToolEmpty, selectedTool])
+
+
+
+    // Set selected consultant when clicked in the dropdown
+    const handleSelectConsultant = (e) => {
+        // console.log("handleSelectConsultant has been called")
+        setSelectedConsultant(e);
+    }
 
     //Set selected client when clicked in the dropdown
     const handleSelectClient = (e) => {
         setSelectedClient(e);
-        console.log("handleSelectClient has been called. Client id:", selectedClient)
+        // console.log("handleSelectClient has been called. Client id:", selectedClient)
+
+
         // Filter consultants based on the selected client
         // const filteredConsultantsBySelectedClient = filteredProjectsBySelectedClient.projectDescriptionUserList.filter(consultant => {
 
@@ -249,20 +323,40 @@ const FindProject = () => {
                const matchesClient = !selectedClient || project.clientuuid === selectedClient;
                return matchesClient;
            });
-   
            console.log("XX", filteredProjectsBySelectedClient)
        }
+    }, [])
 
+    // Set selected offering when clicked in the dropdown
+    const handleSelectOffering = (e) => {
+        // console.log("handleSelectOffering has been called: ", e)
+        setSelectedOffering(e);
+    }
+
+    // Set selected tool when clicked in the dropdown
+    const handleSelectTool = (e) => {
+        // console.log("handleSelectTool has been called")
+        setSelectedTool(e);
+    }
+
+    useEffect(() => {
+        // Filter updatedProjectList based on client
+        const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
+           const matchesClient = !selectedClient || project.clientuuid === selectedClient;
+           return matchesClient;           
+        });
+   
+        // console.log("XX", filteredProjectsBySelectedClient)
     }, [])
     
 
-    // Funktion til at åbne pop up ved click på et projekt
+    // Funktion til at åbne modal ved click på et projekt
     const handleProjectClick = (chunkIndex, projectIndex) => {
         setSelectedProjectChunkIndex(chunkIndex);
         setSelectedProjectIndex(projectIndex);
-      };
+    };
     
-    // Funktion til at lukke pop up
+    // Funktion til at lukke modal
     const handleModalClose = () => {
         setSelectedProjectChunkIndex(null);
         setSelectedProjectIndex(null);
@@ -343,29 +437,42 @@ const FindProject = () => {
     };
 
     // useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
-    useEffect(() => {
-        console.log("Updated projects after sorting alphabetically:", updatedProjects);
-    }, [updatedProjects]);
+    // useEffect(() => {
+    //     console.log("Updated projects after sorting alphabetically:", updatedProjects);
+    // }, [updatedProjects]);
+
+
+    const handleCreateProject = () => {
+        const externalURL = 'https://intra.trustworks.dk/#!projectdescriptions';
+        window.open(externalURL, '_blank'); // '_blank' opens in a new window/tab
+    };
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long' };
+        return new Date(dateString).toLocaleDateString('da-DK', options);
+    };
 
 
     return (
-        <Wrapper style={{
-            backgroundImage: 'none',
-            // Add any other styles specific to this page if needed
-          }}>
-            
-
-            
+        <Wrapper 
+            // style={{
+            //     backgroundImage: 'none',
+            //     // Add any other styles specific to this page if needed
+            // }}
+          >
             <ButtonGroup style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ flex: 1, marginRight: '10px' }}>
-            <Button className="back" onClick={() => navigate('/')}> <ArrowIosBack size="24" /> Tilbage til home </Button>
-            <br/>
-            </div>
-            <div style={{ flex: 1, marginLeft: '10px' }}>
-            <Button className="nulstil" onClick={() => removeFilters() } > < BackInTime size="24" /> Nulstil filtre </Button>
-            </div>
+                <div style={{ flex: 1, marginRight: '10px' }}>
+                    <Button className="back" onClick={() => navigate('/')}> <ArrowIosBack size="24" /> Tilbage til home </Button>
+                </div>
+
+                <div style={{ flex: 1, marginLeft: '10px' }}>
+                    <Button className="add" onClick={handleCreateProject}  > < Add size="24" /> Opret projekt </Button>
+                </div>
+                
+                <div style={{ flex: 1, marginLeft: '10px' }}>
+                    <Button className="nulstil" onClick={() => removeFilters() } > < BackInTime size="24" /> Nulstil filtre </Button>
+                </div>
             </ButtonGroup>
-            
             
             <br/>
             <br/>
@@ -390,33 +497,39 @@ const FindProject = () => {
                     </Col>
 
                     <Col className="dropdown-col d-flex justify-content-center" >
-                    <DropdownButton title="Konsulent" onSelect={handleSelectConsultant} size="lg" >
+                    <DropdownButton title="Konsulent" onSelect={ handleSelectConsultant } size="lg" >
                         { uniqueProjectConsultants.map(consultant => (
-                            <Dropdown.Item eventKey={consultant.useruuid} > {consultant.firstName} {consultant.lastName}</Dropdown.Item>
+                            <Dropdown.Item eventKey={consultant.useruuid} > {consultant.firstName} {consultant.lastName} </Dropdown.Item>
                         )) }
                     </DropdownButton>
                     </Col>
                     
                     <Col className="dropdown-col d-flex justify-content-center" >
-                    <DropdownButton title="Ydelse"  size="lg" >
-                        <Dropdown.Item> Ydelse 1 </Dropdown.Item>
-                        <Dropdown.Item> Ydelse 2 </Dropdown.Item>
+                    <DropdownButton title="Kompetence" size="lg" onSelect={handleSelectOffering}  >
+                        { uniqueProjectOfferings.map((offering) => (
+                            <Dropdown.Item eventKey={offering} > {offering}  </Dropdown.Item>
+                        )) }
                     </DropdownButton>
                     </Col>
 
                     <Col className="dropdown-col d-flex justify-content-center" >
-                    <DropdownButton title="Tool" size="lg" >
-                        <Dropdown.Item> Tool 1 </Dropdown.Item>
-                        <Dropdown.Item> Tool 2 </Dropdown.Item>
+                    <DropdownButton title="Tool" size="lg" onSelect={handleSelectTool } >
+                        { uniqueProjectTools.map((tool) => (
+                            <Dropdown.Item eventKey={tool} > {tool} </Dropdown.Item>
+                        )) }
                     </DropdownButton>
                     </Col>
                 </Row>
 
                 <Row>
 
-                <Carousel>
+                <Carousel 
+                    defaultActiveIndex={0}
+                    activeIndex={activeSlide} // Set the active index
+                    onSelect={(index) => setActiveSlide(index)} // Update the active index  
+                >
                 {projectChunks.map((chunk, chunkIndex) => (
-                    <Carousel.Item key={chunkIndex} interval={100000}>
+                    <Carousel.Item key={chunkIndex} interval={5000} >
                     <div className="carousel-content">
                         <div className="row">
                         {chunk.map((project, projectIndex) => (
@@ -437,23 +550,35 @@ const FindProject = () => {
                 ))} 
                 </Carousel>
 
-                <Modal show={selectedProjectIndex !== null} onHide={handleModalClose} centered>
-                <Modal.Body>
+                <Modal 
+                    show={selectedProjectIndex !== null} 
+                    onHide={handleModalClose} 
+                    centered
+                    size="lg"
+                >
+                <Modal.Body >
                     {selectedProjectIndex !== null && selectedProjectChunkIndex !== null && (
                     <div>
-                        <img src={`data:image/jpeg;base64,${getClientLogo(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].clientuuid)}`}  ></img>
-                        <h2>{projectChunks[selectedProjectChunkIndex][selectedProjectIndex].name}</h2>
+                        <img src={`data:image/jpeg;base64,${getClientLogo(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].clientuuid)}` }  ></img>
+                        <h2 className="modalheader" > {projectChunks[selectedProjectChunkIndex][selectedProjectIndex].name} </h2>
+                        <p> { formatDate(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].from)} - { formatDate(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].to)} </p>
                         <br/>
                         <Row>
                             <Col>
                             <h3>Tools:</h3>
+                            <p> {projectChunks[selectedProjectChunkIndex][selectedProjectIndex].toolsList.join(', ')} </p>
                             </Col>
+
                             <Col>
-                            <h3>Ydelser:</h3>
+                            <h3>Kompetencer:</h3>
+                            <p> {projectChunks[selectedProjectChunkIndex][selectedProjectIndex].offeringList.join(', ')} </p>
                             </Col>
                         </Row>
                         <br/>
                         <h5> {projectChunks[selectedProjectChunkIndex][selectedProjectIndex].description} </h5>
+
+            
+
                     </div>
                     )}
                 </Modal.Body>

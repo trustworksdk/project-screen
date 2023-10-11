@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
 
     h2 {
       color: white;
+
     }
 
     p {
@@ -50,6 +51,20 @@ export const Wrapper = styled.div`
       height: 50px;
       float: right;
       margin-right: 70px;
+    }
+
+    .btn.btn-primary.add {
+      margin-top: 50px;
+      background: white;
+      border: 0;
+      color: #455977;
+      font-weight: bold;
+      font-size: 17px;
+      border-radius: 10px;
+      width: 200px;
+      height: 50px;
+      float: right;
+      margin-left: 1100px;
     }
 
     .row {
@@ -163,6 +178,14 @@ export const Wrapper = styled.div`
         
       }
 
+      .my-modal .modal-content {
+        background-color: red;
+      }
+
+
+
+   
+  
     
    
     

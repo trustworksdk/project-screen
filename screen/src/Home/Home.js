@@ -6,32 +6,59 @@ import { useNavigate } from "react-router-dom";
 import { Base64 } from "js-base64";
 import {config} from "../Components/API";
 import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
+import { useToolContext } from "../Contexts/ToolContext";
+
 
  
 const Home = () => {
 
     const navigate = useNavigate();
-
     const [projects, setProjects] = useState();
     const [employeeList, setEmployeeList] = useState([]);
     const [clientList, setClientList] = useState([]);
+    const { selectedTool, updateSelectedTool, setSelectedTool } = useToolContext();
+
     
 
     // Setting projects
+    // useEffect(() => {
+    //     axios.get('https://api.trustworks.dk/knowledge/projects', config)
+    //     .then(response => {
+    //         setProjects(() => response.data) 
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }, []);
+
     useEffect(() => {
-        axios.get('https://api.trustworks.dk/knowledge/projects', config)
-        .then(response => {
-            setProjects(() => response.data) 
-        }).catch(error => {
-            console.log(error)
-        });
-    }, []);
+        axios
+          .get('https://api.trustworks.dk/knowledge/projects', config)
+          .then(response => {
+            // Sort the projects by the "from" field in descending order
+            const sortedProjects = response.data.sort((a, b) => {
+              // Convert the "from" values to Date objects for comparison
+              const dateA = new Date(a.from);
+              const dateB = new Date(b.from);
+      
+              // Compare the dates in reverse order (newest first)
+              return dateB - dateA;
+            });
+      
+            // Set the sorted projects in the state
+            setProjects(sortedProjects);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+
+      
 
     // Making employee list consisting of id and photo file
     useEffect(() => {
         projects?.map(project => {
             project.projectDescriptionUserList?.map(user => {
-                axios.get(`https://api.trustworks.dk/users/${user.useruuid}/photo`, config).then(response => { 
+                axios.get(`https://api.trustworks.dk/public/users/${user.useruuid}/photo`, config).then(response => { 
                     // setEmployeePhoto(response.data.file);
                     const photo = response.data.file;
                     setEmployeeList(employeeList => [...employeeList, {id: user.useruuid, file: photo}])  
@@ -53,7 +80,7 @@ const Home = () => {
     // Making client list consisting of id and photo file
     useEffect(() => {
         projects?.map(project => {
-            axios.get(`https://api.trustworks.dk/files/photos/${project.clientuuid}`, config)
+            axios.get(`https://api.trustworks.dk/public/files/photos/${project.clientuuid}`, config)
             .then(response => {
                 setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
             }).catch(error => {
@@ -68,6 +95,20 @@ const Home = () => {
         const foundItem = clientList.find(item => item.id === props);
         return foundItem ? foundItem.file : null;
     }
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long' };
+        return new Date(dateString).toLocaleDateString('da-DK', options);
+    };
+
+    const handleToolButtonClick = (tool) => {
+        // setSelectedTool(tool);
+        navigate('/findproject');
+        // console.log("From home page: handleToolButtonClick: ", tool)
+
+        // updateSelectedTool(tool);
+        setSelectedTool(tool);
+    };
 
 
     return (
@@ -89,18 +130,23 @@ const Home = () => {
                         <div className="ydelser-og-tools">
                         <Card className="ydelser bg-transparent border-0">
                                 <Card.Title className="ydelser-og-tools-overskrift" > Ydelser </Card.Title>
-                                <Card.Text> 
-                                <button className="ydelser-og-tools-knap">Ydelse1</button>
-                                <button className="ydelser-og-tools-knap">Ydelse2</button>
-                                <button className="ydelser-og-tools-knap">Ydelse3</button>
+                                <Card.Text>
+                                    { project.offeringList.map(tool => (
+                                        <button className="ydelser-og-tools-knap"> {tool} </button>
+                                    )) }
                             </Card.Text>
                             </Card>
                         <Card className="tools bg-transparent border-0">
                             <Card.Title className="ydelser-og-tools-overskrift" > Tools </Card.Title>
                             <Card.Text> 
-                                <button className="ydelser-og-tools-knap">Tool1</button>
-                                <button className="ydelser-og-tools-knap">Tool2</button>
-                                <button className="ydelser-og-tools-knap">Tool3</button>
+                                { project.toolsList.map(tool => (
+                                    <button 
+                                        key={tool}
+                                        className="ydelser-og-tools-knap"
+                                        onClick={() => handleToolButtonClick(tool)}
+                                        > {tool} 
+                                    </button>
+                                )) }
                             </Card.Text>
                         </Card>
                         </div>
@@ -113,14 +159,17 @@ const Home = () => {
                                 <Card.Title>
                                     <h1> {project.name} </h1>
                                     <br></br>
-                                    <h2 className="periode">Periode fra - periode til </h2>
+                                    <h2 className="periode"> {formatDate(project.from)} - {formatDate(project.to)} </h2>
                                     <h2 className="beskrivelse"> {project.description} </h2>
                                 </Card.Title>
+
+
 
                                 <Row className="employeerow" >
                                 { project.projectDescriptionUserList?.map(user => (
                                     <Col className="employeecol" >
                                     <img className="employeephoto" src={`data:image/jpeg;base64,${ getEmployee(user.useruuid) }`}  />
+                                    <p>  </p>
                                     </Col>
                                 )) }
                                 </Row>
