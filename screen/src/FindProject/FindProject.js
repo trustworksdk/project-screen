@@ -19,6 +19,7 @@ const FindProject = () => {
 
     const [projects, setProjects] = useState([]);
     const [updatedProjects, setUpdatedProjects] = useState([]);
+    const [filteredProjects, setfilteredProjects] = useState([]);
     const [clients, setClients] = useState([]);
     const [uniqueProjectClients, setUniqueProjectClients] = useState([]);
     const [uniqueProjectOfferings, setUniqueProjectOfferings] = useState([]);
@@ -38,8 +39,6 @@ const FindProject = () => {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const { selectedToolFromContext } = useToolContext();
-
-
 
 
     useEffect(() => {
@@ -97,8 +96,6 @@ const FindProject = () => {
         );
         
       }, [allConsultants]);
-
-    
 
 
       //Set list with client IDs and logos
@@ -164,7 +161,7 @@ const FindProject = () => {
         // console.log("useEffect: Unik liste af konsulenter");
       
         const uniqueConsultantsMap = new Map(); // Use a Map to efficiently keep track of unique consultants
-        updatedProjects.forEach((project) => {
+        filteredProjects.forEach((project) => {
           project.projectDescriptionUserList.forEach((consultant) => {
             const consultantKey = consultant.useruuid;
             const consultantFirstName = consultant.firstName;
@@ -192,19 +189,14 @@ const FindProject = () => {
         
         setUniqueProjectConsultants(sortedUniqueConsultantsList);
         // console.log(uniqueConsultantsList)
-      }, [updatedProjects, activeConsultants]);
+      }, [filteredProjects, activeConsultants]);
       
-
-    useEffect(() => {
-        // console.log("setUniqueProjectConsultants: ", uniqueProjectConsultants);
-    }, [uniqueProjectClients]);
 
     // Set uniqueProjectClients list for drop-down based on unique values from updatedProjects
     useEffect(() => {
         // console.log("useEffect: Unik liste af kunder");
-      
         const uniqueClientsMap = new Map(); // Use a Map to efficiently keep track of unique clients
-        updatedProjects.forEach((project) => {
+        filteredProjects.forEach((project) => {
           if (!uniqueClientsMap.has(project.clientName)) {
             uniqueClientsMap.set(project.clientName, {
                 clientuuid: project.clientuuid,
@@ -216,15 +208,14 @@ const FindProject = () => {
         const uniqueClientList = Array.from(uniqueClientsMap.values());
         const sortedUniqueClientsList = uniqueClientList.sort(sortByClientName); // Hey Nicole, man kan også bare skrive ".sort()" og så sorteres den alfabetisk, se useEffect nedenfor.
         setUniqueProjectClients(sortedUniqueClientsList);
-    }, [updatedProjects]);
+    }, [filteredProjects]);
 
 
     // Set uniqueOfferingList for drop-down based on unique values from updatedProjects
     useEffect(() => {
         // console.log("useEffect: Unik list of offerings");
-      
         const uniqueOfferingMap = new Map(); // Use a Map to efficiently keep track of unique offerings
-        updatedProjects.forEach((project) => {
+        filteredProjects.forEach((project) => {
             project.offeringList.forEach((offering) => {
                 if (!uniqueOfferingMap.has(offering)) {
                     uniqueOfferingMap.set(offering, offering)
@@ -233,18 +224,16 @@ const FindProject = () => {
         });
       
         const uniqueOfferingList = Array.from(uniqueOfferingMap.values());
-        
         const sortedUniqueOfferingList = uniqueOfferingList.sort();
         setUniqueProjectOfferings(sortedUniqueOfferingList);
-    }, [updatedProjects]);
+    }, [filteredProjects]);
 
 
     // Set UniqueProjectTools for drop-down based on unique values from updatedProjects
     useEffect(() => {
         // console.log("useEffect: Unik list of tools");
-      
         const uniqueToolMap = new Map(); // Use a Map to efficiently keep track of unique tools
-        updatedProjects.forEach((project) => {
+        filteredProjects.forEach((project) => {
             project.toolsList.forEach((tool) => {
                 if (!uniqueToolMap.has(tool)) {
                     uniqueToolMap.set(tool, tool)
@@ -255,9 +244,7 @@ const FindProject = () => {
         const uniqueToolList = Array.from(uniqueToolMap.values());
         const sortedUniqueToolList = uniqueToolList.sort();
         setUniqueProjectTools (sortedUniqueToolList);
-    }, [updatedProjects]);
-
-
+    }, [filteredProjects]);
 
     // Filtrering af projekter og visning af tre ad gangen
     const chunkSize = 3;
@@ -282,15 +269,16 @@ const FindProject = () => {
         else {
             for (let i = 0; i < filteredArray.length; i += chunkSize) {
                 newProjectChunks.push(filteredArray.slice(i, i + chunkSize));
-            }   
+            }
         }
 
         // Reset the active slide index when consultant/client/offering/tool selection changes
         setActiveSlide(0);
 
         setProjectChunks(newProjectChunks)
+        setfilteredProjects(filteredArray)
         // console.log("selected tool from use effect:", selectedTool)
-        console.log("project chunks:", projectChunks)
+        console.log("filteredArray:", filteredArray)
     }, [selectedClient, updatedProjects.length, isClientEmpty, selectedConsultant, isConsultantEmpty, updatedProjects, selectedOffering, isOfferingEmpty, isToolEmpty, selectedTool])
 
 
