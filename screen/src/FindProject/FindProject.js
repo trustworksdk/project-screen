@@ -1,33 +1,31 @@
-import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { Card, Button, Row, Col, Dropdown, DropdownButton, CardGroup, Carousel, Modal, ButtonGroup } from "react-bootstrap";
 import { Wrapper } from "./FindProject.styles";
 import { useNavigate, useLocation } from "react-router-dom";
-import {config} from "../Components/API";
-import {ArrowBack} from '@styled-icons/boxicons-regular/ArrowBack';
 import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
-import {ArrowReset} from '@styled-icons/fluentui-system-filled/ArrowReset';
 import {BackInTime} from '@styled-icons/entypo/BackInTime';
-import {AddToQueue} from '@styled-icons/boxicons-regular/AddToQueue';
+
 import {Add} from '@styled-icons/fluentui-system-filled/Add';
 import { useToolContext } from "../Contexts/ToolContext"; 
 
+//NYT
+import { getProjects, getClients, getConsultants, updateClientListWithIdPhoto, getClientLogoUudid, getEmployeePhotoUuid} from "../Components/API";
+
 
 const FindProject = () => {
-
     const navigate = useNavigate();
-
     const [projects, setProjects] = useState([]);
+    const [clients, setClients] = useState([]);
+    const [consultants, setConsultants] = useState([]);
+
     const [updatedProjects, setUpdatedProjects] = useState([]);
     const [filteredProjects, setfilteredProjects] = useState([]);
-    const [clients, setClients] = useState([]);
     const [uniqueProjectClients, setUniqueProjectClients] = useState([]);
     const [uniqueProjectOfferings, setUniqueProjectOfferings] = useState([]);
     const [uniqueProjectTools, setUniqueProjectTools] = useState([]);
     const [uniqueProjectConsultants, setUniqueProjectConsultants] = useState([]);
-    const [allConsultants, setAllConsultants] = useState([]);
+    
     const [activeConsultants, setActiveConsultants] = useState([]);
-    const [clientList, setClientList] = useState([]);
     const [selectedClient, setSelectedClient] = useState("");
     const [selectedConsultant, setSelectedConsultant] = useState("");
     const [selectedOffering, setSelectedOffering] = useState("");
@@ -37,83 +35,67 @@ const FindProject = () => {
     const [selectedProjectChunkIndex, setSelectedProjectChunkIndex] = useState(null);
     const [sortOption, setSortOption] = useState("default");
     const [activeSlide, setActiveSlide] = useState(0);
-
     const { selectedToolFromContext } = useToolContext();
 
+    const isClientEmpty = selectedClient === "";
+    const isConsultantEmpty = selectedConsultant === "";
+    const isOfferingEmpty = selectedOffering === "";
+    const isToolEmpty = selectedTool === "";
+
+    useEffect(() => {
+        getProjects(setProjects);
+    }, []);
+
+    useEffect(()=>{
+        getClients(setClients);
+    }, []);
+
+    useEffect(()=>{
+        getConsultants(setConsultants);
+    }, []);
+
+    
+    updateClientListWithIdPhoto(projects, setClients);
+    
+    function setListActiveConsultants(consultants) {
+        setActiveConsultants(
+            consultants.filter(consultant => 
+                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT" )
+            )
+        )
+    }
+
+    //Set active consultants 
+    useEffect(() => {
+        setListActiveConsultants(
+            consultants.filter(consultant => 
+                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT" )
+            )
+        ); 
+      }, [consultants]);
+
+    //Get the client logo. Client ID is given as props. 
+    function getClientLogo(props) {
+        const foundItem = clients.find(item => item.id === props);
+        return foundItem ? foundItem.file : null;
+    } 
 
     useEffect(() => {
         // Add the 'no-background-image' class to the body element when the component mounts
         document.body.classList.add('no-background-image');
-    
         // Remove the 'no-background-image' class from the body element when the component unmounts
         return () => {
           document.body.classList.remove('no-background-image');
         };
       }, []);
-  
-
-    // Set clients (and active clients)
-    useEffect(() => {
-        axios.get('https://api.trustworks.dk/public/clients', config)
-        .then(response => {
-            setClients(() => response.data)   
-        }).catch(error => {
-            console.log(error)
-        });
-    }, []);
 
 
-    // Set projects
-    useEffect(() => {
-        axios.get('https://api.trustworks.dk/knowledge/projects', config)
-        .then(response => {
-            setProjects(() => response.data)
-        }).catch(error => {
-            console.log(error)
-        });
-    }, []);
-  
-
-    //Set consultants
-    useEffect(() => {
-        axios.get('https://api.trustworks.dk/public/users', config)
-          .then(response => {
-            setAllConsultants(response.data);
-            
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }, []);
-
-      //Set active consultants 
-      useEffect(() => {
-        setActiveConsultants(
-
-            allConsultants.filter(consultant => 
-                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT" )
-            )
-        );
-        
-      }, [allConsultants]);
-
-
-      //Set list with client IDs and logos
-      useEffect(() => {
-        projects?.map(project => {
-            axios.get(`https://api.trustworks.dk/public/files/photos/${project.clientuuid}`, config)
-            .then(response => {
-                setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
-            }).catch(error => {
-            console.log(error)
-            })
-        })
-    }, [projects]);
+      
 
 
     //Add clientName and consultantName as variables in updatedProjects
     useEffect(() => {
-        console.log("all consultants: ", allConsultants)
+        console.log("all consultants: ", consultants)
 
         const updatedProjectList = projects.map((project) => {
             //Find client name
@@ -122,7 +104,7 @@ const FindProject = () => {
 
             //Update projectDescriptionUserList with Consultant name
             const updatedProjectDescriptionUserList = project.projectDescriptionUserList.map((employee) => {
-                const consultant = allConsultants.find((user) => user.uuid === employee.useruuid);
+                const consultant = consultants.find((user) => user.uuid === employee.useruuid);
                 const consultantFirstName = consultant ? (consultant.firstName) : 'Konsulent fornavn ukendt';
                 const consultantLastName = consultant ? (consultant.lastName) : 'Konsulent efternavn ukendt';
                 return { ...employee, firstName: consultantFirstName, lastName: consultantLastName};
@@ -133,18 +115,9 @@ const FindProject = () => {
 
         setUpdatedProjects(updatedProjectList);
         // console.log("updatedProjects", updatedProjects)
-    }, [projects, clients, allConsultants]);   
+    }, [projects, clients, consultants]);   
     
-    //Get the client logo. Client ID is given as props. 
-    function getClientLogo(props) {
-        const foundItem = clientList.find(item => item.id === props);
-        return foundItem ? foundItem.file : null;
-    }
     
-    const isClientEmpty = selectedClient === "";
-    const isConsultantEmpty = selectedConsultant === "";
-    const isOfferingEmpty = selectedOffering === "";
-    const isToolEmpty = selectedTool === "";
 
     // Remove filters
     const removeFilters = () => {
@@ -293,15 +266,6 @@ const FindProject = () => {
     const handleSelectClient = (e) => {
         setSelectedClient(e);
         // console.log("handleSelectClient has been called. Client id:", selectedClient)
-
-
-        // Filter consultants based on the selected client
-        // const filteredConsultantsBySelectedClient = filteredProjectsBySelectedClient.projectDescriptionUserList.filter(consultant => {
-
-        // });
-        // //filtrer konsulent dropdown
-        // setUniqueProjectConsultants();
-        // const sortedUniqueConsultantsList = uniqueConsultantsList.sort(sortConsultantBySelectedClient);
     }
 
     useEffect(() => {
@@ -416,20 +380,6 @@ const FindProject = () => {
         return 0;
     };
 
-    // Sort Consultant by selected client
-    const sortConsultantBySelectedClient = (client) => {
-        const clientId = client.clientuuid;
-
-        
-
-    };
-
-    // useEffect til at tjekke hvornår projekter er blevet sorteret. Kan slettes.
-    // useEffect(() => {
-    //     console.log("Updated projects after sorting alphabetically:", updatedProjects);
-    // }, [updatedProjects]);
-
-
     const handleCreateProject = () => {
         const externalURL = 'https://intra.trustworks.dk/#!projectdescriptions';
         window.open(externalURL, '_blank'); // '_blank' opens in a new window/tab
@@ -442,12 +392,7 @@ const FindProject = () => {
 
 
     return (
-        <Wrapper 
-            // style={{
-            //     backgroundImage: 'none',
-            //     // Add any other styles specific to this page if needed
-            // }}
-          >
+        <Wrapper>
             <ButtonGroup style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ flex: 1, marginRight: '10px' }}>
                     <Button className="back" onClick={() => navigate('/')}> <ArrowIosBack size="24" /> Tilbage til home </Button>
@@ -581,9 +526,61 @@ const FindProject = () => {
 export default FindProject
 
 
+//GAMMEL KODE
+
+// import {ArrowReset} from '@styled-icons/fluentui-system-filled/ArrowReset';
+// import {AddToQueue} from '@styled-icons/boxicons-regular/AddToQueue';
+// import {config} from "../Components/API";
+// import {ArrowBack} from '@styled-icons/boxicons-regular/ArrowBack';
+// import axios from "axios";
+
+    // Kode nu i API.js
+    // Set clients (and active clients)
+    // useEffect(() => {
+    //     axios.get('https://api.trustworks.dk/public/clients', config)
+    //     .then(response => {
+    //         setClients(() => response.data)   
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }, []);
 
 
+    // Kode nu i API.js
+    // Set projects
+    // useEffect(() => {
+    //     axios.get('https://api.trustworks.dk/knowledge/projects', config)
+    //     .then(response => {
+    //         setProjects(() => response.data)
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }, []);
+  
 
+    // Kode nu i API.js
+    //Set consultants
+    // useEffect(() => {
+    //     axios.get('https://api.trustworks.dk/public/users', config)
+    //       .then(response => {
+    //         setAllConsultants(response.data);
+            
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
+    //   }, []);
 
+     //   //Set list with client IDs and logos
+    //   useEffect(() => {
+    //     projects?.map(project => {
+    //         axios.get(`https://api.trustworks.dk/public/files/photos/${project.clientuuid}`, config)
+    //         .then(response => {
+    //             setClientList(clientList => [...clientList, {id: project.clientuuid, file: response.data.file}])  
+    //         }).catch(error => {
+    //         console.log(error)
+    //         })
+    //     })
+    // }, [projects]);
 
 
