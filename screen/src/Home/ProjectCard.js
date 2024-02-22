@@ -1,5 +1,4 @@
 import React from "react";
-// import { Wrapper } from "./Home.styles";
 import { Card, CardGroup, Row, Col } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
