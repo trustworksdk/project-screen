@@ -2,6 +2,24 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+### Install nvm
+
+`brew install nvm`
+
+### Install node
+
+`nvm install --lts`
+
+### Install react-scripts
+
+`npm install react-scripts`
+
+### Get token
+
+login through swagger https://api.trustworks.dk/q/swagger-ui/#/login/get_login and paste token into API.js
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -68,3 +86,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Prerequisites for Docker
+
+```brew install docker```
+
+### Build Docker Image to local registry
+
+```docker image build -t project-screen:latest .```
+
+### Run Docker Image
+
+```docker run -d -p 3000:3000 --name project-screen project-screen:latest```
