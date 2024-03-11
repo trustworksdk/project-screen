@@ -1,12 +1,28 @@
 import styled from "styled-components"
-import twlogo from "../../src/img/iconlogo_white.png";
 
 export const Wrapper = styled.div`
-    // background: white;
+
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: space-around; /* Distribute space vertically */
+  }
+  
+  .aspect-ratio-item {
+    width: 85%; /* Adjust based on your design needs */
+    aspect-ratio: 9 / 16;
+    height: 90%
+    background-color: lightblue; /* Example background color */
+  }
+
+// background: white;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
-    
 
+    row {
+        background-color: transparent;
+    }
     h1 {
         color: #192434;
         font-size: 48px;
@@ -28,29 +44,9 @@ export const Wrapper = styled.div`
         margin-top: 50px;
     }
 
-    .row{
-        margin-right: 300px;
-    }
-
-    .col-sm-8{
-        padding-left: 100px;
-        padding-right: 200px;
-    }
-
-
-    .col-sm-4 {
-        // background-color: #CAE2E1;
-        // border-radius: 0px 90px 90px 0px;
-        padding-top: 40px;
-        padding-left: 10px;
-        height: 700px;
-        border-right: 15px solid #193B670D;
-    }
-
     .card-img-top {
-        width: 20%;
-        height: 10vw;
-        object-fit: cover;
+        // width: 20%;
+        object-fit: contain;
     }
 
     .people {
@@ -75,8 +71,6 @@ export const Wrapper = styled.div`
     
 
     .ydelser-og-tools{
-        margin-top: 20%;
-        padding-left: 10%; 
         color: #192434;
     }
 
@@ -102,11 +96,6 @@ export const Wrapper = styled.div`
         margin-top: 10px;
     }
 
-    // .personcardbody{
-    //     display: table;
-    //     // text-align: center;
-    // }
-
     .userdescription{
         font-size: 18px;
         padding-left: 20px;
@@ -123,7 +112,6 @@ export const Wrapper = styled.div`
     .employeecol {
         padding: 0;
         margin-right: -10;
-        // margin-bottom: 10px; /* Optional: Add some margin between each image */
         display: inline-block;
     } 
       
@@ -152,23 +140,12 @@ export const Wrapper = styled.div`
     }
 
     .carousel-indicators {
-        // background-color: darkgray;
+        background-color: darkgray;
         filter: invert(100%);
-    }
-
-    .carousel-inner{
-        height: 900px;
     }
 
     .carousel-control-prev{
         width: 10px;
     }
-
-
-
-
-  
-    
-
 
 `

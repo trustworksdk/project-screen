@@ -1,6 +1,8 @@
 //med
 import React, { useEffect, useState } from "react";
 import { Wrapper } from "./Home.styles";
+// import './HomeStyleVer.css';
+
 import { useNavigate } from "react-router-dom";
 import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
 import { useToolContext } from "../Contexts/ToolContext";
@@ -8,6 +10,7 @@ import { useToolContext } from "../Contexts/ToolContext";
 import { Button, Carousel} from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid} from "../Components/API";
 import ProjectCard from "./ProjectCard";
+import ProjectCardVer from "./ProjectCardVer";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -71,10 +74,10 @@ const Home = () => {
             <ArrowIosBack size="24" /> Flere projekter
         </Button>
 
-        <Carousel className="carousell">
+        <Carousel>
         {projects.map((project) => (
-            <Carousel.Item key={project.id} interval={5000}>
-            <ProjectCard
+            <Carousel.Item key={project.id} interval={5000000}>
+            <ProjectCardVer
             project={project}
             onToolButtonClick={handleToolButtonClick}
             getClientLogo={getClientLogo}
