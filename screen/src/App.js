@@ -1,8 +1,8 @@
-import { Routes, Route } from "react-router-dom";
-// import logo from './logo.svg';
+import {Routes, Route } from "react-router-dom";
 import './App.css';
 import FindProject from './FindProject/FindProject';
 import Home from "./Home/Home";
+import ProjectCarousel from './ProjectCarousel/ProjectCarousel';
 import twlogo from "../src/img/tw_white.png";
 import { ToolProvider } from "./Contexts/ToolContext";
 
@@ -19,24 +19,21 @@ const styles = {
 }
 
 
-
-
 function App() {
-  return (
-    <div className="App" style={styles.header}>
-      <ToolProvider>
-      <Routes>
-        
-          <Route path="/" element={ <Home/> } />
-          <Route path="/findproject" element={ <FindProject/> } />
-        
-      </Routes>
-      </ToolProvider>
-   
-    
-    
-    </div>
-  );
+    return (
+        <div className="App" style={styles.header}>
+            <ToolProvider>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/projectcarousel" element={< ProjectCarousel />} />
+                    <Route path="/findproject" element={<FindProject />} />
+
+                </Routes>
+            </ToolProvider>
+
+        </div>
+    );
 }
+
 
 export default App;

@@ -2,21 +2,58 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
 
-.vertical-layout {
+@media (orientation: portrait) {
+  .vertical-layout {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    justify-content: space-around; /* Distribute space vertically */
+    align-items: center; 
+    justify-content: space-around; 
+    height: 100vh;
   }
   
   .aspect-ratio-item {
-    width: 85%; /* Adjust based on your design needs */
+    flex-grow: 15;
+    width: 85%; 
     aspect-ratio: 9 / 16;
     height: 90%
-    background-color: lightblue; /* Example background color */
+    background-color: lightblue; 
   }
 
-// background: white;
+  .logo-row {
+    flex: 3;
+  }
+
+  .logo-img {
+    border-radius: 3%;
+  }
+
+  .project-name-row {
+    flex: 1;
+  }
+
+  .project-date-row {
+    flex: 0.4;
+  }
+
+  .project-description-row {
+    flex: 10;
+    display: flex;
+  }
+
+  .description-col {
+    flex: 2;
+  }
+
+  .tools-col {
+    flex: 1;
+  }
+
+  .employee-card {
+    flex: 3;
+  }
+
+  }
+  // background: white;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
 
@@ -147,5 +184,4 @@ export const Wrapper = styled.div`
     .carousel-control-prev{
         width: 10px;
     }
-
-`
+`;
