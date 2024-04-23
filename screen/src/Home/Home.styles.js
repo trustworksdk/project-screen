@@ -2,76 +2,58 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
 
-.vertical-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    justify-content: space-around; /* Distribute space vertically */
-  }
-  
-  .aspect-ratio-item {
-    width: 85%; /* Adjust based on your design needs */
-    aspect-ratio: 9 / 16;
-    height: 90%
-    background-color: lightblue; /* Example background color */
-  }
-
-// background: white;
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-
-    row {
-        background-color: transparent;
-    }
-    h1 {
-        color: #192434;
-        font-size: 48px;
-        font-weight: bold;
+@media (orientation: portrait) {
+    .vertical-layout {
+        display: flex;
+        flex-direction: column;
+        height: 95vh;
+        width: 80%;
+        margin: auto;
+        align-items: center; /* Center items horizontally */
+        justify-content: center; /* Center items vertically */
     }
 
-    h2 {
-        color: #192434;
-        font-size: 23px;
+    .row {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+      
+    .column {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
 
-    .periode{
-        font-weight: bold;
-        font-size: 30px;
-        margin-bottom: 15px;
-    }
-   
-    .card-group{
-        margin-top: 50px;
+    .client-logo-row{
+      object-fit: none;
+      borderRadius: 3%;
+    //   flex: 2;
     }
 
-    .card-img-top {
-        // width: 20%;
-        object-fit: contain;
+    .project-description-row{
+      flex: 1; 
+      min-width: 33vh;
+      max-width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
 
-    .people {
-        color: #16215B;
+    .description-col{
+      flex: 2;
+      
     }
 
-    .person.card.text.bg-transparent.border-0{
-        font-size: 17px;
-        padding: 10px;
-    }
-
-    .btn.btn-primary {
-        margin-top: 50px;
-        margin-left: 50px;
-        background: #DFD8D282;
-        border: 0;
-        color: #455977;
-        font-weight: bold;
-        font-size: 20px;
-        padding: 15px;
-    }
-    
-
-    .ydelser-og-tools{
-        color: #192434;
+    .ydelser-og-tools-col{
+      flex: 1; 
+      color: #192434; 
     }
 
     .tools{
@@ -96,19 +78,34 @@ export const Wrapper = styled.div`
         margin-top: 10px;
     }
 
-    .userdescription{
-        font-size: 18px;
-        padding-left: 20px;
-        display: flex;
-        display: table-cell;
-        vertical-align: middle;
+    .card-group{
+        margin-top: 50px;
     }
 
-    .employeerow {
-        margin-right: 0;
-        overflow: hidden; /* Prevent horizontal scroll if images exceed the container width */
+    .card-img-top {
+        object-fit: contain;
     }
-      
+
+    .people {
+        color: #16215B;
+    }
+
+    .person.card.text.bg-transparent.border-0{
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    .btn.btn-primary {
+        margin-top: 50px;
+        margin-left: 50px;
+        background: #DFD8D282;
+        border: 0;
+        color: #455977;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 15px;
+    }
+  
     .employeecol {
         padding: 0;
         margin-right: -10;
@@ -117,9 +114,9 @@ export const Wrapper = styled.div`
       
     .employeephoto {
         width: 130px;
-        height: 110px;
+        height: 130px;
         border-radius: 50%;
-        margin-top: 100px;
+        margin: 5%;
     }
 
     .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -132,20 +129,30 @@ export const Wrapper = styled.div`
     }
        
     .carousel-control-prev-icon {
-        left: 7%;
     }
     
-    .carousel-control-next {
-        right: -5%;
-    }
-
-    .carousel-indicators {
-        background-color: darkgray;
-        filter: invert(100%);
+    .carousel-control-next { 
     }
 
     .carousel-control-prev{
-        width: 10px;
     }
+
+    .carousel-indicators {
+        background-color: orange;
+        border: 20px;
+    }
+
+    h1 {
+        color: #192434;
+        font-size: 60px;
+        font-weight: bold;
+    }
+
+    h2 {
+        color: #192434;
+        font-size: 40px;
+    }
+
+  }
 
 `
