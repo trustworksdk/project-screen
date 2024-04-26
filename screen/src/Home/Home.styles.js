@@ -7,53 +7,20 @@ export const Wrapper = styled.div`
         display: flex;
         flex-direction: column;
         height: 95vh;
-        width: 80%;
+        width: 85%;
         margin: auto;
         align-items: center; /* Center items horizontally */
         justify-content: center; /* Center items vertically */
     }
 
-    .row {
+    .row-flex {
         flex: 1;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-      
-    .column {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
+        border: 1px solid green;
     }
 
     .client-logo-row{
       object-fit: none;
-      borderRadius: 3%;
-    //   flex: 2;
-    }
-
-    .project-description-row{
-      flex: 1; 
-      min-width: 33vh;
-      max-width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-    }
-
-    .description-col{
-      flex: 2;
-      
-    }
-
-    .ydelser-og-tools-col{
-      flex: 1; 
-      color: #192434; 
     }
 
     .tools{
@@ -84,10 +51,6 @@ export const Wrapper = styled.div`
 
     .card-img-top {
         object-fit: contain;
-    }
-
-    .people {
-        color: #16215B;
     }
 
     .person.card.text.bg-transparent.border-0{

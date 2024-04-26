@@ -5,8 +5,8 @@ import { formatDate } from "../Components/utils";
 const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="vertical-layout">
     
-      <div className="row">
-        <div className="client-logo">
+      <div className="row row-flex">
+        <div className="">
           <Card>
             <Card.Img
             className="client-logo-row"
@@ -34,48 +34,50 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
         </div>
       </div>
 
-      <div className="row">
-        <div className="project-description-row"> 
-          <div className="col-sm-8 description-col">
-            <Card>
-              <Card.Body>
-              <Card.Title>
-                <h2 className="beskrivelse">{project.description}</h2>
+      <div className="row row-flex">
+        <div className="col-8">
+          <Card>
+            <Card.Body>
+            <Card.Title>
+                <h2 className="text-start">{project.description}</h2>
               </Card.Title>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-sm-4 ydelser-og-tools-col">
-            <Card className="ydelser bg-transparent border-0">
-              <Card.Title>Ydelser</Card.Title>
-              <Card.Text>
-                {project.offeringList.map((tool, index) => (
-                  <button key={index} className="ydelser-og-tools-knap">
-                  {tool}
-                  </button>
-                ))}
-              </Card.Text>
-            </Card>
-            <Card className="tools bg-transparent border-0">
-              <Card.Title>Tools</Card.Title>
-              <Card.Text>
-                {project.toolsList.map((tool, index) => (
-                  <button
-                    key={index}
-                    className="ydelser-og-tools-knap"
-                    onClick={() => onToolButtonClick(tool)}
-                  >
-                  {tool}
-                  </button>
-                ))}
-              </Card.Text>
-            </Card>
-          </div>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-4">
+          <Card className="ydelser bg-transparent border-0">
+          <Card.Title className="text-uppercase fw-bold">
+            <h3>Ydelser</h3>
+          </Card.Title>
+          <Card.Text>
+              {project.offeringList.map((tool, index) => (
+              <button key={index} className="ydelser-og-tools-knap">
+              {tool}
+              </button>
+              ))}
+          </Card.Text>
+          </Card>
+          <Card className="tools bg-transparent border-0">
+          <Card.Title className="text-uppercase fw-bold">
+            <h3>Tools</h3>
+          </Card.Title>
+          <Card.Text>
+              {project.toolsList.map((tool, index) => (
+              <button
+              key={index}
+              className="ydelser-og-tools-knap"
+              onClick={() => onToolButtonClick(tool)}
+              >
+              {tool}
+              </button>
+              ))}
+          </Card.Text>
+          </Card>
         </div>
       </div>
 
-      <div className="row">
-        <div ClassName="employeerow">
+      <div className="row row-flex">
+        <div ClassName="">
           <Card className="card bg-transparent border-0"> 
             <Card.Body>
               <Row>
