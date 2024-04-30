@@ -45,18 +45,18 @@ export const Wrapper = styled.div`
         margin-top: 10px;
     }
 
-    .card-group{
-        margin-top: 50px;
-    }
+    // .card-group{
+    //     margin-top: 50px;
+    // }
 
-    .card-img-top {
-        object-fit: contain;
-    }
+    // .card-img-top {
+    //     object-fit: contain;
+    // }
 
-    .person.card.text.bg-transparent.border-0{
-        font-size: 17px;
-        padding: 10px;
-    }
+    // .person.card.text.bg-transparent.border-0{
+    //     font-size: 17px;
+    //     padding: 10px;
+    // }
 
     .btn.btn-primary {
         margin-top: 50px;
@@ -74,6 +74,8 @@ export const Wrapper = styled.div`
         margin-right: -10;
         display: inline-block;
     } 
+
+    
       
     .employeephoto {
         width: 130px;

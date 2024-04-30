@@ -9,12 +9,12 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
         <div className="">
           <Card>
             <Card.Img
-            className="client-logo-row"
+            className="client-logo-row border-0"
             src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
             />
           </Card>
         </div>
-        <div className="project-name-row"> 
+        <div className="project-name-row "> 
           <Card>
             <Card.Body>
             <Card.Title>
@@ -39,7 +39,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
           <Card>
             <Card.Body>
             <Card.Title>
-                <h2 className="text-start">{project.description}</h2>
+                <h2 className="text-start bg-transparent">{project.description}</h2>
               </Card.Title>
             </Card.Body>
           </Card>
@@ -77,8 +77,8 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
       </div>
 
       <div className="row row-flex">
-        <div ClassName="">
-          <Card className="card bg-transparent border-0"> 
+        <div ClassName="col d-flex flex-column justify-content-between">
+          <Card className="card bg-transparent border-0 "> 
             <Card.Body>
               <Row>
                 {project.projectDescriptionUserList?.map((user) => (
