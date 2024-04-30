@@ -3,11 +3,11 @@ import './Home.styles';
 import { Card, Row, Col } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
-  <div className="vertical-layout">
+  <div className="vertical-layout justify-content-center">
     
       <div className="row row-flex">
         <div className="col-12">
-          <Card>
+          <Card className="bg-transparent border-0">
             <Card.Img
             className="client-logo-row border-0"
             src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
@@ -15,7 +15,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
           </Card>
         </div>
         <div className="project-name-row "> 
-          <Card>
+          <Card className="bg-transparent border-0">
             <Card.Body>
             <Card.Title>
               <h1>{project.name}</h1>
@@ -24,7 +24,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
           </Card>
         </div>
         <div className="project-date-row"> 
-          <Card>
+          <Card className="bg-transparent border-0">
             <Card.Body>
             <Card.Title>
               <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
@@ -36,7 +36,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
 
       <div className="row row-flex">
         <div className="col-8">
-          <Card>
+          <Card className="bg-transparent border-0">
             <Card.Body>
             <Card.Title>
                 <h2 className="text-start bg-transparent">{project.description}</h2>

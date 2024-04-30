@@ -78,9 +78,9 @@ const Home = () => {
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-        <Button onClick={() => navigate("/findproject")}>
+        {/* <Button onClick={() => navigate("/findproject")}>
             <ArrowIosBack size="24" /> Flere projekter
-        </Button>
+        </Button> */}
 
         <Carousel>
         {projects.map((project, index) => (

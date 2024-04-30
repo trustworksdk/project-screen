@@ -17,10 +17,20 @@ export const Wrapper = styled.div`
         flex: 1;
         display: flex;
         border: 1px solid green;
+        max-height: 33vh; /* Set max height to 1/3 of the viewport height */
+        overflow-y: auto;
+        
+    }
+
+    .row-description{
+        flex: 1;
+  max-height: 33vh; /* Set max height to 1/3 of the viewport height */
+  overflow-y: auto;
     }
 
     .client-logo-row{
       object-fit: none;
+      background-color: transparent;
     }
 
     .tools{
@@ -128,6 +138,7 @@ export const Wrapper = styled.div`
         color: #192434;
         font-size: 65px;
         font-weight: bold;
+        background-color: transparent;
     }
 
     h2 {
