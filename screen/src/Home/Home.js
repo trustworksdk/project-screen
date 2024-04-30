@@ -27,6 +27,7 @@ const Home = () => {
     useEffect(() => {
         projects?.map(project => {
             project.projectDescriptionUserList?.map(user => {
+                console.log(project);
                 getEmployeePhotoUuid(user.useruuid)
                 .then(photo =>{
                     setEmployeeList((prevList) => [...prevList, { id: user.useruuid, file: photo }]);
@@ -43,6 +44,10 @@ const Home = () => {
         const foundItem = employees.find(item => item.id === props);
         return foundItem ? foundItem.file : null;
     }
+
+    // function getFirst12Employee(props){
+    //     const slicedProjectDescriptionUserList = project.projectDescriptionUserList?.slice(0, 12);
+    // } 
 
     // Making list of clients consisting of id and photo file
     useEffect(() => {
@@ -68,6 +73,9 @@ const Home = () => {
         setSelectedTool(tool);
     };
 
+      
+
+    //interval=5000=5sec
     return (
         <Wrapper className="body::before">
         <Button onClick={() => navigate("/findproject")}>
@@ -75,14 +83,15 @@ const Home = () => {
         </Button>
 
         <Carousel>
-        {projects.map((project) => (
-            <Carousel.Item key={project.id} interval={5000000}>
+        {projects.map((project, index) => (
+            <Carousel.Item key={project.id} interval={500000}> 
             <ProjectCardVer
             project={project}
             onToolButtonClick={handleToolButtonClick}
             getClientLogo={getClientLogo}
             getEmployeePhoto={getEmployeePhoto}
             />
+            
             </Carousel.Item>
         ))}
         </Carousel>

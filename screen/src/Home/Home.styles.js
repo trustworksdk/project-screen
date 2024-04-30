@@ -27,10 +27,10 @@ export const Wrapper = styled.div`
         margin-top: 10%;
     }
 
-    .ydelser-og-tools-overskrift{
+    h3{
         font-weight: bold;
         color: #192434;
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .ydelser-og-tools-knap{
@@ -43,6 +43,7 @@ export const Wrapper = styled.div`
         margin-right: 25px;
         color: #FF7201;
         margin-top: 10px;
+        font-size: 40px;
     }
 
     // .card-group{
@@ -69,19 +70,12 @@ export const Wrapper = styled.div`
         padding: 15px;
     }
   
-    .employeecol {
-        padding: 0;
-        margin-right: -10;
-        display: inline-block;
-    } 
-
-    
-      
+  
     .employeephoto {
-        width: 130px;
-        height: 130px;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
-        margin: 5%;
     }
 
     .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -103,19 +97,42 @@ export const Wrapper = styled.div`
     }
 
     .carousel-indicators {
-        background-color: orange;
-        border: 20px;
+        background-color: transparent; /* Make the background transparent */
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        position: absolute;
+        bottom: 10px; /* Adjust to place below the carousel */
+        left: 0;
+        right: 0;
+        text-align: center;
     }
+    
+    .carousel-indicators li {
+        background-color: lightgrey; /* Color of inactive indicators with some transparency */
+        width: 20px; /* Width of each line segment */
+        height: 5px; /* Height of the line */
+        border-radius: 0;
+        display: inline-block;
+        margin: 0 2px; /* Space between line segments */
+    }
+    
+    .carousel-indicators .active {
+        background-color: black; /* Color of the active indicator */
+        height: 20px;
+        width: 70px;
+    }
+
 
     h1 {
         color: #192434;
-        font-size: 60px;
+        font-size: 65px;
         font-weight: bold;
     }
 
     h2 {
         color: #192434;
-        font-size: 40px;
+        font-size: 52px;
     }
 
   }

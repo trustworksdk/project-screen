@@ -6,7 +6,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
   <div className="vertical-layout">
     
       <div className="row row-flex">
-        <div className="">
+        <div className="col-12">
           <Card>
             <Card.Img
             className="client-logo-row border-0"
@@ -76,20 +76,20 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
         </div>
       </div>
 
-      <div className="row row-flex">
-        <div ClassName="col d-flex flex-column justify-content-between">
+      <div className="row row-flex w-100 align-items-start">
+        <div ClassName="col">
           <Card className="card bg-transparent border-0 "> 
             <Card.Body>
-              <Row>
-                {project.projectDescriptionUserList?.map((user) => (
-                <Col className="employeecol" key={user.useruuid}>
-                <img
-                  className="employeephoto"
+            <div className="row row-cols-4">
+                {project.projectDescriptionUserList?.slice(0, 8).map((user) => (
+                <div className="col mb-4" key={user.useruuid}>
+                  <img
+                  className="employeephoto img-fluid"
                   src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
-                />
-                </Col>
+                  />
+                </div>
                 ))}
-              </Row>
+              </div>
             </Card.Body>
           </Card>
         </div>
