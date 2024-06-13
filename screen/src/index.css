@@ -17,13 +17,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: #203369 !important; */
   
   /* SKIFT BAGGRUNDSBILLEDE HER */
   background-image: url('./img/background.png') !important;
   background-repeat: no-repeat !important;
-  background-size: 100% !important;
-  background-position: 70% 30% !important;
+  background-size: 95% !important;
+  background-position: 70% center !important;
   
 }
 

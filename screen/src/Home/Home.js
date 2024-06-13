@@ -1,14 +1,10 @@
-//med
 import React, { useEffect, useState } from "react";
 import { Wrapper } from "./Home.styles";
-// import './HomeStyleVer.css';
-
 import { useNavigate } from "react-router-dom";
 import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
 import { useToolContext } from "../Contexts/ToolContext";
-//med - mindre indhold
 import { Button, Carousel} from "react-bootstrap";
-import { getProjects, getClientLogoUudid, getEmployeePhotoUuid} from "../Components/API";
+import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants, getActiveConsultants} from "../Components/API";
 import ProjectCard from "./ProjectCard";
 import ProjectCardVer from "./ProjectCardVer";
 
@@ -16,28 +12,65 @@ const Home = () => {
     const navigate = useNavigate();
     const { setSelectedTool } = useToolContext();
     const [projects, setProjects] = useState([]);
+    const [activeProjects, setActiveProjects] = useState([]);
     const [employees, setEmployeeList] = useState([]);
+    const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
 
     useEffect(() => {
         getProjects(setProjects);
+        getConsultants(setConsultants);
     }, []);
-  
-    // Making list of employees consisting of id and photo file
+
     useEffect(() => {
-        projects?.map(project => {
-            project.projectDescriptionUserList?.map(user => {
-                console.log(project);
-                getEmployeePhotoUuid(user.useruuid)
-                .then(photo =>{
-                    setEmployeeList((prevList) => [...prevList, { id: user.useruuid, file: photo }]);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-            })
-        })
+        if (projects.length > 0 && consultants.length > 0){
+            // Create a Set of active consultant IDs
+            const activeConsultantIds = new Set(consultants.map(consultant => consultant.uuid));
+
+            // Filter projects to only include active consultants in projectDescriptionUserList
+            const filteredProjects = projects.map(project => ({
+                ...project,
+                projectDescriptionUserList: (project.projectDescriptionUserList || [])
+                .filter(user => activeConsultantIds.has(user.useruuid))
+            }));
+
+            const today = new Date();
+            const oneYearAgo = new Date(today.setFullYear(today.getFullYear()-3));
+            
+            const projectsActiveLastYear = filteredProjects.filter(project => {
+                const inputDate = new Date(project.to);
+                return inputDate > oneYearAgo;
+            });
+            setActiveProjects(projectsActiveLastYear);
+        }
     }, [projects]);
+
+    // Update employee list based on active consultants
+    useEffect(() => {  
+        if (activeProjects.length > 0) {
+            console.log("Projekter: ", activeProjects);
+        
+            const fetchPhotosForActiveConsultants = async () => {
+                const photoPromises = activeProjects.flatMap(project =>
+                    project.projectDescriptionUserList.map(async user => {
+                        try {
+                            const photo = await getEmployeePhotoUuid(user.useruuid);
+                            return { id: user.useruuid, file: photo };
+                        } catch (error) {
+                            console.error(`Error fetching photo for user ${user.useruuid}:`, error);
+                            return null;
+                        }
+                    })
+                );
+    
+                const newEmployeeList = (await Promise.all(photoPromises)).filter(Boolean);
+                setEmployeeList(newEmployeeList);
+            };
+
+            fetchPhotosForActiveConsultants();
+        }
+    }, [activeProjects, consultants]);
+
 
     //Function to get the employee photo
     function getEmployeePhoto(props) {
@@ -45,22 +78,26 @@ const Home = () => {
         return foundItem ? foundItem.file : null;
     }
 
-    // function getFirst12Employee(props){
-    //     const slicedProjectDescriptionUserList = project.projectDescriptionUserList?.slice(0, 12);
-    // } 
-
     // Making list of clients consisting of id and photo file
     useEffect(() => {
-        projects?.map(project => {
-            getClientLogoUudid(project.clientuuid)
-            .then(photo =>{
-                setClientList(clientList => [...clientList, {id: project.clientuuid, file: photo}]);  
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        })
-    }, [projects]);
+        const fetchClientPhotos = async () => {
+            const clientPhotoPromises = activeProjects.map(async project => {
+                try {
+                    const photo = await getClientLogoUudid(project.clientuuid);
+                    return { id: project.clientuuid, file: photo };
+                } catch (error) {
+                    console.error(error);
+                    return null;
+                }
+            });
+
+            const newClientList = (await Promise.all(clientPhotoPromises)).filter(Boolean);
+            setClientList(newClientList);
+        };
+
+        fetchClientPhotos();
+    }, [activeProjects]);
+
 
     // Function to get the client logo
     function getClientLogo(props) {
@@ -74,7 +111,6 @@ const Home = () => {
     };
 
       
-
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
@@ -83,8 +119,8 @@ const Home = () => {
         </Button> */}
 
         <Carousel>
-        {projects.map((project, index) => (
-            <Carousel.Item key={project.id} interval={500000}> 
+        {activeProjects.map((project, index) => (
+            <Carousel.Item key={project.id} interval={50000}> 
             <ProjectCardVer
             project={project}
             onToolButtonClick={handleToolButtonClick}
@@ -92,6 +128,7 @@ const Home = () => {
             getEmployeePhoto={getEmployeePhoto}
             />
             
+
             </Carousel.Item>
         ))}
         </Carousel>

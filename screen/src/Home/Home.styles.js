@@ -16,16 +16,18 @@ export const Wrapper = styled.div`
     .row-flex {
         flex: 1;
         display: flex;
-        border: 1px solid green;
         max-height: 33vh; /* Set max height to 1/3 of the viewport height */
-        overflow-y: auto;
-        
+        overflow-y: hidden;        
+    }
+
+    .right-border {
+        border-right: 20px solid #D3D3D3; /* Change 2px to your desired width and grey to your desired color */
     }
 
     .row-description{
         flex: 1;
-  max-height: 33vh; /* Set max height to 1/3 of the viewport height */
-  overflow-y: auto;
+        max-height: 33vh; /* Set max height to 1/3 of the viewport height */
+        overflow-y: auto;
     }
 
     .client-logo-row{
@@ -37,11 +39,33 @@ export const Wrapper = styled.div`
         margin-top: 10%;
     }
 
+    h1 {
+        color: #192434;
+        font-size: 65px;
+        font-weight: bold;
+        background-color: transparent;
+    }
+
+    h2 {
+        color: #192434;
+        font-size: 52px;
+    }
+
     h3{
         font-weight: bold;
         color: #192434;
         font-size: 40px;
     }
+
+    .text-ellipsis {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 17; /* Adjust the number of lines to show */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
+      
 
     .ydelser-og-tools-knap{
         border-radius: 11px;
@@ -55,31 +79,6 @@ export const Wrapper = styled.div`
         margin-top: 10px;
         font-size: 40px;
     }
-
-    // .card-group{
-    //     margin-top: 50px;
-    // }
-
-    // .card-img-top {
-    //     object-fit: contain;
-    // }
-
-    // .person.card.text.bg-transparent.border-0{
-    //     font-size: 17px;
-    //     padding: 10px;
-    // }
-
-    .btn.btn-primary {
-        margin-top: 50px;
-        margin-left: 50px;
-        background: #DFD8D282;
-        border: 0;
-        color: #455977;
-        font-weight: bold;
-        font-size: 20px;
-        padding: 15px;
-    }
-  
   
     .employeephoto {
         object-fit: cover;
@@ -88,22 +87,9 @@ export const Wrapper = styled.div`
         border-radius: 50%;
     }
 
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        position: absolute;
-        top: 40%;
-        transform: translateY(-50%);
-        // background-color: red;
-        border: 1px solid black;
-        filter: invert(100%);
-    }
-       
-    .carousel-control-prev-icon {
-    }
-    
-    .carousel-control-next { 
-    }
-
-    .carousel-control-prev{
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      display: none; /* Hide the default icons */
     }
 
     .carousel-indicators {
@@ -131,19 +117,6 @@ export const Wrapper = styled.div`
         background-color: black; /* Color of the active indicator */
         height: 20px;
         width: 70px;
-    }
-
-
-    h1 {
-        color: #192434;
-        font-size: 65px;
-        font-weight: bold;
-        background-color: transparent;
-    }
-
-    h2 {
-        color: #192434;
-        font-size: 52px;
     }
 
   }

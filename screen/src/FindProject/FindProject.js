@@ -368,12 +368,6 @@ const FindProject = () => {
         return 0;
     };
 
-    //Ikke i brug - spørgsmål om den skal i brug?
-    // const handleCreateProject = () => {
-    //     const externalURL = 'https://intra.trustworks.dk/#!projectdescriptions';
-    //     window.open(externalURL, '_blank'); // '_blank' opens in a new window/tab
-    // };
-
     //Del af util.js
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long' };

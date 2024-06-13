@@ -35,11 +35,11 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
       </div>
 
       <div className="row row-flex">
-        <div className="col-8">
+        <div className="col-8 right-border ">
           <Card className="bg-transparent border-0">
             <Card.Body>
             <Card.Title>
-                <h2 className="text-start bg-transparent">{project.description}</h2>
+                <h2 className="text-start bg-transparent text-ellipsis">{project.description}</h2>
               </Card.Title>
             </Card.Body>
           </Card>
@@ -77,7 +77,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
       </div>
 
       <div className="row row-flex w-100 align-items-start">
-        <div ClassName="col">
+        <div className="col">
           <Card className="card bg-transparent border-0 "> 
             <Card.Body>
             <div className="row row-cols-4">
