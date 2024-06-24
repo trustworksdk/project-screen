@@ -22,6 +22,8 @@ const Home = () => {
         getConsultants(setConsultants);
     }, []);
 
+
+
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0){
             // Create a Set of active consultant IDs
@@ -111,6 +113,7 @@ const Home = () => {
     };
 
       
+
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">

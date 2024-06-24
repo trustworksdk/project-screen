@@ -21,9 +21,9 @@ body {
   /* SKIFT BAGGRUNDSBILLEDE HER */
   background-image: url('./img/background.png') !important;
   background-repeat: no-repeat !important;
-  background-size: 95% !important;
-  background-position: 70% center !important;
-  
+  background-size: 290% !important;
+  background-position: 45% center !important;
+
 }
 
 code {
