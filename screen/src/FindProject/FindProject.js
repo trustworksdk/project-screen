@@ -10,7 +10,8 @@ import { BackInTime } from '@styled-icons/entypo/BackInTime';
 // import { useToolContext } from "../Contexts/ToolContext";
 
 //NYT
-import { getProjects, getClients, getConsultants, updateClientListWithIdPhoto, getClientLogoUudid, getEmployeePhotoUuid } from "../Components/API";
+// import { getProjects, getClients, getConsultants, updateClientListWithIdPhoto, getClientLogoUudid, getEmployeePhotoUuid } from "../Components/API";
+import { getProjects, getClients, getConsultants, updateClientListWithIdPhoto } from "../Components/API";
 
 
 const FindProject = () => {
@@ -34,7 +35,7 @@ const FindProject = () => {
     const [projectChunks, setProjectChunks] = useState([]);
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
     const [selectedProjectChunkIndex, setSelectedProjectChunkIndex] = useState(null);
-    const [sortOption, setSortOption] = useState("default");
+    // const [sortOption, setSortOption] = useState("default");
     const [activeSlide, setActiveSlide] = useState(0);
 
     const isClientEmpty = selectedClient === "";
@@ -56,7 +57,7 @@ const FindProject = () => {
     function setListActiveConsultants(consultants) {
         setActiveConsultants(
             consultants.filter(consultant =>
-                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT")
+                consultant.active && (consultant.type === "CONSULTANT" || consultant.type === "STUDENT")
             )
         )
     }
@@ -65,7 +66,7 @@ const FindProject = () => {
     useEffect(() => {
         setListActiveConsultants(
             consultants.filter(consultant =>
-                consultant.active && (consultant.type === "CONSULTANT") || (consultant.type === "STUDENT")
+                consultant.active && (consultant.type === "CONSULTANT" || consultant.type === "STUDENT")
             )
         );
     }, [consultants]);
@@ -256,16 +257,16 @@ const FindProject = () => {
         // console.log("handleSelectClient has been called. Client id:", selectedClient)
     }
 
-    useEffect(() => {
-        const filterConsultantsBySelectedClient = () => {
-            // Filter updatedProjectList based on client
-            const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
-                const matchesClient = !selectedClient || project.clientuuid === selectedClient;
-                return matchesClient;
-            });
-            console.log("XX", filteredProjectsBySelectedClient)
-        }
-    }, [])
+    // useEffect(() => {
+    //     const filterConsultantsBySelectedClient = () => {
+    //         // Filter updatedProjectList based on client
+    //         const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
+    //             const matchesClient = !selectedClient || project.clientuuid === selectedClient;
+    //             return matchesClient;
+    //         });
+    //         console.log("XX", filteredProjectsBySelectedClient)
+    //     }
+    // }, [])
 
     // Set selected offering when clicked in the dropdown
     const handleSelectOffering = (e) => {
@@ -279,15 +280,15 @@ const FindProject = () => {
         setSelectedTool(e);
     }
 
-    useEffect(() => {
-        // Filter updatedProjectList based on client
-        const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
-            const matchesClient = !selectedClient || project.clientuuid === selectedClient;
-            return matchesClient;
-        });
+    // useEffect(() => {
+    //     // Filter updatedProjectList based on client
+    //     const filteredProjectsBySelectedClient = updatedProjects.filter(project => {
+    //         const matchesClient = !selectedClient || project.clientuuid === selectedClient;
+    //         return matchesClient;
+    //     });
 
-        // console.log("XX", filteredProjectsBySelectedClient)
-    }, [])
+    //     // console.log("XX", filteredProjectsBySelectedClient)
+    // }, [])
 
 
     // Funktion til at åbne modal ved click på et projekt
@@ -306,7 +307,7 @@ const FindProject = () => {
     const handleSortChange = (event) => {
         console.log("handleSortChange has been called")
         const selectedOption = event.target.textContent;
-        setSortOption(selectedOption);
+        // setSortOption(selectedOption);
 
         switch (selectedOption) {
             case "Alfabetisk på projektnavn":
@@ -475,7 +476,7 @@ const FindProject = () => {
                         <Modal.Body >
                             {selectedProjectIndex !== null && selectedProjectChunkIndex !== null && (
                                 <div>
-                                    <img src={`data:image/jpeg;base64,${getClientLogo(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].clientuuid)}`}  ></img>
+                                    <img alt="" src={`data:image/jpeg;base64,${getClientLogo(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].clientuuid)}`}  ></img>
                                     <h2 className="modalheader" > {projectChunks[selectedProjectChunkIndex][selectedProjectIndex].name} </h2>
                                     <p> {formatDate(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].from)} - {formatDate(projectChunks[selectedProjectChunkIndex][selectedProjectIndex].to)} </p>
                                     <br />

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import './App.css';
 import FindProject from './FindProject/FindProject';
 import Home from "./Home/Home";
-import twlogo from "../src/img/tw_white.png";
+// import twlogo from "../src/img/tw_white.png";
 import { ToolProvider } from "./Contexts/ToolContext";
 
 const styles = {

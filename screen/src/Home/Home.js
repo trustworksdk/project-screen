@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Wrapper } from "./Home.styles";
 import { useNavigate } from "react-router-dom";
-import {ArrowIosBack} from  '@styled-icons/evaicons-solid/ArrowIosBack';
+// import { ArrowIosBack } from '@styled-icons/evaicons-solid/ArrowIosBack';
 import { useToolContext } from "../Contexts/ToolContext";
-import { Button, Carousel} from "react-bootstrap";
-import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants, getActiveConsultants} from "../Components/API";
-import ProjectCard from "./ProjectCard";
+import { Carousel } from "react-bootstrap";
+import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
+// import ProjectCard from "./ProjectCard";
 import ProjectCardVer from "./ProjectCardVer";
 
 const Home = () => {
@@ -25,7 +25,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        if (projects.length > 0 && consultants.length > 0){
+        if (projects.length > 0 && consultants.length > 0) {
             // Create a Set of active consultant IDs
             const activeConsultantIds = new Set(consultants.map(consultant => consultant.uuid));
 
@@ -33,25 +33,24 @@ const Home = () => {
             const filteredProjects = projects.map(project => ({
                 ...project,
                 projectDescriptionUserList: (project.projectDescriptionUserList || [])
-                .filter(user => activeConsultantIds.has(user.useruuid))
+                    .filter(user => activeConsultantIds.has(user.useruuid))
             }));
 
             const today = new Date();
-            const oneYearAgo = new Date(today.setFullYear(today.getFullYear()-3));
-            
+            const oneYearAgo = new Date(today.setFullYear(today.getFullYear() - 3));
+
             const projectsActiveLastYear = filteredProjects.filter(project => {
                 const inputDate = new Date(project.to);
                 return inputDate > oneYearAgo;
             });
             setActiveProjects(projectsActiveLastYear);
         }
-    }, [projects]);
+    }, [projects, consultants]);
 
     // Update employee list based on active consultants
-    useEffect(() => {  
+    useEffect(() => {
         if (activeProjects.length > 0) {
             console.log("Projekter: ", activeProjects);
-        
             const fetchPhotosForActiveConsultants = async () => {
                 const photoPromises = activeProjects.flatMap(project =>
                     project.projectDescriptionUserList.map(async user => {
@@ -64,15 +63,14 @@ const Home = () => {
                         }
                     })
                 );
-    
+
                 const newEmployeeList = (await Promise.all(photoPromises)).filter(Boolean);
                 setEmployeeList(newEmployeeList);
             };
 
             fetchPhotosForActiveConsultants();
         }
-    }, [activeProjects, consultants]);
-
+    }, [activeProjects]);
 
     //Function to get the employee photo
     function getEmployeePhoto(props) {
@@ -82,22 +80,25 @@ const Home = () => {
 
     // Making list of clients consisting of id and photo file
     useEffect(() => {
-        const fetchClientPhotos = async () => {
-            const clientPhotoPromises = activeProjects.map(async project => {
-                try {
-                    const photo = await getClientLogoUudid(project.clientuuid);
-                    return { id: project.clientuuid, file: photo };
-                } catch (error) {
-                    console.error(error);
-                    return null;
-                }
-            });
+        if (activeProjects.length > 0) {
+            const fetchClientPhotos = async () => {
+                const clientPhotoPromises = activeProjects.map(async project => {
+                    try {
+                        const photo = await getClientLogoUudid(project.clientuuid);
+                        return { id: project.clientuuid, file: photo };
+                    } catch (error) {
+                        console.error(error);
+                        return null;
+                    }
+                });
 
-            const newClientList = (await Promise.all(clientPhotoPromises)).filter(Boolean);
-            setClientList(newClientList);
-        };
+                // const newClientList = (await Promise.all(clientPhotoPromises)).filter(Boolean);
+                const newClientList = (await Promise.all(clientPhotoPromises)).filter(Boolean);
+                setClientList(newClientList);
+            };
+            fetchClientPhotos();
+        }
 
-        fetchClientPhotos();
     }, [activeProjects]);
 
 
@@ -112,29 +113,28 @@ const Home = () => {
         setSelectedTool(tool);
     };
 
-      
-
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-        {/* <Button onClick={() => navigate("/findproject")}>
+            {/* <Button onClick={() => navigate("/findproject")}>
             <ArrowIosBack size="24" /> Flere projekter
         </Button> */}
 
-        <Carousel>
-        {activeProjects.map((project, index) => (
-            <Carousel.Item key={project.id} interval={50000}> 
-            <ProjectCardVer
-            project={project}
-            onToolButtonClick={handleToolButtonClick}
-            getClientLogo={getClientLogo}
-            getEmployeePhoto={getEmployeePhoto}
-            />
-            
 
-            </Carousel.Item>
-        ))}
-        </Carousel>
+            <Carousel>
+                {activeProjects.map((project, index) => (
+                    <Carousel.Item key={index} interval={50000}>
+                        <ProjectCardVer
+                            project={project}
+                            onToolButtonClick={handleToolButtonClick}
+                            getClientLogo={getClientLogo}
+                            getEmployeePhoto={getEmployeePhoto}
+                        />
+
+
+                    </Carousel.Item>
+                ))}
+            </Carousel>
         </Wrapper>
     );
 };

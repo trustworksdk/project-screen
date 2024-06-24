@@ -1,6 +1,6 @@
 import React from "react";
 import './Home.styles';
-import { Card, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="vertical-layout justify-content-center">
@@ -89,6 +89,7 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
                 {project.projectDescriptionUserList?.slice(0, 8).map((user) => (
                 <div className="col mb-4" key={user.useruuid}>
                   <img
+                  alt=""
                   className="employeephoto img-fluid"
                   src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
                   />
