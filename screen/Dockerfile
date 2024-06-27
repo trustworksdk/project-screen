@@ -11,14 +11,16 @@ COPY package*.json ./
 COPY . .
 
 # Build the React app
-RUN npm install \
-    && npm install -g serve \
-    && npm run build \
-    && rm -fr node_modules
+# RUN npm install \
+#     && npm install -g serve \
+#     && npm run build \
+#     && rm -fr node_modules
+
+RUN npm install
 
 # Expose the port on which the app will run
 EXPOSE 3000
 
 # Define the command to run the app
-# CMD ["npm", "start"]
-CMD [ "serve", "-s", "build" ]
+# CMD [ "serve", "-s", "build" ]
+CMD [ "npm", "start" ]

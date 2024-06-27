@@ -1,0 +1,18 @@
+version: '2.27'
+services:
+  server:
+    context: ./server
+    dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - screen
+  screen:
+    build:
+      context: ./screen
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
