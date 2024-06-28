@@ -10,5 +10,5 @@ jobs:
   docker:
     runs-on: self-hosted
     steps:
-      - run: docker build -t webserver .
-      - run: docker run -p 80:80 webserver
+      - run: podman build -t screen .
+      - run: podman run -p 8080:8080 screen
