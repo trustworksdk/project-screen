@@ -10,13 +10,5 @@ jobs:
   docker:
     runs-on: self-hosted
     steps:
-      - run: docker version
-
-  # npm:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - run: npm ci
+      - run: docker build -t webserver .
+      - run: docker run -p 80:80 webserver
