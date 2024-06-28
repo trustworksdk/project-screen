@@ -1,26 +1,30 @@
-# Use an official Node.js runtime as the base image
-FROM node:lts-alpine
+FROM node:lts-alpine AS react-build
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
+# Copy the package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Copy the entire project to the container
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
 
 # Build the React app
-# RUN npm install \
-#     && npm install -g serve \
-#     && npm run build \
-#     && rm -fr node_modules
+RUN npm run build
 
-RUN npm install
+# Stage 2: Serve the React app with NGINX
+FROM nginx:latest
 
-# Expose the port on which the app will run
-EXPOSE 3000
+# Copy custom NGINX config
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Define the command to run the app
-# CMD [ "serve", "-s", "build" ]
-CMD [ "npm", "start" ]
+# Copy the build output from the react-build stage to NGINX html directory
+COPY --from=react-build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
