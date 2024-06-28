@@ -10,5 +10,5 @@ jobs:
   docker:
     runs-on: self-hosted
     steps:
-      - run: podman build -t screen .
+      - run: podman build -t screen /home/TWadmin/actions-runner/_work/project-screen/project-screen/screen/
       - run: podman run -p 8080:8080 screen
