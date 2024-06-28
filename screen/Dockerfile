@@ -1,4 +1,5 @@
-FROM node:lts-alpine AS react-build
+# Stage 1: Build the React app
+FROM node:lts-alpine as react-build
 
 WORKDIR /app
 
@@ -23,8 +24,8 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 # Copy the build output from the react-build stage to NGINX html directory
 COPY --from=react-build /app/build /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080
+EXPOSE 8080
 
 # Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
