@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
 
-@media (orientation: portrait) {
     .vertical-layout {
         display: flex;
         flex-direction: column;
@@ -160,6 +159,5 @@ export const Wrapper = styled.div`
         width: 70px;
     }
 
-  }
 
 `
