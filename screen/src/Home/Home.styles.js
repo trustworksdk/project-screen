@@ -123,8 +123,8 @@ export const Wrapper = styled.div`
   
     .employeephoto {
         object-fit: cover;
-        width: 100%;
-        height: 100%;
+        height: 400px;
+        width: 400px;
         border-radius: 50%;
     }
 

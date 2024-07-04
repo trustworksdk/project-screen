@@ -81,11 +81,11 @@ const ProjectCardVer = ({ project, onToolButtonClick, getClientLogo, getEmployee
         </div>
       </div>
 
-      <div className="row row-flex w-100 align-items-start p-4">
-        <div className="col employee-container">
+      <div className="row row-flex w-100 align-items-center p-4">
+        <div className="cols d-flex employee-container">
           <Card className="employee-card bg-transparent border-0 "> 
             <Card.Body>
-            <div className="row row-cols-4 p-3">
+            <div className="row p-3">
                 {project.projectDescriptionUserList?.slice(0, 8).map((user) => (
                 <div className="col mb-4" key={user.useruuid}>
                   <img
