@@ -1,4 +1,5 @@
 export function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long' };
-    return new Date(dateString).toLocaleDateString('da-DK', options);
+    const date = new Date(dateString).toLocaleDateString('da-DK', options)
+    return date.charAt(0).toUpperCase() + date.slice(1);
   }

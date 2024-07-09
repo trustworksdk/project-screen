@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useToolContext } from "../Contexts/ToolContext";
 import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
-// import ProjectCard from "./ProjectCard";
-import ProjectCardVer from "./ProjectCardVer";
+import HomeCard from "./HomeCard";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -116,21 +115,16 @@ const Home = () => {
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-            {/* <Button onClick={() => navigate("/findproject")}>
-            <ArrowIosBack size="24" /> Flere projekter
-        </Button> */}
-
-
             <Carousel>
                 {activeProjects.map((project, index) => (
-                    <Carousel.Item key={index} interval={50000}>
-                        <ProjectCardVer
+                    <Carousel.Item key={index} interval={5000000000000000000000}>
+                        <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
                         />
-
+3
 
                     </Carousel.Item>
                 ))}
