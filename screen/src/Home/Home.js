@@ -117,6 +117,7 @@ const Home = () => {
     return (
         <Wrapper className="body::before">
             <Carousel>
+                {activeProjects.forEach(project => console.log('project', project))}
                 {activeProjects.map((project, index) => (
                     <Carousel.Item key={index} interval={5000000000000000000000}>
                         <HomeCard

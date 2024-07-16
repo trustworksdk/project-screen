@@ -1,8 +1,16 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
-const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
 
+const getColSize = project => {
+  return project.projectDescriptionUserList.length > 8 ? 'col-1' : 'col-3'
+}
+
+const getImgSize = project => {
+  return project.projectDescriptionUserList.length > 8 ? 'employeephoto' : 'employeephoto img-fluid'
+}
+
+const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="container">
     {/* Client photo + Project title + date */}
     <div className="row align-items-end pt-5">
@@ -80,11 +88,11 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     <Card className="bg-transparent border-0 ">
       <Card.Body>
         <div className="row align-items-start py-4">
-          {project.projectDescriptionUserList?.map(user => (
-            <div className="col-3" key={user.useruuid}>
+        {project.projectDescriptionUserList?.map(user => (
+            <div className={getColSize(project)} key={user.useruuid}>
               <img
                 alt=""
-                className="employeephoto img-fluid"
+                className={getImgSize(project)}
                 src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
               />
             </div>

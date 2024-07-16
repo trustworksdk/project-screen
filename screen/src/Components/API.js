@@ -71,7 +71,7 @@ export async function getConsultants(setConsultants) {
     );
 
     // Update the state with the filtered list of active consultants
-    setConsultants(activeConsultants);
+    setConsultants(data);
     
   } catch (error) {
     console.error(`Error fetching client:`, error.message);
