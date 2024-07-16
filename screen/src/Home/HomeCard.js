@@ -5,7 +5,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
   <div className="container">
     {/* Client photo + Project title + date */}
-    <div className="row align-items-end mt-5">
+    <div className="row align-items-end pt-5">
       <Card className="bg-transparent border-0 justify-content-center align-items-center">
         <Card.Img
           className="border-0 w-50 mb-3"
@@ -22,7 +22,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
           </Card.Body>
         </Card>
 
-        <Card className="mt-3 bg-transparent border-0">
+        <Card className="pt-3 bg-transparent border-0">
           <Card.Body>
             <Card.Title>
               <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
@@ -34,7 +34,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
 
     {/* Projektbeskrivelse  + ydelser + tools */}
-    <div className="row justify-content-center mt-3">
+    <div className="row justify-content-center pt-3">
       <div className="col-8 right-border align-items-center">
         <Card className="bg-transparent border-0">
           <Card.Body>
@@ -79,12 +79,12 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     {/* Employee photo */}
     <Card className="bg-transparent border-0 ">
       <Card.Body>
-        <div className="row align-items-start mt-5">
+        <div className="row align-items-start py-4">
           {project.projectDescriptionUserList?.map(user => (
             <div className="col-3" key={user.useruuid}>
               <img
                 alt=""
-                className="employeephoto"
+                className="employeephoto img-fluid"
                 src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
               />
             </div>

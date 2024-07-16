@@ -25,6 +25,7 @@ const Home = () => {
 
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
+            console.log("projekt: ", projects);
             // Create a Set of active consultant IDs
             const activeConsultantIds = new Set(consultants.map(consultant => consultant.uuid));
 
@@ -124,7 +125,6 @@ const Home = () => {
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
                         />
-3
 
                     </Carousel.Item>
                 ))}

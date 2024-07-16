@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     }
 
     .container {
-        height: 95vh;
+        height: 99.5vh;
     }
 
     h1 {

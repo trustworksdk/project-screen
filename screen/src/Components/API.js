@@ -1,16 +1,23 @@
 
-const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJuaWNvbGUuYWdnZXJuaWVsc2VuIiwiaWF0IjoxNzIwNTA3MTMzLCJleHAiOjE3MjA1NDMxMzMsImdyb3VwcyI6WyJVU0VSIl0sImp0aSI6ImVhZWZiN2JiLWFhOGUtNDcxNi05M2ViLTE0MTlmMzE5MDQzMSJ9.D6Y0mGHn_0vifZp7HoixLlFGu3SuqmwJ93bLQx8w-e-LuwdbYGuyBjNE3xns-l_2yAvYMmeDgSt4-VJoG8TyaUPmBrMAKfnc6pudCXhPt70wBAedA6-3bCblmp3wcsz740sz6mwGHZpF8zeMi57gxXp6W0JqropWm8wOkARQaaxbXuJN7yeL6_kXN97q8fEh8m-zIssJdo4geJETzyc1-ahmUyi0a1s9CU1dXfdUtky-XeCam_-PqQsz4wr1_ZL4esIArVy3YG42wIIumeWomL53FOIWC-HE3MwqmCw125ZC5qysTkgLnhwhKngsCyL6ueuuLYd2scoxYT68Am7SsjxtT-1TIC3XMq5rpQjGubufLrR_BWSiRQd3BAo1S3smyfbqTVqCI95Yzk1XLbgW1EwKDzRvSwPuDQYBTy4VLwVeAIdYCrP_6e5_GvXT7u0Qc9PL5_5r3xOWMkC3o0U3FW8Ox5K9DRA5aksMu0PG9msfb0L-i2YfIajeaFpnvQvTTIKEKNRIVOGKgeMmvIl5nFxPLXxGTx6JNysCmBBrLEwvqxeltGBgJ2xIpHxgNRsKqT_x3tWd6THHKz51TIqA2_-s_l0zobrsiTKa0w0m4umJljppZ-2tnBXBUvVQTzpfnPmlDDMJmeADf0Ib2xIzzZcMfLNb5jpYuTDAw1MuCWk";
+const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJuaWNvbGUuYWdnZXJuaWVsc2VuIiwiaWF0IjoxNzIxMTE1NDU1LCJleHAiOjE3MjExNTE0NTUsImdyb3VwcyI6WyJVU0VSIl0sImp0aSI6IjAwMTg4OWUzLTE3NTQtNDVlMi04NmIxLTNkMjY2OGVhMTBiYyJ9.k-loqTumUy_nH2Sh7mBfIKPQDXZh0tl60QTNRDb69SuSQqnZpb4NlrLjIVayUmlvyoNo4XnyUoD0yaScSK_FroaBy3NeVeUTi7ZZVvtRdLY4OJGkxmxad16nRz-RNMl-dIkglf5mq7LrRSfZ7k3LLmkFKD8gLqPvK1X9Xw4cJb6Wc4jMWWC7eyLMzowgZ_SOlJxFC2L30PJA2J79nwrfTk97zQbVnfUT52nSSobT13aUpIsYcZaxr7Mpzpkm0I1dSBF_FjRms0ZPJKj1wZL2Pgfec569VQiUAmM0BjUUZ4dCALh7rfnaqcE4-YwB9kMxfObATSPLRJKTVUYJl6iVYS1xxFiIdkxgeGTXM8-e2pkg0gDAFu8KvRbBN-wZMenZ42FFT09rO4gFvcbjY1E8eu9sttp5yVnt6zEek34dAMdPjOwmYXO3mgwa-9aAWTyg4f21TNdcbTf4CP9YNgN6lhrptQrxMBrEbpXG7VnTbcCojOhlvtiYo-dcKHl3ZT6U80MXIjNrI3r_gpZWV9j-oTPbwFkqarL8jDP-qJVZf1qdarNeQzsGiB4toTJ3p-qmCiULagELfhqCHJCja1NUl-7cmMvsAetKqs4sAxjEQ5n1hf8aWvjuYlicvOLRwaSJ1VHufEDNwXv8lObMzAmUPDBc1D7Uj6qgmUaLuWkLClM";
 export const config = { headers: { Authorization: `Bearer ${token}` } };
 
+//async
 export async function getProjects(setProjects) {
   try {
-    const response = await fetch('https://api.trustworks.dk/knowledge/projects', config);
+    // const response = await fetch('https://api.trustworks.dk/knowledge/projects', config);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! Status: ${response.status}`);
+    // }
 
-    const data = await response.json();
+    // const data = await response.json();
+    
+
+    const data = require('./testJson.json');
+    console.log(data);
+
+
     // Sort the projects by the "from" field in descending order
 
     const sortedProjects = data.sort((a, b) => {
@@ -22,6 +29,7 @@ export async function getProjects(setProjects) {
       return dateB - dateA;
     });
 
+    console.log('sortedProjects', sortedProjects)
     // Set the sorted projects in the state
     setProjects(sortedProjects);
   } catch (error) {
