@@ -21,7 +21,7 @@ const Home = () => {
         getConsultants(setConsultants);
     }, []);
 
-
+    setInterval(navigate(0), 5000)
 
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {

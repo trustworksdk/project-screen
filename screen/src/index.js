@@ -16,13 +16,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // app.use(cors(corsOptions));
 
-
+// window.location.reload()
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+
+function tick() {
+  root.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+setInterval(tick(), 1000)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
