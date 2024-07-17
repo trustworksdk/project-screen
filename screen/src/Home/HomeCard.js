@@ -11,7 +11,7 @@ const tenCol = project => {
 }
 
 const getImgSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-3' : 'mb-3 employeephoto img-fluid'
+  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-3' : 'mb-3 employeephoto'
 }
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
