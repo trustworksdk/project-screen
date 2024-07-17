@@ -3,11 +3,15 @@ import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
 const getColSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'col-1' : 'col-3'
+  return project.projectDescriptionUserList.length > 8 ? 'mx-3 col-1' : 'col-3'
+}
+
+const tenCol = project => {
+  return project.projectDescriptionUserList.length > 8 ? 'row col-10' : 'row'
 }
 
 const getImgSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'employeephoto' : 'employeephoto img-fluid'
+  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-3' : 'mb-3 employeephoto img-fluid'
 }
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
@@ -22,7 +26,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
       </Card>
 
       <div>
-        <Card className=" bg-transparent border-0  text-ellipsis-1">
+        <Card className="bg-transparent border-0  text-ellipsis-1">
           <Card.Body>
             <Card.Title>
               <h1>{project.name}</h1>
@@ -30,8 +34,8 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
           </Card.Body>
         </Card>
 
-        <Card className="pt-3 bg-transparent border-0">
-          <Card.Body>
+        <Card className="bg-transparent border-0">
+          <Card.Body className="pt-1">
             <Card.Title>
               <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
             </Card.Title>
@@ -42,7 +46,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
 
     {/* Projektbeskrivelse  + ydelser + tools */}
-    <div className="row justify-content-center pt-3">
+    <div className="row justify-content-center pt-4">
       <div className="col-8 right-border align-items-center">
         <Card className="bg-transparent border-0">
           <Card.Body>
@@ -55,7 +59,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
       <div className="col-4 ydelser-og-tools">
         <Card className="ydelser bg-transparent border-0 ">
           <Card.Title className="fw-bold">
-            <h2>Ydelser</h2>
+            <h2>Roller</h2>
           </Card.Title>
           <Card.Text>
             {project.offeringList.map((tool, index) => (
@@ -67,7 +71,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
         </Card>
         <Card className="tools bg-transparent border-0">
           <Card.Title className="fw-bold">
-            <h2>Tools</h2>
+            <h2>Tilgang</h2>
           </Card.Title>
           <Card.Text>
             {project.toolsList.map((tool, index) => (
@@ -85,19 +89,19 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     </div>
 
     {/* Employee photo */}
-    <Card className="bg-transparent border-0 ">
-      <Card.Body>
-        <div className="row align-items-start py-4">
-        {project.projectDescriptionUserList?.map(user => (
-            <div className={getColSize(project)} key={user.useruuid}>
-              <img
-                alt=""
-                className={getImgSize(project)}
-                src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
-              />
-            </div>
-          ))}
-        </div>
+    <Card className=" bg-transparent border-0 pt-5">
+      <Card.Body className="pt-3 ">
+        <div className={tenCol(project)}>
+            {project.projectDescriptionUserList?.map(user => (
+              <div className={getColSize(project)} key={user.useruuid}>
+                <img
+                  alt=""
+                  className={getImgSize(project)}
+                  src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
+                />
+              </div>
+            ))}
+          </div>
       </Card.Body>
     </Card>
 
