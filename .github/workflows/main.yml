@@ -1,0 +1,21 @@
+name: Podman build/run CI
+
+on:
+  push:
+    branches: "main"
+  pull_request:
+    branches: "main"
+    
+jobs:
+  docker:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Build
+        run: podman build -t screen -f screen/Dockerfile .
+      
+      - name: Run
+        run: podman run -p 3000:3000 screen
+
