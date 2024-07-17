@@ -12,10 +12,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+        
+      - name: Stop and remove existing container
+        run: |
+          docker stop screen || true
+          docker rm screen || true
+          
       - name: Build
         run: docker build -t screen -f screen/Dockerfile .
       
       - name: Run
-        run: docker run -d -p 0:0 screen
+        run: docker run -d -p 3000:3000 screen
 
