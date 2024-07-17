@@ -1,4 +1,4 @@
-name: Podman build/run CI
+name: Docker build/run CI
 
 on:
   push:
