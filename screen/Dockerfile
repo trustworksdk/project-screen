@@ -12,7 +12,7 @@ RUN npm install \
 && npm install -g serve
 
 # Copy the entire project to the container
-COPY . .
+COPY screen .
 
 # Build the React app
 RUN npm run build \
