@@ -2,16 +2,16 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
-const getColSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'mx-3 col-1' : 'col-3'
+const tenCol = project => {
+  return project.projectDescriptionUserList.length > 8 ? 'row pt-5 col-10' : 'pt-5 row'
 }
 
-const tenCol = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'row col-10' : 'row'
+const getColSize = project => {
+  return project.projectDescriptionUserList.length > 8 ? 'mx-2 col-1 ' : 'col-3'
 }
 
 const getImgSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-3' : 'mb-3 employeephoto img-fluid'
+  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-2' : 'mb-2 employeephoto'
 }
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
@@ -45,7 +45,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     </div>
 
 
-    {/* Projektbeskrivelse  + ydelser + tools */}
+    {/* Projektbeskrivelse  + roller + tools */}
     <div className="row justify-content-center pt-4">
       <div className="col-8 right-border align-items-center">
         <Card className="bg-transparent border-0">
@@ -56,20 +56,21 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
           </Card.Body>
         </Card>
       </div>
-      <div className="col-4 ydelser-og-tools">
-        <Card className="ydelser bg-transparent border-0 ">
+
+      <div className="col-4 roller-og-tools pb-3">
+        <Card className="roller bg-transparent border-0 ">
           <Card.Title className="fw-bold">
             <h2>Roller</h2>
           </Card.Title>
           <Card.Text>
             {project.offeringList.map((tool, index) => (
-              <button key={index} className="ydelser ydelser-og-tools-knap">
+              <button key={index} className="roller roller-og-tools-knap">
                 {tool}
               </button>
             ))}
           </Card.Text>
         </Card>
-        <Card className="tools bg-transparent border-0">
+        <Card className="tools bg-transparent border-0 py-4">
           <Card.Title className="fw-bold">
             <h2>Tilgang</h2>
           </Card.Title>
@@ -77,7 +78,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
             {project.toolsList.map((tool, index) => (
               <button
                 key={index}
-                className="tools ydelser-og-tools-knap"
+                className="tools roller-og-tools-knap"
                 onClick={() => onToolButtonClick(tool)}
               >
                 {tool}
@@ -89,8 +90,8 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     </div>
 
     {/* Employee photo */}
-    <Card className=" bg-transparent border-0 pt-5">
-      <Card.Body className="pt-3 ">
+    <Card className="row bg-transparent border-0 pt-5">
+      <Card.Body className=" ">
         <div className={tenCol(project)}>
             {project.projectDescriptionUserList?.map(user => (
               <div className={getColSize(project)} key={user.useruuid}>

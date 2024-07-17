@@ -21,7 +21,8 @@ const Home = () => {
         getConsultants(setConsultants);
     }, []);
 
-
+    //Refereshs Home page every 60sek
+    setInterval(() => navigate(0), 60000);
 
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
@@ -119,7 +120,7 @@ const Home = () => {
             <Carousel>
                 {activeProjects.forEach(project => console.log('project', project))}
                 {activeProjects.map((project, index) => (
-                    <Carousel.Item key={index} interval={5000000000000000000000}>
+                    <Carousel.Item key={index} interval={200000}>
                         <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}

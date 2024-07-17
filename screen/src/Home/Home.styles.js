@@ -3,10 +3,8 @@ import styled from "styled-components"
 export const Wrapper = styled.div`
 
     .row {
-        max-height: 33.33vh; 
-
+        height: 33.33vh; 
     }
-
 
     .right-border {
         border-right: 0.5em solid #ebe7e1; 
@@ -45,29 +43,30 @@ export const Wrapper = styled.div`
         white-space: normal;
       }
 
-      .text-ellipsis-1 {
+    .text-ellipsis-1 {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1; /* Adjust the number of lines to show */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-      }
+    }
     
-    .ydelser-og-tools{
+    .roller-og-tools{
         padding-left: 2vh;
         overflow: hidden;
+        height: 100%;
     }
 
-    .ydelser-og-tools-knap{
+    .roller-og-tools-knap{
         border-radius: 1em;
         border: none;
         margin-right: 1em;
-        margin-top: 1em;
+        margin-top: 0.75em;
         font-size: 1.25em;
     }
 
-    .ydelser{
+    .roller{
         color: #374B05;
         background-color: #eaf3ff;
     }
@@ -76,7 +75,6 @@ export const Wrapper = styled.div`
     .tools{
         color: #FF7201;
         background-color: #eaf3ff;
-        margin-top: 10%;
     }
 
   

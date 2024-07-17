@@ -1,40 +1,8 @@
 [
   {
     "clientuuid": "7d34db42-9d11-4fe2-84df-449a46cdfcc9",
-    "name": "Fedt Fedt",
-    "description": "Marie og Regitze har lavet behovsafklaring og kravspecificering, så politiet kan anskaffe nyt system til håndtering og analyse af fingeraftryk (AFIS) - evt. udvidet med håndtering af anden biometrisk information også (ABIS). Behov er dokumenteret i proces- og tilstandsdiagrammer samt kravspecifikationen. Elvi har bistået med sikring af erfaringsopsamling ift. non-funktionelle krav inden politiets hidtidige SME stoppede - samt dokumentering af den ønskede informationsmodel",
-    "from": "2022-03-10",
-    "to": "2022-03-10",
-    "offering": "#Forretningsanalyse #Behovsafdækning",
-    "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
-    "projectDescriptionUserList": [
-      {
-        "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
-        "description": "string"
-      },
-      {
-        "useruuid": "fcfe998f-b38a-421a-899b-2d8dd32029ee",
-        "description": "string"
-      },
-      {
-        "useruuid": "55567dc6-f7d4-4fd5-8240-96787e492818",
-        "description": "string"
-      }
-    ],
-    "offeringList": [
-      "Forretningsanalyse",
-      "Behovsafdækning"
-    ],
-    "toolsList": [
-      "ProcessMapping",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram"
-    ]
-  },
-  {
-    "clientuuid": "7d34db42-9d11-4fe2-84df-449a46cdfcc9",
     "name": "Skærm Projektet",
-    "description": "Som en del af et fælles Q-mål om vidensdeling, udvikles en hjemmeside til deling af igangværende og tidligere projekter, som skal vises på skærme på det nye HQ.",
+    "description": "Som en del af et fælles Q-mål om vidensdeling, udvikles en hjemmeside til deling af igangværende og tidligere projekter, som skal vises på skærme på det nye HQ. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis sodales efficitur. Nam sit amet euismod libero. Integer ac justo quis urna interdum euismod vel ut metus. Morbi eu efficitur est. Cras luctus volutpat nisi eget vehicula. Mauris ultrices ac nisl quis lacinia. Fusce pretium libero non tincidunt placerat. Pellentesque nec imperdiet sapien. Duis iaculis interdum suscipit. Quisque cursus mi ut leo auctor, in dictum tellus fermentum. Integer porta nec ex nec porta. Pellentesque nibh ipsum, dapibus quis elit id, gravida tincidunt dolor. Fusce ultricies, mi et viverra hendrerit, erat quam condimentum eros, sit amet lacinia sem dui non sapien. Suspendisse laoreet velit turpis, sit amet sagittis dui maximus in. Cras molestie nunc a massa commodo, at molestie quam sodales. Mauris non felis facilisis, hendrerit mi et, auctor nisi. Donec nec augue sed mi vehicula rhoncus. Duis luctus libero quis ornare eleifend. Morbi quis nisl id enim luctus efficitur at a diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas massa justo, hendrerit a egestas eu, egestas non lectus. Morbi at rhoncus elit. In in sem sit amet eros pellentesque molestie in at justo. Nam dignissim pretium lacinia. Praesent sagittis ac purus vel imperdiet. Maecenas faucibus sem et mattis egestas. Suspendisse potenti. Quisque ultrices in eros nec fringilla. Donec sodales libero non ante maximus, eget aliquet mi elementum. Proin non fermentum nulla. Nullam gravida vehicula dignissim. Integer pretium tortor sem, sed blandit erat pellentesque quis. Aenean tellus nisl, finibus at turpis at, posuere pretium purus. Curabitur ac urna enim. Mauris vitae commodo nulla. Sed consectetur ipsum ac urna placerat volutpat eget non ex.",
     "from": "2022-10-01",
     "to": "2024-09-01",
     "offering": "",
@@ -75,88 +43,76 @@
       {
         "useruuid": "48f88806-7ebc-471b-99c5-82bc2142fb09",
         "description": "Helene - UX"
+      },
+      {
+        "useruuid": "70b19352-b7db-4a55-abb7-a84259cf9d64",
+        "description": "Nicole - Udvikler"
       }
     ],
     "offeringList": [
       "Udvikling",
       "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse", 
+      "hej",
+      "Projektledelse",
+      "Projektledelse",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse", 
+      "hej",
+      "Projektledelse",
       "Projektledelse"
     ],
     "toolsList": [
       "NodeJs",
       "React",
-      "Figma"
+      "Figma",
+      "Kravspecifikaiton",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "aaaaaaa",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "nkjkkjjjkkj",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "åååååååååååååå"
     ]
   },
   {
-    "clientuuid": "99636db6-b2cd-4f3b-863c-6d578f922563",
-    "name": "Noget andet end KK ",
+    "clientuuid": "7d34db42-9d11-4fe2-84df-449a46cdfcc9",
+    "name": "Smart borders",
     "description": "Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn.",
     "from": "2022-03-10",
     "to": "2022-03-10",
     "offering": "#Forretningsanalyse #Behovsafdækning",
     "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
     "projectDescriptionUserList": [
-      {
-        "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
-        "description": "string",
-        "key": 1
-      },
-      {
-        "useruuid": "fcfe998f-b38a-421a-899b-2d8dd32029ee",
-        "description": "string",
-        "key": 2
-      },
-      {
-        "useruuid": "55567dc6-f7d4-4fd5-8240-96787e492818",
-        "description": "string",
-        "key": 3
-      },
-      {
-        "useruuid": "f6a36952-c2e8-4e9a-b9ec-1deaa2b2ccfe",
-        "description": "string",
-        "key": 4
-      },
-      {
-        "useruuid": "7948c5e8-162c-4053-b905-0f59a21d7746",
-        "description": "string",
-        "key": 5
-      },
-      {
-        "useruuid": "d2878586-800e-4ba2-ac3c-93e5ac69834c",
-        "description": "string",
-        "key": 6
-      },
-      {
-        "useruuid": "8e15d9c8-1df5-4c32-8e98-001cfabc54b8",
-        "description": "string",
-        "key": 7
-      },
-      {
-        "useruuid": "ff117b85-51a2-4955-8612-c612ba011b91",
-        "description": "string",
-        "key": 8
-      },
-      {
-        "useruuid": "f6626f6c-e7c8-11e6-bf01-fe55135034f3",
-        "description": "string",
-        "key": 9
-      },
-      {
-        "useruuid": "9750fd10-d6f2-4e18-ac58-c5924ceb279a",
-        "description": "string",
-        "key": 10
-      },
-      {
-        "useruuid": "4072707e-21b5-482e-9fa7-413a60ca5d37",
-        "description": "string",
-        "key": 11
-      },
-      {
-        "useruuid": "e32fdbc2-ac8d-4a4c-b0b6-c096090ebf4c",
-        "description": "string",
-        "key": 12
-      },
       {
         "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
         "description": "string",
@@ -271,18 +227,45 @@
       }
     ],
     "offeringList": [
-      "Udvikler",
       "Forretningsanalyse",
-      "Product Owner",
-      "Scrum Master",
-      "Projektleder",
-      "IT-arkitekt"
+      "Behovsafdækning"
     ],
     "toolsList": [
-      "Process Mapping",
-      "UX",
-      "Systemoverblik (?)",
-      "Udvikling"
+      "ProcessMapping",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram"
+    ]
+  },
+  {
+    "clientuuid": "99636db6-b2cd-4f3b-863c-6d578f922563",
+    "name": "3 konsulenter",
+    "description": "Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn.",
+    "from": "2022-03-10",
+    "to": "2022-03-10",
+    "offering": "#Forretningsanalyse #Behovsafdækning",
+    "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
+    "projectDescriptionUserList": [
+      {
+        "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
+        "description": "string"
+      },
+      {
+        "useruuid": "fcfe998f-b38a-421a-899b-2d8dd32029ee",
+        "description": "string"
+      },
+      {
+        "useruuid": "55567dc6-f7d4-4fd5-8240-96787e492818",
+        "description": "string"
+      }
+    ],
+    "offeringList": [
+      "Forretningsanalyse",
+      "Behovsafdækning"
+    ],
+    "toolsList": [
+      "ProcessMapping",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram"
     ]
   }
 ]
