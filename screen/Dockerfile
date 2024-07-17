@@ -2,7 +2,7 @@
 FROM node:lts-alpine
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /screen
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
