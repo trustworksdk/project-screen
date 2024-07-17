@@ -31,7 +31,7 @@ h3 {
 .text-ellipsis-13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 13;
+  -webkit-line-clamp: 24;
   /* Adjust the number of lines to show */
   overflow: hidden;
   text-overflow: ellipsis;

@@ -3,8 +3,10 @@ import styled from "styled-components"
 export const Wrapper = styled.div`
 
     .row {
-        height: 33.33vh; 
+        max-height: 33.33vh; 
+
     }
+
 
     .right-border {
         border-right: 0.5em solid #ebe7e1; 
@@ -16,8 +18,8 @@ export const Wrapper = styled.div`
 
     h1 {
         color: #192434;
-        font-size: 2em;
-        font-weight: bold;
+        font-size: 2.5em;
+        font-weight: 800;
         background-color: transparent;
     }
 
@@ -30,12 +32,14 @@ export const Wrapper = styled.div`
     h3 {
         color: #192434;
         font-size: 1em;
+        font-weight: 100;
+        line-height: 1.5;
     }
 
     .text-ellipsis-13 {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 13; /* Adjust the number of lines to show */
+        -webkit-line-clamp: 14; /* Adjust the number of lines to show */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
@@ -52,7 +56,7 @@ export const Wrapper = styled.div`
     
     .ydelser-og-tools{
         padding-left: 2vh;
-        
+        overflow: hidden;
     }
 
     .ydelser-og-tools-knap{
@@ -60,13 +64,14 @@ export const Wrapper = styled.div`
         border: none;
         margin-right: 1em;
         margin-top: 1em;
-        font-size: 1em;
+        font-size: 1.25em;
     }
 
     .ydelser{
         color: #374B05;
         background-color: #eaf3ff;
     }
+
 
     .tools{
         color: #FF7201;
