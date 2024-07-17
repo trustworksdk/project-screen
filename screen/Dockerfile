@@ -5,11 +5,11 @@ FROM node:lts-alpine
 WORKDIR /screen
 
 # Copy package.json and package-lock.json to the container
-COPY package*.json ./
+COPY screen/package*.json ./
 
 # Install project dependencies
 RUN npm install \
-&& npm install -g serve
+    && npm install -g serve
 
 # Copy the entire project to the container
 COPY screen .
