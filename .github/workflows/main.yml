@@ -17,5 +17,5 @@ jobs:
         run: docker build -t screen -f screen/Dockerfile .
       
       - name: Run
-        run: docker run -p 3000:3000 screen
+        run: docker run -d -p 3000:3000 screen
 
