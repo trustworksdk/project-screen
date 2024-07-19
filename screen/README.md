@@ -18,7 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Get token
 
-login through swagger https://api.trustworks.dk/q/swagger-ui/#/login/get_login and paste token into API.js
+login through swagger https://api.truxstworks.dk/q/swagger-ui/#/login/get_login and paste token into API.js
 
 ## Available Scripts
 

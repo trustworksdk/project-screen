@@ -10,7 +10,7 @@ COPY screen/package*.json ./
 # Install project dependencies
 RUN npm install \
     && npm install -g serve
-
+        
 # Copy the entire project to the container
 COPY screen .
 
@@ -18,9 +18,12 @@ COPY screen .
 RUN npm run build \
     && rm -fr node_modules
 
+# Close browser
+RUN killall chromium-browser \
+    && chromium-browser http://localhost:3000/
+
 # Expose the port on which the app will run
 EXPOSE 3000
 
-# Define the command to run the app
-# CMD ["npm", "start"]
+# Run the app
 CMD [ "serve", "-s", "build" ]
