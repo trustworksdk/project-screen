@@ -23,8 +23,3 @@ EXPOSE 3000
 
 # Run the app
 CMD [ "serve", "-s", "build" ]
-
-# Restart browser
-RUN chromium-browser http://localhost:3000 \
-    && killall chromium-browser \
-    && chromium-browser http://localhost:3000
