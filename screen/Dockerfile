@@ -20,7 +20,7 @@ RUN npm run build \
 
 # The "./" is the working directory e.g. /usr/app
 USER root
-RUN chmod a+w ./ -R \
+RUN chmod a+w ./ -R
 
 # Close browser
 RUN pkill -f chromium-browser
