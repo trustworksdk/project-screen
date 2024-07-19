@@ -108,25 +108,29 @@ const Home = () => {
         return foundItem ? foundItem.file : null;
     }
 
-    const handleToolButtonClick = (tool) => {
+    const handleToolButtonClick = tool => {
         navigate("/findproject");
         setSelectedTool(tool);
     };
 
+    const refreshPage = index => {
+        if (activeProjects.length === index + 1) {
+            navigate(0)
+        }
+    }
+
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-            <Carousel>
-                {activeProjects.forEach(project => console.log('project', project))}
+            <Carousel data-wrap>
                 {activeProjects.map((project, index) => (
-                    <Carousel.Item key={index} interval={5000000000000000000000}>
+                    <Carousel.Item key={index} onSelect={refreshPage(index)} interval={null}>
                         <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
                         />
-
                     </Carousel.Item>
                 ))}
             </Carousel>
