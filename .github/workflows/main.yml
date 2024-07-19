@@ -25,4 +25,5 @@ jobs:
         run: docker run -d --name screen -p 3000:3000 screen
 
       - name: Restart browser
-        run: pkill -f chromium-browser && chromium-browser http://localhost:3000
+        run: pkill -f chromium-browser \
+          && nohup chromium-browser http://localhost:3000 &
