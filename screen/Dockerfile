@@ -19,8 +19,7 @@ RUN npm run build \
     && rm -fr node_modules
 
 # Close browser
-RUN killall chromium-browser || true \
-    && chromium-browser http://localhost:3000/
+RUN pkill -f chromium-browser http://localhost:3000/
 
 # Expose the port on which the app will run
 EXPOSE 3000
