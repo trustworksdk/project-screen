@@ -7,7 +7,7 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
-const MILLISECONDS_PER_SLIDE = 1000
+const MILLISECONDS_PER_SLIDE = 5000
 
 const Home = () => {
     const navigate = useNavigate();
@@ -95,7 +95,7 @@ const Home = () => {
                 setClientList(newClientList);
             };
             fetchClientPhotos();
-            setInterval(() => navigate(0), MILLISECONDS_PER_SLIDE * (activeProjects.length + 2) * 10)
+            // setInterval(() => navigate(0), MILLISECONDS_PER_SLIDE * (activeProjects.length + 2) * 10)
         }
 
     }, [activeProjects]);
