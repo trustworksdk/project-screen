@@ -7,6 +7,8 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
+const MILLISECONDS_PER_SLIDE = 1000
+
 const Home = () => {
     const navigate = useNavigate();
     const { setSelectedTool } = useToolContext();
@@ -21,11 +23,8 @@ const Home = () => {
         getConsultants(setConsultants);
     }, []);
 
-    // setInterval(() => navigate(0), 20000)
-
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
-            console.log("projekt: ", projects);
             // Create a Set of active consultant IDs
             const activeConsultantIds = new Set(consultants.map(consultant => consultant.uuid));
 
@@ -50,7 +49,6 @@ const Home = () => {
     // Update employee list based on active consultants
     useEffect(() => {
         if (activeProjects.length > 0) {
-            console.log("Projekter: ", activeProjects);
             const fetchPhotosForActiveConsultants = async () => {
                 const photoPromises = activeProjects.flatMap(project =>
                     project.projectDescriptionUserList.map(async user => {
@@ -97,6 +95,7 @@ const Home = () => {
                 setClientList(newClientList);
             };
             fetchClientPhotos();
+            setInterval(() => navigate(0), MILLISECONDS_PER_SLIDE * (activeProjects.length + 2) * 10)
         }
 
     }, [activeProjects]);
@@ -112,19 +111,12 @@ const Home = () => {
         navigate("/findproject");
         setSelectedTool(tool);
     };
-
-    const refreshPage = index => {
-        if (activeProjects.length === index + 1) {
-            navigate(0)
-        }
-    }
-
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-            <Carousel data-wrap>
+            <Carousel data-wrap={false} onSelect={(_, evt) => console.log(evt)}>
                 {activeProjects.map((project, index) => (
-                    <Carousel.Item key={index} onSelect={refreshPage(index)} interval={null}>
+                    <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}

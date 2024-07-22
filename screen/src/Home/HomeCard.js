@@ -10,14 +10,10 @@ const tenCol = project => {
   return project.projectDescriptionUserList.length > 8 ? 'row col-10' : 'row'
 }
 
-const getImgSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-3' : 'mb-3 employeephoto'
-}
-
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="container">
     {/* Client photo + Project title + date */}
-    <div className="row align-items-end pt-5">
+    <div className="row align-items-end pt-3">
       <Card className="bg-transparent border-0 justify-content-center align-items-center">
         <Card.Img
           className="border-0 w-50 mb-3"
@@ -35,7 +31,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
         </Card>
 
         <Card className="bg-transparent border-0">
-          <Card.Body className="pt-1">
+          <Card.Body className="pt-0">
             <Card.Title>
               <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
             </Card.Title>
@@ -46,7 +42,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
 
     {/* Projektbeskrivelse  + ydelser + tools */}
-    <div className="row justify-content-center pt-4">
+    <div className="row justify-content-center pt-0">
       <div className="col-8 right-border align-items-center">
         <Card className="bg-transparent border-0">
           <Card.Body>
@@ -90,13 +86,13 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
     {/* Employee photo */}
     <Card className=" bg-transparent border-0 pt-5">
-      <Card.Body className="pt-3 ">
+      <Card.Body className="pt-5">
         <div className={tenCol(project)}>
             {project.projectDescriptionUserList?.map(user => (
               <div className={getColSize(project)} key={user.useruuid}>
                 <img
                   alt=""
-                  className={getImgSize(project)}
+                  className="employeephoto mb-3"
                   src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
                 />
               </div>

@@ -1,5 +1,5 @@
 
-  const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkYXZpZC52aW5qZSIsImlhdCI6MTcyMTM4NTg0MSwiZXhwIjoxNzIxNDIxODQxLCJncm91cHMiOlsiVVNFUiJdLCJqdGkiOiI1OWRiYmM0Zi1iYzNjLTQ2MzItYTA3Mi00ZWQ1NDUyMDk2NWUifQ.I8hW2ycLxmUxi6wfmef9E3wd3ar8n8B7eg8G6kaCxfb1JPJZUQgQl6QYPE0oeeDkgi6JL2n3DTUovY3_tGx23nEHV8rj7WD_NmGTZ677SlkVTV0CZnZ8TfqzSZUZ9wJ9E8fZGQ3VNvidRjOrZ3YWWsNN18UvCY3m35UBbFmDTWO5k2aNa-ghmhQScV3uoFL-_wlgJq06NhD5yao-ToRoOX265nnlUM_o99WFYozMjE7HxGicjuHL3xI-XPzQbao132Cif6k-EE08YTAIfmGjzkpQXsJAoSnEocENfPQRxdEg47n6mDVN0h70eTGqOBlxlMCv1NCcwiVgA23fMebiTpQbrrPVp1KrwiYsgoeUKCW2aq3hodJ6Kc2RFV6abj1mR20OL3F_HTsyjrZuuq_2diwnjyt4_lsjGhZQlR2yxFsSIOSGLb2MoGdUFOl3gnLfm-XRA79K-rh1caitmTXDi9nTcCE9S58Pn5A_8dDNU2CMKvqefaaTuhPqFb680ZFdTvmwvK6P1Gkp5BRlc0Z9n52Hw0j1NCd_HmC8zIrM4faPQaj9Xo-2yconFwsb-yhXhz1GBRD8zJ0jYE7kpVU1Ig3rKTWgkq648QQbY45B0wzNZ3kXETPbw6EojHyQG3ZI_2Eu0_vZBLxCh1Ah9PrA5Lp3e4YsqYphGVO4LriEnWc";
+const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkYXZpZC52aW5qZSIsImlhdCI6MTcyMTYzMjE4MCwiZXhwIjoxNzIxNjY4MTgwLCJncm91cHMiOlsiVVNFUiJdLCJqdGkiOiIyMmZlMzIzZi1jN2E4LTQ1YzItYTY2OS1lYzYwYWRmNmExYTYifQ.VnnAUEwxC5Qm29WxHTRni6FM-cZQ1n6WGUoIsf39EaAacGlfbuW65z7xGB1TC2Mou03YoJbVTXJeWUNTZ_TjSs449D4748puuVqVQ_hHsnoI8jRz6sdrMhU6_46ytHBEuA7VgT7LhCIDUi7hVPFkZudWkMvael0zLTcibFQX3IaEABOyWOKycX3Ml4SBlRWhTPuHRxha7m2_0PjsglSeH_8xOuhh6JdvTJSH7JpqJSVYMMrsSt_b1FtaWuPc5zqAV1QEpk4FeKEHSPR5Qx9dFwSfrEfR7uUZsVA0w2Wgpv2TMm3EjBqtXQ4LREjZkQ3MZdacF8DgvZCVqWU1o-o8T3gUhJ5a4jbSLjc7zPkAvl-2b2Q5tEyjGqHLxvFKb6Ap514eNhKYeVm1zsrOkBZYXQJcGRvPXhc7Rxy4dCHds4yPaTe6YCISN0RQpuQFDOtjK8HONrtQlaoFUn9r776U1_5uwP1j6Tcu7Dv1d-7tJ1ZakSaGj8ZL-UdSOSqVMBuDr5EE53NnT5h6MGDiwMCJtxgm2QKVnsyViSeDkQnhXP8kXNoJSmVyQOaDVCgo94Jlj7pkg_wzdMY1g9ZSKMr8AMBV2Rt1E33JijyAZ1Vmf3ajY2mrKAKPzR3piuIYatl1jVPkEEfh90qkdfI9w-JWbczNAW2dSUlf8DrwQ9nf9xk";
 export const config = { headers: { Authorization: `Bearer ${token}` } };
 
 //async
@@ -15,7 +15,6 @@ export async function getProjects(setProjects) {
     
 
     const data = require('./testJson.json');
-    console.log(data);
 
 
     // Sort the projects by the "from" field in descending order
@@ -29,7 +28,6 @@ export async function getProjects(setProjects) {
       return dateB - dateA;
     });
 
-    console.log('sortedProjects', sortedProjects)
     // Set the sorted projects in the state
     setProjects(sortedProjects);
   } catch (error) {

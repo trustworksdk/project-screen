@@ -4,9 +4,7 @@ export const Wrapper = styled.div`
 
     .row {
         max-height: 33.33vh; 
-
     }
-
 
     .right-border {
         border-right: 0.5em solid #ebe7e1; 
@@ -82,8 +80,8 @@ export const Wrapper = styled.div`
   
     .employeephoto {
         object-fit: cover;
-        height: 10em;
-        width: 10em;
+        height: 7.5em;
+        width: 7.5em;
         border-radius: 50%;
     }
 

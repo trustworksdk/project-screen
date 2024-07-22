@@ -156,66 +156,6 @@
         "useruuid": "e32fdbc2-ac8d-4a4c-b0b6-c096090ebf4c",
         "description": "string",
         "key": 12
-      },
-      {
-        "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
-        "description": "string",
-        "key": 1
-      },
-      {
-        "useruuid": "fcfe998f-b38a-421a-899b-2d8dd32029ee",
-        "description": "string",
-        "key": 2
-      },
-      {
-        "useruuid": "55567dc6-f7d4-4fd5-8240-96787e492818",
-        "description": "string",
-        "key": 3
-      },
-      {
-        "useruuid": "f6a36952-c2e8-4e9a-b9ec-1deaa2b2ccfe",
-        "description": "string",
-        "key": 4
-      },
-      {
-        "useruuid": "7948c5e8-162c-4053-b905-0f59a21d7746",
-        "description": "string",
-        "key": 5
-      },
-      {
-        "useruuid": "d2878586-800e-4ba2-ac3c-93e5ac69834c",
-        "description": "string",
-        "key": 6
-      },
-      {
-        "useruuid": "8e15d9c8-1df5-4c32-8e98-001cfabc54b8",
-        "description": "string",
-        "key": 7
-      },
-      {
-        "useruuid": "ff117b85-51a2-4955-8612-c612ba011b91",
-        "description": "string",
-        "key": 8
-      },
-      {
-        "useruuid": "f6626f6c-e7c8-11e6-bf01-fe55135034f3",
-        "description": "string",
-        "key": 9
-      },
-      {
-        "useruuid": "9750fd10-d6f2-4e18-ac58-c5924ceb279a",
-        "description": "string",
-        "key": 10
-      },
-      {
-        "useruuid": "4072707e-21b5-482e-9fa7-413a60ca5d37",
-        "description": "string",
-        "key": 11
-      },
-      {
-        "useruuid": "e32fdbc2-ac8d-4a4c-b0b6-c096090ebf4c",
-        "description": "string",
-        "key": 12
       }
     ],
     "offeringList": [

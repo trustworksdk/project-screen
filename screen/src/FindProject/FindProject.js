@@ -88,7 +88,6 @@ const FindProject = () => {
 
     //Add clientName and consultantName as variables in updatedProjects
     useEffect(() => {
-        console.log("all consultants: ", consultants)
 
         const updatedProjectList = projects.map((project) => {
             //Find client name
@@ -452,7 +451,7 @@ const FindProject = () => {
                                         {chunk.map((project, projectIndex) => (
                                             <div className="col" key={projectIndex}>
                                                 <Card className="card" onClick={() => handleProjectClick(chunkIndex, projectIndex)}>
-                                                    <div class="white-circle">
+                                                    <div className="white-circle">
                                                         <Card.Img className="avatar" variant="top" src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`} />
                                                     </div>
                                                     <div className="content">
