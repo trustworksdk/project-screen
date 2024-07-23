@@ -7,7 +7,7 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
-const MILLISECONDS_PER_SLIDE = 5000
+const MILLISECONDS_PER_SLIDE = 500000000000
 
 const Home = () => {
     const navigate = useNavigate();
@@ -114,7 +114,7 @@ const Home = () => {
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-            <Carousel data-wrap={false} onSelect={(_, evt) => console.log(evt)}>
+            <Carousel data-wrap>
                 {activeProjects.map((project, index) => (
                     <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard

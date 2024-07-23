@@ -1,6 +1,14 @@
+const getToken = async () => {
+  // const url = `https://api.trustworks.dk/login?password=${process.env.USERNAME}&username=${process.env.USERNAME}`
+  const url = "https://api.trustworks.dk/login?password=macvyj-bungov-jusmI5&username=David.vinje"
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log('username', process.env.USERNAME)
+  console.log('password', process.env.PASSWORD)
+  return data.token
+}
 
-const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkYXZpZC52aW5qZSIsImlhdCI6MTcyMTYzMjE4MCwiZXhwIjoxNzIxNjY4MTgwLCJncm91cHMiOlsiVVNFUiJdLCJqdGkiOiIyMmZlMzIzZi1jN2E4LTQ1YzItYTY2OS1lYzYwYWRmNmExYTYifQ.VnnAUEwxC5Qm29WxHTRni6FM-cZQ1n6WGUoIsf39EaAacGlfbuW65z7xGB1TC2Mou03YoJbVTXJeWUNTZ_TjSs449D4748puuVqVQ_hHsnoI8jRz6sdrMhU6_46ytHBEuA7VgT7LhCIDUi7hVPFkZudWkMvael0zLTcibFQX3IaEABOyWOKycX3Ml4SBlRWhTPuHRxha7m2_0PjsglSeH_8xOuhh6JdvTJSH7JpqJSVYMMrsSt_b1FtaWuPc5zqAV1QEpk4FeKEHSPR5Qx9dFwSfrEfR7uUZsVA0w2Wgpv2TMm3EjBqtXQ4LREjZkQ3MZdacF8DgvZCVqWU1o-o8T3gUhJ5a4jbSLjc7zPkAvl-2b2Q5tEyjGqHLxvFKb6Ap514eNhKYeVm1zsrOkBZYXQJcGRvPXhc7Rxy4dCHds4yPaTe6YCISN0RQpuQFDOtjK8HONrtQlaoFUn9r776U1_5uwP1j6Tcu7Dv1d-7tJ1ZakSaGj8ZL-UdSOSqVMBuDr5EE53NnT5h6MGDiwMCJtxgm2QKVnsyViSeDkQnhXP8kXNoJSmVyQOaDVCgo94Jlj7pkg_wzdMY1g9ZSKMr8AMBV2Rt1E33JijyAZ1Vmf3ajY2mrKAKPzR3piuIYatl1jVPkEEfh90qkdfI9w-JWbczNAW2dSUlf8DrwQ9nf9xk";
-export const config = { headers: { Authorization: `Bearer ${token}` } };
+export const config = { headers: { Authorization: `Bearer ${await getToken()}` } };
 
 //async
 export async function getProjects(setProjects) {
