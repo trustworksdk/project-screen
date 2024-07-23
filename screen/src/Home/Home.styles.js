@@ -14,7 +14,8 @@ export const Wrapper = styled.div`
     }
 
     .mr-5 {
-        margin-right: 2rem !important;
+        margin-right: 2rem;
+        z-index: 1;
     }
 
     .counter > h3 {
