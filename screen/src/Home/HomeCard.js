@@ -3,18 +3,18 @@ import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
-  <div className="container">
+  <div className="container ">
     {/* Client photo + Project title + date */}
     <div className="row align-items-end pt-3">
       <Card className="bg-transparent border-0 center">
         <Card.Img
-          className="border-0 w-50 mb-3"
+          className="border-0 mb-3"
           src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
         />
       </Card>
 
       <div>
-        <Card className="bg-transparent border-0 text-ellipsis-1">
+        <Card className="bg-transparent border-0 text-ellipsis-project-name">
           <Card.Body>
             <Card.Title>
               <h1>{project.name}</h1>
@@ -38,7 +38,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
         <Card className="bg-transparent border-0">
           <Card.Body>
             <Card.Title>
-              <h3 className="text-ellipsis-13">{project.description}</h3>
+              <h3 className="text-ellipsis-project-description">{project.description}</h3>
             </Card.Title>
           </Card.Body>
         </Card>
@@ -56,7 +56,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
             ))}
           </Card.Text>
         </Card>
-        <Card className="tools bg-transparent border-0">
+        <Card className="tools pt-5 bg-transparent border-0">
           <Card.Title className="fw-bold">
             <h2>Tilgang</h2>
           </Card.Title>
@@ -77,7 +77,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 
     {/* Employee photo */}
     <Card className="row bg-transparent border-0">
-      <Card.Body className="d-flex align-items-start">
+      <Card.Body>
         <Project
           project={project}
           getEmployeePhoto={getEmployeePhoto}
@@ -99,14 +99,14 @@ const Counter = ({ project }) => {
 }
 
 const Project = ({ project, getEmployeePhoto }) => {
-  let rowStyling = 'row d-flex align-items-center '
-  let colStyling = 'py-5 '
-  rowStyling += project.projectDescriptionUserList.length > 8 ? 'col-10' : 'col-12'
-  colStyling += project.projectDescriptionUserList.length > 8 ? 'col-1 mr-5' : 'col-3'
+  // let rowStyling = 'row d-flex align-items-center '
+  // let colStyling = 'py-5 '
+  // rowStyling += project.projectDescriptionUserList.length > 8 ? 'col-10' : 'col-12'
+  // colStyling += project.projectDescriptionUserList.length > 8 ? 'col-1 mr-5' : 'col-3'
   return (
-    <div className={rowStyling}>
-      {project.projectDescriptionUserList.slice(0, 15).map(user => (
-        <div className={colStyling} key={user.useruuid}>
+    <div className='row pt-5 align-items-center'>
+      {project.projectDescriptionUserList.slice(0, 19).map(user => (
+        <div className='py-5 col-1 mr-5' key={user.useruuid}>
           <img
             alt=""
             className="employeephoto"

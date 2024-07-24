@@ -91,7 +91,7 @@
   {
     "clientuuid": "99636db6-b2cd-4f3b-863c-6d578f922563",
     "name": "24 Konsulenter",
-    "description": "Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn.",
+    "description": "Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn. Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn.",
     "from": "2022-03-10",
     "to": "2022-03-10",
     "offering": "#Forretningsanalyse #Behovsafdækning",
@@ -195,13 +195,32 @@
       }
     ],
     "offeringList": [
+      "UX/UI",
+      "Behovsafdækning",
       "Forretningsanalyse",
+      "Behovsafdækning",
+      "Scrum Master",
+      "Behovsafdækning",
+      "UX/UI",
+      "Behovsafdækning",
+      "Forretningsanalyse",
+      "Behovsafdækning",
+      "Scrum Master",
       "Behovsafdækning"
     ],
     "toolsList": [
+      "Process Mapping",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Scrum",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
       "ProcessMapping",
       "Kravspecifikaiton",
-      "Tilstandsdiagram"
+      "Tilstandsdiagram",
+      "ProcessMapping",
+      "Kravspecifikaiton",
+      "Scrum"
     ]
   },
   {

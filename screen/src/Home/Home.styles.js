@@ -1,9 +1,12 @@
 import styled from "styled-components"
 
 export const Wrapper = styled.div`
+    .container {
+        max-width: 80vw;
+    }
 
     .counter {
-        background-color: #E3DDD5;
+        background-color: #eee;
         height: 10rem;
         width: 10rem;
         border-radius: 50%;
@@ -14,8 +17,7 @@ export const Wrapper = styled.div`
     }
 
     .mr-5 {
-        margin-right: 2rem;
-        z-index: 1;
+        margin-right: 1rem;
     }
 
     .counter > h3 {
@@ -30,36 +32,40 @@ export const Wrapper = styled.div`
         border-right: 0.5rem solid #ebe7e1; 
     }
 
+    .card-img {
+        width: 66%;
+    }
+
     h1 {
         color: #192434;
-        font-size: rem;
+        font-size: 5rem;
         font-weight: 800;
         background-color: transparent;
     }
 
     h2 {
         color: #192434;
-        font-size: 1.5rem;
-        font-weight: bold;
+        font-size: 2rem;
+        font-weight: 450;
     }
 
     h3 {
         color: #192434;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 100;
         line-height: 1.5;
     }
 
-    .text-ellipsis-13 {
+    .text-ellipsis-project-description {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 14; /* Adjust the number of lines to show */
+        -webkit-line-clamp: 21; /* Adjust the number of lines to show */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
       }
 
-      .text-ellipsis-1 {
+      .text-ellipsis-project-name {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1; /* Adjust the number of lines to show */
@@ -71,6 +77,7 @@ export const Wrapper = styled.div`
     .ydelser-og-tools{
         padding-left: 2vh;
         overflow: hidden;
+        height: 100%;
     }
 
     .ydelser-og-tools-knap{
@@ -78,13 +85,13 @@ export const Wrapper = styled.div`
         border: none;
         margin-right: 1rem;
         margin-top: 1rem;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
     }
 
     .center {
         display: flex;
         justify-content: center;
-        align-items: center;1
+        align-items: center;
     }
 
     .ydelser{
@@ -96,7 +103,6 @@ export const Wrapper = styled.div`
     .tools{
         color: #FF7201;
         background-color: #eaf3ff;
-        margin-top: 10%;
     }
 
   
@@ -120,7 +126,7 @@ export const Wrapper = styled.div`
         background-color: #E3DDD5;
         margin: 0; /* Space between line segments */
         border: none;
-        width: 20vw;
+        width: 15vw;
         padding: 1px;
     }
 
