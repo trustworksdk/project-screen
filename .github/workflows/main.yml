@@ -12,18 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
-      - name: Stop and remove existing container
-        run: |
-          docker stop screen || true
-          docker rm screen || true
           
       - name: Build
         run: docker build -t screen -f screen/Dockerfile .
       
       - name: Run
-        run: docker run -d --name screen -p 3000:3000 screen
-
-      # - name: Restart browser
-      #   run: pkill -f chromium-browser \
-      #     && nohup chromium-browser http://localhost:3000 &
+        run: docker run --restart -d --name screen -p 3000:3000 screen
