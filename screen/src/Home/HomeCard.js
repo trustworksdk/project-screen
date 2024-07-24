@@ -99,10 +99,6 @@ const Counter = ({ project }) => {
 }
 
 const Project = ({ project, getEmployeePhoto }) => {
-  // let rowStyling = 'row d-flex align-items-center '
-  // let colStyling = 'py-5 '
-  // rowStyling += project.projectDescriptionUserList.length > 8 ? 'col-10' : 'col-12'
-  // colStyling += project.projectDescriptionUserList.length > 8 ? 'col-1 mr-5' : 'col-3'
   return (
     <div className='row pt-5 align-items-center'>
       {project.projectDescriptionUserList.slice(0, 19).map(user => (
@@ -119,4 +115,4 @@ const Project = ({ project, getEmployeePhoto }) => {
   )
 }
 
-export default HomeCard;
+export default HomeCard; 
