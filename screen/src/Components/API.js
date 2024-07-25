@@ -2,12 +2,12 @@ const getToken = async () => {
   const url = `https://api.trustworks.dk/login?password=${process.env.REACT_APP_PASSWORD}&username=${process.env.REACT_APP_USERNAME}`
   const response = await fetch(url)
   const data = await response.json()
-  console.log('username', process.env.USERNAME)
-  console.log('password', process.env.PASSWORD)
   return data.token
 }
 
-export const config = { headers: { Authorization: `Bearer ${await getToken()}` } };
+// export const config = { headers: { Authorization: `Bearer ${await getToken()}` } };
+const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkYXZpZC52aW5qZSIsImlhdCI6MTcyMTkwOTMyOSwiZXhwIjoxNzIxOTQ1MzI5LCJncm91cHMiOlsiVVNFUiJdLCJqdGkiOiJlYTFmOWRjMS0zYzVkLTQ5ZjEtOTE0Ni01NzFmYzFlODgzNWYifQ.HLZg9Xo3pxoXU-g8NsLt0rVKxnj2H2QcmFPAlUOH2GcG_5i39YnPmAYdLqlzFb81B9wrYB2U_Y336L5jXZJ8CXusYLq13NKHQqzRjE__kJca6EpQcIjj4HSREtWfJLYvhjWxK9e0K4OUVSLopFRYC_p8yfu38eF7xwnTAbFIkzzpWYv_Un6MIz6bYUetzeeSgg35AXNjKzN4zuH6EvrTduT77YoPtauh7WjszvOGELTvQ6owlE_VP-ZYKe5T4tj5rMKbb94jnQQPHshzAAvnLfp6_O9QNHQiEvXFshjNMMN_HDizX1UawxKRlAewZ7_wXpGK-KvOD-X1Wvp9L1XXgGD1Mqh55TWzB2Ev6wsl5uqlAl_yYehh9mCZbmH4o6RzbgnQ0sZOTlHJh3xh25zSJV4WcS63b0dFBfTV_pJb2I4ZwEH70XRyS9pMTvOMe0GyVib5C2q43sS7EJo91PunLchG1iws6thBBJB5BIOM04R8SNpdIrisN-7BCoF-029YBl23FO0c-cC0CQOsY5kCanMv9YcH--1dY7YYDX8LdaI3LN2boMNZfTRRz9DupqWaAcyJBnJNf2bmAig5_0WcLgO1uxgqY_ViuCkypxh2FP1mWhXUBjzG7grp6X8yzs4-9S-jQ7d1RHCyXYriLPGfmoMO1m6Tj7dB6omQ19Cyjf4"
+export const config = { headers: { Authorization: `Bearer ${token}` } };
 
 //async
 export async function getProjects(setProjects) {
