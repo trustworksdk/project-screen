@@ -1,6 +1,13 @@
+const getToken = async () => {
+  const url = `https://api.trustworks.dk/login?password=${process.env.REACT_APP_PASSWORD}&username=${process.env.REACT_APP_USERNAME}`
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log('username', process.env.USERNAME)
+  console.log('password', process.env.PASSWORD)
+  return data.token
+}
 
-const token = "eyJraWQiOiIvcHJpdmF0ZUtleS5wZW0iLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RydXN0d29ya3MuZGsiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJuaWNvbGUuYWdnZXJuaWVsc2VuIiwiaWF0IjoxNzIxMTk4NjAwLCJleHAiOjE3MjEyMzQ2MDAsImdyb3VwcyI6WyJVU0VSIl0sImp0aSI6IjM4ZjI0NzI0LWRlNjYtNDc3Zi1hOTc0LTkwMmZjNTU3MDk0ZSJ9.D4-PGaRiylir9H5aaFiVmPoR_2fdi0bzFwl06Sn1gMFP2llid8fJ4P0Sp-UzZVYv9XU3hrZr5rfaIHt2y7aHnqO4fomy_0w9mgquwPgCbnk64OmcHtoaVbEtLj_C9jrHx4Wx0WlzjHjnBmF3f836dKufW3VXwnB72Ntw5pyPGmd0P6dkXZGa6Abz9dJFgYrZM-Jupffcypi-cCcFmw7DErNceFF0DMxAWQPvwtTpxmHpoiq0wTDMD1QDPuT5HZYr9XaQPQzBKVECFRRrJhb2NBr63XW2FB1rXydg1UNaQJleLnGqqp_-87et7ydKxUyZPukPQz-9aR9KnjYuLWvAuoMRUCcvym49RZpogb5ObxdJuyrXc8gffQm4bs2GuaVtUNGFIX4PPLxZBRgkKVnqMqU9OOE-vXv2I5C4c_bnRhJCN8H05BdXgcltLgnRV7NgbtKeD378TxBCwn1E5IWnxbJndkhxZHfNhElYInRHjH39YQdl4N-rtVlTrghZxazdpxCyqjeaiVuekAIyvThSgvP78wCU7-VXQPRok6SVThSAGRMkFtsuai-1DoeloFTQYqN1W_BA14A8mIlYhGIy723zf10eOS8IN_LSqlRgPtGJ-7-7cYBJ3WcVNFYVSMPslclvhF6FhAhMHHm18u3T3UAUBmmYuWjU64CUvioz58U";
-export const config = { headers: { Authorization: `Bearer ${token}` } };
+export const config = { headers: { Authorization: `Bearer ${await getToken()}` } };
 
 //async
 export async function getProjects(setProjects) {
@@ -15,7 +22,6 @@ export async function getProjects(setProjects) {
     
 
     const data = require('./testJson.json');
-    console.log(data);
 
 
     // Sort the projects by the "from" field in descending order
@@ -29,7 +35,6 @@ export async function getProjects(setProjects) {
       return dateB - dateA;
     });
 
-    console.log('sortedProjects', sortedProjects)
     // Set the sorted projects in the state
     setProjects(sortedProjects);
   } catch (error) {

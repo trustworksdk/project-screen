@@ -2,31 +2,19 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
-const tenCol = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'row pt-5 col-10' : 'pt-5 row'
-}
-
-const getColSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'mx-2 col-1 ' : 'col-3'
-}
-
-const getImgSize = project => {
-  return project.projectDescriptionUserList.length > 8 ? 'employeephoto mb-2' : 'mb-2 employeephoto'
-}
-
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
-  <div className="container">
+  <div className="container ">
     {/* Client photo + Project title + date */}
-    <div className="row align-items-end pt-5">
-      <Card className="bg-transparent border-0 justify-content-center align-items-center">
+    <div className="row align-items-end pt-3">
+      <Card className="bg-transparent border-0 center">
         <Card.Img
-          className="border-0 w-50 mb-3"
+          className="border-0 mb-3"
           src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
         />
       </Card>
 
       <div>
-        <Card className="bg-transparent border-0  text-ellipsis-1">
+        <Card className="bg-transparent border-0 text-ellipsis-project-name">
           <Card.Body>
             <Card.Title>
               <h1>{project.name}</h1>
@@ -35,7 +23,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
         </Card>
 
         <Card className="bg-transparent border-0">
-          <Card.Body className="pt-1">
+          <Card.Body className="pt-0">
             <Card.Title>
               <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
             </Card.Title>
@@ -44,14 +32,13 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
       </div>
     </div>
 
-
-    {/* Projektbeskrivelse  + roller + tools */}
-    <div className="row justify-content-center pt-4">
-      <div className="col-8 right-border align-items-center">
+    {/* Projektbeskrivelse  + ydelser + tools */}
+    <div className="row">
+      <div className="col-8 right-border">
         <Card className="bg-transparent border-0">
           <Card.Body>
             <Card.Title>
-              <h3 className="text-start bg-transparent text-ellipsis-13">{project.description}</h3>
+              <h3 className="text-ellipsis-project-description">{project.description}</h3>
             </Card.Title>
           </Card.Body>
         </Card>
@@ -70,7 +57,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
             ))}
           </Card.Text>
         </Card>
-        <Card className="tools bg-transparent border-0 py-4">
+        <Card className="tools pt-5 bg-transparent border-0">
           <Card.Title className="fw-bold">
             <h2>Tilgang</h2>
           </Card.Title>
@@ -90,22 +77,42 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     </div>
 
     {/* Employee photo */}
-    <Card className="row bg-transparent border-0 pt-5">
-      <Card.Body className=" ">
-        <div className={tenCol(project)}>
-            {project.projectDescriptionUserList?.map(user => (
-              <div className={getColSize(project)} key={user.useruuid}>
-                <img
-                  alt=""
-                  className={getImgSize(project)}
-                  src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
-                />
-              </div>
-            ))}
-          </div>
+    <Card className="row bg-transparent border-0">
+      <Card.Body>
+        <Project
+          project={project}
+          getEmployeePhoto={getEmployeePhoto}
+        />
       </Card.Body>
     </Card>
-
   </div >
 );
-export default HomeCard;
+
+const Counter = ({ project }) => {
+  if (project.projectDescriptionUserList.length > 15) {
+    return (
+      <div className='col-1 center counter'>
+        <h3>+{project.projectDescriptionUserList.length - 15}</h3>
+      </div>
+    )
+  }
+}
+
+const Project = ({ project, getEmployeePhoto }) => {
+  return (
+    <div className='row pt-5 align-items-center'>
+      {project.projectDescriptionUserList.slice(0, 19).map(user => (
+        <div className='py-5 col-1 mr-5' key={user.useruuid}>
+          <img
+            alt=""
+            className="employeephoto"
+            src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
+          />
+        </div>
+      ))}
+      <Counter project={project} />
+    </div>
+  )
+}
+
+export default HomeCard; 

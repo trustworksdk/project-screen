@@ -7,6 +7,8 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
+const MILLISECONDS_PER_SLIDE = 500000000000
+
 const Home = () => {
     const navigate = useNavigate();
     const { setSelectedTool } = useToolContext();
@@ -20,13 +22,9 @@ const Home = () => {
         getProjects(setProjects);
         getConsultants(setConsultants);
     }, []);
-
-    //Refereshs Home page every 60sek
-    setInterval(() => navigate(0), 60000);
-
+  
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
-            console.log("projekt: ", projects);
             // Create a Set of active consultant IDs
             const activeConsultantIds = new Set(consultants.map(consultant => consultant.uuid));
 
@@ -51,7 +49,6 @@ const Home = () => {
     // Update employee list based on active consultants
     useEffect(() => {
         if (activeProjects.length > 0) {
-            console.log("Projekter: ", activeProjects);
             const fetchPhotosForActiveConsultants = async () => {
                 const photoPromises = activeProjects.flatMap(project =>
                     project.projectDescriptionUserList.map(async user => {
@@ -98,6 +95,7 @@ const Home = () => {
                 setClientList(newClientList);
             };
             fetchClientPhotos();
+            // setInterval(() => navigate(0), MILLISECONDS_PER_SLIDE * (activeProjects.length + 2) * 10)
         }
 
     }, [activeProjects]);
@@ -109,25 +107,22 @@ const Home = () => {
         return foundItem ? foundItem.file : null;
     }
 
-    const handleToolButtonClick = (tool) => {
+    const handleToolButtonClick = tool => {
         navigate("/findproject");
         setSelectedTool(tool);
     };
-
     //interval=5000=5sec
     return (
         <Wrapper className="body::before">
-            <Carousel>
-                {activeProjects.forEach(project => console.log('project', project))}
+            <Carousel data-wrap>
                 {activeProjects.map((project, index) => (
-                    <Carousel.Item key={index} interval={200000}>
+                    <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
                         />
-
                     </Carousel.Item>
                 ))}
             </Carousel>
