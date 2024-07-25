@@ -43,15 +43,14 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
           </Card.Body>
         </Card>
       </div>
-
-      <div className="col-4 roller-og-tools pb-3">
-        <Card className="roller bg-transparent border-0 ">
+      <div className="col-4 ydelser-og-tools">
+        <Card className="ydelser bg-transparent border-0 ">
           <Card.Title className="fw-bold">
             <h2>Roller</h2>
           </Card.Title>
           <Card.Text>
             {project.offeringList.map((tool, index) => (
-              <button key={index} className="roller roller-og-tools-knap">
+              <button key={index} className="ydelser ydelser-og-tools-knap">
                 {tool}
               </button>
             ))}
@@ -65,7 +64,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
             {project.toolsList.map((tool, index) => (
               <button
                 key={index}
-                className="tools roller-og-tools-knap"
+                className="tools ydelser-og-tools-knap"
                 onClick={() => onToolButtonClick(tool)}
               >
                 {tool}
@@ -85,6 +84,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
         />
       </Card.Body>
     </Card>
+
   </div >
 );
 
