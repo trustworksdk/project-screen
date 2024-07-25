@@ -23,4 +23,4 @@ jobs:
         run: docker build -t screen -f screen/Dockerfile .
       
       - name: Run
-        run: docker run -d --name screen -p 3000:3000 screen
+        run: docker run -d --restart=always --name screen -p 3000:3000 screen
