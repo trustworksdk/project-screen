@@ -2,14 +2,7 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
     .container {
-        max-width: 80vw;
-    }
-
-    .counter {
-        background-color: #eee;
-        height: 10rem;
-        width: 10rem;
-        border-radius: 50%;
+        max-width: 75vw;
     }
 
     .card-body > .row {
@@ -38,20 +31,20 @@ export const Wrapper = styled.div`
 
     h1 {
         color: #192434;
-        font-size: 5rem;
+        font-size: 8rem;
         font-weight: 800;
         background-color: transparent;
     }
 
     h2 {
         color: #192434;
-        font-size: 2rem;
+        font-size: 3rem;
         font-weight: 450;
     }
 
     h3 {
         color: #192434;
-        font-size: 2rem;
+        font-size: 3rem;
         font-weight: 100;
         line-height: 1.5;
     }
@@ -59,20 +52,20 @@ export const Wrapper = styled.div`
     .text-ellipsis-project-description {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 21; /* Adjust the number of lines to show */
+        -webkit-line-clamp: 25; /* Adjust the number of lines to show */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-      }
+    }
 
-      .text-ellipsis-project-name {
+    .text-ellipsis-project-name {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1; /* Adjust the number of lines to show */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-      }
+    }
     
     .ydelser-og-tools{
         padding-left: 2vh;
@@ -85,7 +78,8 @@ export const Wrapper = styled.div`
         border: none;
         margin-right: 1rem;
         margin-top: 1rem;
-        font-size: 1.5rem;
+        font-size: 2.25rem;
+        font-weight: 325;
     }
 
     .center {
@@ -108,10 +102,16 @@ export const Wrapper = styled.div`
   
     .employeephoto {
         object-fit: cover;
-        height: 10rem;
-        width: 10rem;
+        height: 18rem;
+        width: 18rem;
         border-radius: 50%;
     }
+
+    .counter {
+        background-color: #eee;
+        // margin-left: 1rem;
+    }
+
 
     .carousel-control-prev-icon,
     .carousel-control-next-icon {

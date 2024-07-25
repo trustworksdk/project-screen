@@ -91,7 +91,7 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
 const Counter = ({ project }) => {
   if (project.projectDescriptionUserList.length > 15) {
     return (
-      <div className='col-1 center counter'>
+      <div className='col-1 center employeephoto counter'>
         <h3>+{project.projectDescriptionUserList.length - 15}</h3>
       </div>
     )
@@ -101,7 +101,7 @@ const Counter = ({ project }) => {
 const Project = ({ project, getEmployeePhoto }) => {
   return (
     <div className='row pt-5 align-items-center'>
-      {project.projectDescriptionUserList.slice(0, 19).map(user => (
+      {project.projectDescriptionUserList.slice(0, 21).map(user => (
         <div className='py-5 col-1 mr-5' key={user.useruuid}>
           <img
             alt=""
@@ -110,7 +110,7 @@ const Project = ({ project, getEmployeePhoto }) => {
           />
         </div>
       ))}
-      <Counter project={project} />
+      <Counter className="mr-5" project={project} />
     </div>
   )
 }
