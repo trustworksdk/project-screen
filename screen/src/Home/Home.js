@@ -7,7 +7,8 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
-const MILLISECONDS_PER_SLIDE = 500000000000
+const MILLISECONDS_PER_SLIDE = 10000
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ const Home = () => {
     const [employees, setEmployeeList] = useState([]);
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
+
+    setInterval(() => navigate(0),150000)
 
     useEffect(() => {
         getProjects(setProjects);
