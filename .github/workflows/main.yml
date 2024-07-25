@@ -13,8 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
           
-      - name: Stop and remove Docker container
-        run: docker stop screen && docker rm screen
+      - name: Stop Docker container
+        run: docker stop screen || true
+
+      - name: Remove Docker container
+        run: docker remove screen || true
         
       - name: Build
         run: docker build -t screen -f screen/Dockerfile .
