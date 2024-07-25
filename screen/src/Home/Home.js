@@ -22,7 +22,7 @@ const Home = () => {
         getProjects(setProjects);
         getConsultants(setConsultants);
     }, []);
-
+  
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
             // Create a Set of active consultant IDs

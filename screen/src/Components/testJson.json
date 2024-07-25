@@ -75,17 +75,65 @@
       {
         "useruuid": "48f88806-7ebc-471b-99c5-82bc2142fb09",
         "description": "Helene - UX"
+      },
+      {
+        "useruuid": "70b19352-b7db-4a55-abb7-a84259cf9d64",
+        "description": "Nicole - Udvikler"
       }
     ],
     "offeringList": [
       "Udvikling",
       "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse", 
+      "hej",
+      "Projektledelse",
+      "Projektledelse",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse",
+      "Udvikling",
+      "UX",
+      "Projektledelse", 
+      "hej",
+      "Projektledelse",
       "Projektledelse"
     ],
     "toolsList": [
       "NodeJs",
       "React",
-      "Figma"
+      "Figma",
+      "Kravspecifikaiton",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "aaaaaaa",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "nkjkkjjjkkj",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram",
+      "Kravspecifikaiton",
+      "åååååååååååååå"
     ]
   },
   {
@@ -225,7 +273,7 @@
   },
   {
     "clientuuid": "99636db6-b2cd-4f3b-863c-6d578f922563",
-    "name": "Projekt med 8 konsulenter",
+    "name": "3 konsulenter",
     "description": "Formålet med projektet er at udvikle et ind- og udrejsesystem til registrering af ind- og udrejseoplysninger for rejsende i Schengen-området. Trustworks har understøttet Rigspolitiet som har fået til opgave at udvikle system, som skal anvendes til grænsekontrol, immigrationskontrol, retshåndhævelse og midlertidig grænsekontrol. Løsningen består både af software og hardware, samt integrationer på tværs af EU systemer og danske registre. Projektet er aktuelt, da det vil forbedre sikkerheden og effektiviteten ved grænserne samt sikre overholdelse af europæiske lovgivninger. Trustworks' hovedopgave i projektet er at sikre sammenhængen mellem forretningen og IT-udviklingen gennem flere leverancer: Afholdelse af workshops for behovsafklaring, dokumentation af behov og krav, bindeled mellem IT-leverandøren og Rigspolitiet for afklaringer, rådgivning inden for arkitektur, leverandørstyring, test og projektledelse. Projektet er forankret hos Rigspolitiet, som er projektejer, mens IT-leverandøren står for den tekniske udvikling. Derudover er der et tæt europæisk samarbejde med EU-Lisa samt danske myndigheder og virksomheder som UIM og Københavns Lufthavn.",
     "from": "2022-03-10",
     "to": "2022-03-10",
@@ -243,41 +291,16 @@
       {
         "useruuid": "55567dc6-f7d4-4fd5-8240-96787e492818",
         "description": "string"
-      },
-      {
-        "useruuid": "f6a36952-c2e8-4e9a-b9ec-1deaa2b2ccfe",
-        "description": "string"
-      },
-      {
-        "useruuid": "7948c5e8-162c-4053-b905-0f59a21d7746",
-        "description": "string"
-      },
-      {
-        "useruuid": "d2878586-800e-4ba2-ac3c-93e5ac69834c",
-        "description": "string"
-      },
-      {
-        "useruuid": "8e15d9c8-1df5-4c32-8e98-001cfabc54b8",
-        "description": "string"
-      },
-      {
-        "useruuid": "ff117b85-51a2-4955-8612-c612ba011b91",
-        "description": "string"
       }
     ],
     "offeringList": [
-      "Udvikler",
       "Forretningsanalyse",
-      "Product Owner",
-      "Scrum Master",
-      "Projektleder",
-      "IT-arkitekt"
+      "Behovsafdækning"
     ],
     "toolsList": [
-      "Process Mapping",
-      "UX",
-      "Systemoverblik (?)",
-      "Udvikling"
+      "ProcessMapping",
+      "Kravspecifikaiton",
+      "Tilstandsdiagram"
     ]
   }
 ]

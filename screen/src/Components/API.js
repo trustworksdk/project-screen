@@ -1,6 +1,5 @@
 const getToken = async () => {
-  // const url = `https://api.trustworks.dk/login?password=${process.env.USERNAME}&username=${process.env.USERNAME}`
-  const url = "https://api.trustworks.dk/login?password=macvyj-bungov-jusmI5&username=David.vinje"
+  const url = `https://api.trustworks.dk/login?password=${process.env.REACT_APP_PASSWORD}&username=${process.env.REACT_APP_USERNAME}`
   const response = await fetch(url)
   const data = await response.json()
   console.log('username', process.env.USERNAME)

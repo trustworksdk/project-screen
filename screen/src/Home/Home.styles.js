@@ -72,9 +72,9 @@ export const Wrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-      }
+    }
     
-    .ydelser-og-tools{
+    .roller-og-tools{
         padding-left: 2vh;
         overflow: hidden;
         height: 100%;
@@ -94,7 +94,7 @@ export const Wrapper = styled.div`
         align-items: center;
     }
 
-    .ydelser{
+    .roller{
         color: #374B05;
         background-color: #eaf3ff;
     }
