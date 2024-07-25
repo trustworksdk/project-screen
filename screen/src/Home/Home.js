@@ -19,7 +19,7 @@ const Home = () => {
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
 
-    setInterval(() => navigate(0),150000)
+    setInterval(() => navigate(0), 60000)
 
     useEffect(() => {
         getProjects(setProjects);
