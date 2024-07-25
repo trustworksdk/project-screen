@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v4
           
       - name: Stop Docker container
-        run: docker stop screen
+        run: docker stop screen || true
 
       - name: Remove Docker container
-        run: docker rm screen
+        run: docker rm screen || true
         
       - name: Build
         run: docker build -t screen -f screen/Dockerfile .
