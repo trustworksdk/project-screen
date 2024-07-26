@@ -7,8 +7,9 @@ import { Carousel } from "react-bootstrap";
 import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
 import HomeCard from "./HomeCard";
 
-const MILLISECONDS_PER_SLIDE = 10000000000000
-
+const MILLISECONDS_PER_SLIDE = 10 * 1000
+const MILLISECONDS_PER_DAY = 60 * 60 * 24 * 1000
+const REFRESH_RATE = MILLISECONDS_PER_DAY / 4
 
 const Home = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Home = () => {
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
 
-    // setInterval(() => navigate(0), 60000)
+    // setInterval(() => navigate(0), REFRESH_RATE)
 
     useEffect(() => {
         getProjects(setProjects);
@@ -98,7 +99,6 @@ const Home = () => {
                 setClientList(newClientList);
             };
             fetchClientPhotos();
-            // setInterval(() => navigate(0), MILLISECONDS_PER_SLIDE * (activeProjects.length + 2) * 10)
         }
 
     }, [activeProjects]);
