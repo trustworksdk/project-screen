@@ -74,7 +74,6 @@ export const Wrapper = styled.div`
     }
 
     .ydelser-og-tools-knap{
-        border-radius: 1rem;
         border: none;
         margin-right: 1rem;
         margin-top: 1rem;
@@ -82,7 +81,7 @@ export const Wrapper = styled.div`
         font-weight: 325;
     }
 
-    .center {
+    .counter {
         display: flex;
         justify-content: center;
         align-items: center;

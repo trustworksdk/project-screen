@@ -2,11 +2,13 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
+const PEOPLE_LIMIT = 11
+
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="container ">
     {/* Client photo + Project title + date */}
-    <div className="row align-items-end pt-3">
-      <Card className="bg-transparent border-0 center">
+    <div className="row align-items-end ">
+      <Card className="max-auto bg-transparent border-0 ">
         <Card.Img
           className="border-0 mb-3"
           src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
@@ -78,41 +80,33 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
     {/* Employee photo */}
     <Card className="row bg-transparent border-0">
       <Card.Body>
-        <Project
-          project={project}
-          getEmployeePhoto={getEmployeePhoto}
-        />
+        <div className='row align-items-center'>
+          {project.projectDescriptionUserList.slice(0, PEOPLE_LIMIT).map(user => (
+            <div className=' col-2' key={user.useruuid}>
+              <img
+                alt=""
+                className="employeephoto"
+                src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
+              />
+            </div>
+          ))}
+          <Counter project={project} />
+        </div>
       </Card.Body>
     </Card>
-
   </div >
 );
 
 const Counter = ({ project }) => {
-  if (project.projectDescriptionUserList.length > 15) {
+  if (project.projectDescriptionUserList.length > PEOPLE_LIMIT) {
     return (
-      <div className='col-1 center employeephoto counter'>
-        <h3>+{project.projectDescriptionUserList.length - 15}</h3>
+      <div className="col-2">
+        <div className="counter bg-light employeephoto">
+          <h3>+{project.projectDescriptionUserList.length - PEOPLE_LIMIT}</h3>
+        </div>
       </div>
     )
   }
-}
-
-const Project = ({ project, getEmployeePhoto }) => {
-  return (
-    <div className='row pt-5 align-items-center'>
-      {project.projectDescriptionUserList.slice(0, 21).map(user => (
-        <div className='py-5 col-1 mr-5' key={user.useruuid}>
-          <img
-            alt=""
-            className="employeephoto"
-            src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
-          />
-        </div>
-      ))}
-      <Counter className="mr-5" project={project} />
-    </div>
-  )
 }
 
 export default HomeCard; 

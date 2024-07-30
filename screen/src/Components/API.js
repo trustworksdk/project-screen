@@ -12,18 +12,12 @@ export const config = { headers: { Authorization: `Bearer ${token}` } };
 
 export async function getProjects(setProjects) {
   try {
-    const response = await fetch('https://api.trustworks.dk/knowledge/projects', config);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    
-    // const data = require('./testJson.json');
-
-
-    // Sort the projects by the "from" field in descending order
+    // const response = await fetch('https://api.trustworks.dk/knowledge/projects', config);
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! Status: ${response.status}`);
+    // }
+    // const data = await response.json();
+    const data = require('./testJson.json');
 
     const sortedProjects = data.sort((a, b) => {
       // Convert the "from" values to Date objects for comparison
