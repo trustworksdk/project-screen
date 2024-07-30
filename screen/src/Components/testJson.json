@@ -6,7 +6,7 @@
     "from": "2022-03-10",
     "to": "2022-03-10",
     "offering": "#Forretningsanalyse #Behovsafdækning",
-    "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
+    "tools": "#Process Mapping #Kravspecifikation #Tilstandsdiagram",
     "projectDescriptionUserList": [
       {
         "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
@@ -26,8 +26,8 @@
       "Behovsafdækning"
     ],
     "toolsList": [
-      "ProcessMapping",
-      "Kravspecifikaiton",
+      "Process Mapping",
+      "Kravspecifikation",
       "Tilstandsdiagram"
     ]
   },
@@ -75,66 +75,19 @@
       {
         "useruuid": "48f88806-7ebc-471b-99c5-82bc2142fb09",
         "description": "Helene - UX"
-      },
-      {
-        "useruuid": "d7a1061b-8de5-44f6-8bc2-ee52ed32a149",
-        "description": "Ditte - Udvikler"
       }
-      
     ],
     "offeringList": [
       "Udvikling",
       "UX",
-      "Projektledelse",
-      "Udvikling",
-      "UX",
-      "Projektledelse",
-      "Udvikling",
-      "UX",
-      "Projektledelse", 
-      "hej",
-      "Projektledelse",
-      "Projektledelse",
-      "Projektledelse",
-      "Udvikling",
-      "UX",
-      "Projektledelse",
-      "Udvikling",
-      "UX",
-      "Projektledelse", 
-      "hej",
-      "Projektledelse",
       "Projektledelse"
     ],
     "toolsList": [
       "NodeJs",
       "React",
       "Figma",
-      "Kravspecifikaiton",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "aaaaaaa",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "nkjkkjjjkkj",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "Kravspecifikaiton",
-      "åååååååååååååå"
+      "Kravspecifikation",
+      "Tilstandsdiagram"
     ]
   },
   {
@@ -144,7 +97,7 @@
     "from": "2022-03-10",
     "to": "2022-03-10",
     "offering": "#Forretningsanalyse #Behovsafdækning",
-    "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
+    "tools": "#Process Mapping #Kravspecifikation #Tilstandsdiagram",
     "projectDescriptionUserList": [
       {
         "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
@@ -247,28 +200,12 @@
       "UX/UI",
       "Behovsafdækning",
       "Forretningsanalyse",
-      "Behovsafdækning",
-      "Scrum Master",
-      "Behovsafdækning",
-      "UX/UI",
-      "Behovsafdækning",
-      "Forretningsanalyse",
-      "Behovsafdækning",
-      "Scrum Master",
-      "Behovsafdækning"
+      "Scrum Master"
     ],
     "toolsList": [
       "Process Mapping",
-      "Kravspecifikaiton",
+      "Kravspecifikation",
       "Tilstandsdiagram",
-      "Scrum",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "ProcessMapping",
-      "Kravspecifikaiton",
-      "Tilstandsdiagram",
-      "ProcessMapping",
-      "Kravspecifikaiton",
       "Scrum"
     ]
   },
@@ -279,7 +216,7 @@
     "from": "2022-03-10",
     "to": "2022-03-10",
     "offering": "#Forretningsanalyse #Behovsafdækning",
-    "tools": "#ProcessMapping #Kravspecifikaiton #Tilstandsdiagram",
+    "tools": "#Process Mapping #Kravspecifikation #Tilstandsdiagram",
     "projectDescriptionUserList": [
       {
         "useruuid": "b3544e89-e1ae-4b8e-b964-d795518b9663",
@@ -299,8 +236,8 @@
       "Behovsafdækning"
     ],
     "toolsList": [
-      "ProcessMapping",
-      "Kravspecifikaiton",
+      "Process Mapping",
+      "Kravspecifikation",
       "Tilstandsdiagram"
     ]
   }

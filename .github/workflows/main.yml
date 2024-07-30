@@ -21,6 +21,13 @@ jobs:
         
       - name: Build
         run: docker build -t screen -f screen/Dockerfile .
-      
+
       - name: Run
-        run: docker run -d --restart=always --name screen -p 3000:3000 screen
+        env:
+          REACT_APP_USERNAME: ${{ secrets.TRUSTWORKS_USERNAME }}
+          REACT_APP_PASSWORD: ${{ secrets.TRUSTWORKS_PASSWORD }}
+          
+        run: docker run -d --restart=always --name screen -p 3000:3000 \
+          -e REACT_APP_USERNAME=${{ secrets.TRUSTWORKS_USERNAME }} \
+          -e REACT_APP_PASSWORD=${{ secrets.TRUSTWORKS_PASSWORD }} \
+          screen
