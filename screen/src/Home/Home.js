@@ -20,7 +20,7 @@ const Home = () => {
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
 
-    // setInterval(() => navigate(0), REFRESH_RATE)
+    setInterval(() => navigate(0), 10000)
 
     useEffect(() => {
         getProjects(setProjects);
