@@ -124,7 +124,7 @@ const Home = () => {
                 <Carousel.Item key="calendar" interval={MILLISECONDS_PER_SLIDE}>
                     <Calendar events={events} />
                 </Carousel.Item>
-                {activeProjects.map((project, index) => (
+                {/* {activeProjects.map((project, index) => (
                     <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard
                             project={project}
@@ -133,7 +133,7 @@ const Home = () => {
                             getEmployeePhoto={getEmployeePhoto}
                         />
                     </Carousel.Item>
-                ))}
+                ))} */}
             </Carousel>
         </Wrapper>
     );

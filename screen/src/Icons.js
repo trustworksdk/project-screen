@@ -14,7 +14,7 @@ export function BrainIcon(props) {
   );
 }
 
-export function AvatarIcon(props) {
+export function UserIcon(props) {
   return (
     <svg fill="none" viewBox="0 0 15 15" height="1em" width="1em" {...props}>
       <path
@@ -41,7 +41,7 @@ export function TakeoffIcon(props) {
   );
 }
 
-export function AddPersonIcon(props) {
+export function TeamIcon(props) {
   return (
     <svg
       viewBox="0 0 512 512"
