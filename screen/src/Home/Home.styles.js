@@ -19,7 +19,6 @@ export const Wrapper = styled.div`
 
 .container {
     height: 99vh;
-    margin: 0 auto;
 }
 
 .right-border {
@@ -67,7 +66,7 @@ h1 {
     ${'' /* border-radius: 1em; */}
     border: none;
     margin-top: 0.75em;
-    ${'' /* font-size: 1em; */}
+    font-size: 1.25em;
     font-weight: 300;
 }
 
@@ -118,7 +117,6 @@ h1 {
 .carousel-indicators .active, .button {
     background: linear-gradient(to right, #e3ddd5, #455977);
     border-radius: 10px;
-    ${'' /* width: 0%; */}
+    ${'' /* width: 50%; */}
 }
-
 `
