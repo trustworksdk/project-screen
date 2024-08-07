@@ -21,8 +21,10 @@ const Home = () => {
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
     const [events, setEvents] = useState([]);
+    const [isPortrait, setOrientation] = useState(window.matchMedia("(orientation: portrait)").matches)
 
     // setInterval(() => navigate(0), REFRESH_RATE)
+    window.addEventListener("resize", () => setOrientation(window.matchMedia("(orientation: portrait)").matches))
 
     useEffect(() => {
         getProjects(setProjects);
@@ -122,18 +124,19 @@ const Home = () => {
         <Wrapper className="body::before">
             <Carousel data-wrap>
                 <Carousel.Item key="calendar" interval={MILLISECONDS_PER_SLIDE}>
-                    <Calendar events={events} />
+                    <Calendar events={events} isPortrait={isPortrait} />
                 </Carousel.Item>
-                {/* {activeProjects.map((project, index) => (
+                {activeProjects.map((project, index) => (
                     <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard
                             project={project}
                             onToolButtonClick={handleToolButtonClick}
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
+                            isPortrait={isPortrait}
                         />
                     </Carousel.Item>
-                ))} */}
+                ))}
             </Carousel>
         </Wrapper>
     );

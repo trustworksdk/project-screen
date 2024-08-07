@@ -3,26 +3,32 @@ import { ClockIcon, BrainIcon, TakeoffIcon, TeamIcon, UserIcon } from '../Icons'
 import styled from "styled-components"
 import { Card } from "react-bootstrap";
 
-const Calendar = ({ events }) => {
+const getIcon = {
+  'Brain': <BrainIcon height="48px" width="48px" />,
+  'Takeoff': <TakeoffIcon height="48px" width="48px" />,
+  'Team': <TeamIcon height="48px" width="48px" />,
+  'User': <UserIcon height="48px" width="48px" />,
+  'Clock': <ClockIcon height="48px" width="48px" />,
+}
+
+const Calendar = ({ events, isPortrait }) => {
+  const numberOfEvents = isPortrait ? 12 : 7
   return (
     <Styling className="body::before">
       <div className="container d-flex flex-column">
-        <div className="calendar pt-5">
-          <h1 style={{ color: "black" }}>Trustworks kalender</h1>
-          <div className="list-group pt-5">
-            {events.map((event, index) => (
-              <Event key={index} event={event} />
-            ))}
-          </div>
+        <h1 style={{ color: "black" }}>Trustworks Kalender</h1>
+        <div className="list-group overflow-hidden ">
+          {/* {events.map((event, index) => ( */}
+          {events.slice(0, numberOfEvents).map((event, index) => (
+            <Event key={index} event={event} />
+          ))}
         </div>
-        <div className="mt-auto mb-5 info-section">
-          <div className="row justify-content-center align-items-end">
-            <div className="col">
-              <InfoCard />
-            </div>
-            <div className="col">
-              <InfoCard />
-            </div>
+        <div className="row my-3 justify-content-center align-items-end">
+          <div className="col">
+            <InfoCard />
+          </div>
+          <div className="col">
+            <InfoCard />
           </div>
         </div>
       </div>
@@ -34,8 +40,8 @@ const Calendar = ({ events }) => {
 const Event = ({ event }) => {
   const [day, month, year] = event?.date?.split(" ")
   return (
-    <div className="list-group-item p-3 row h-25 my-1 d-flex align-items-center ">
-      <div className="col-1 ">
+    <div className="list-group-item p-2 my-1 d-flex align-items-center ">
+      <div className="col-1">
         <p className="display-6">{day}</p>
       </div>
       <div className="col-10">
@@ -43,20 +49,20 @@ const Event = ({ event }) => {
         <div className="text-ellipsis">{event.text}</div>
       </div>
       <div className="col-1 text-end">
-        <ClockIcon width='48px' height='48px' />
+        {getIcon['Clock']}
       </div>
     </div>
   )
 }
 
-const InfoCard = ({ }) => (
+const InfoCard = () => (
   <Card >
     <Card.Title className="pt-3 ps-3 m-0">
       Nedtælling
     </Card.Title>
 
-    <Card.Body className="pt-0 pe-0 ms-auto me-4">
-      <p className="display-1 text-end">100</p>
+    <Card.Body className="pt-0 ms-auto me-3">
+      <p className="display-2 text-end">100</p>
       dage til julefrokost
     </Card.Body>
 
