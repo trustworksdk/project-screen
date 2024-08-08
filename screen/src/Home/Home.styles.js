@@ -49,7 +49,7 @@ h1 {
 .text-ellipsis-project-description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 15; /* Adjust the number of lines to show */
+    -webkit-line-clamp: 5; /* Adjust the number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -59,7 +59,7 @@ h1 {
 .text-ellipsis-project-name {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Adjust the number of lines to show */
+    -webkit-line-clamp: 1; /* Adjust the number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
-const PEOPLE_LIMIT = 11
+const PEOPLE_LIMIT = 5
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto, isPortrait }) => {
   if (isPortrait) {
@@ -21,39 +21,103 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto,
   />
 }
 
-const Vertical = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
-  <div className="container">
-    {/* Client photo + Project title and date */}
-    <div className="row overflow-hidden h-50 align-items-end">
-      <ClientPhoto
-        project={project}
-        getClientLogo={getClientLogo}
-      />
-      <ProjectTitle project={project} />
-    </div>
-    {/* Projektbeskrivelse + roller og tilgang */}
-    <div className="row h-25 overflow-hidden">
-      {/* <ProjectDate project={project} /> */}
-      <div className="col-8 right-border">
-        <ProjectDescription project={project} />
-      </div>
-      <div className="col-4 roller-og-tilgang">
-        <Roller
-          project={project}
-          onToolButtonClick={onToolButtonClick}
+const Vertical = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => {
+  return (
+    <div className="container py-4 d-flex flex-column justify-content-between">
+      <div className="row w-75 mb-2 mx-auto ">
+        <img
+          src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
         />
-        <Tilgang project={project} />
+      </div>
+      <div className="row">
+        <h1 className="text-ellipsis-project-name">
+          {project.name}
+        </h1>
+        <h2>
+          {formatDate(project.from)} - {formatDate(project.to)}
+        </h2>
+      </div>
+      <div className="row h-100">
+        <div className="col-8 right-border text-ellipsis-project-description">
+          {project.description}
+        </div>
+        <div className="col-4">
+          <div className="">
+            <h2>Roller</h2>
+            {project.offeringList.map((rolle, index) => (
+              <button
+                key={index}
+                className="roller mx-1 roller-og-tilgang-knap"
+              >
+                {rolle}
+              </button>
+            ))}
+          </div>
+          <div className="mt-auto">
+            <h2>Tilgang</h2>
+            {project.toolsList.map((tilgang, index) => (
+              <button
+                key={index}
+                className="tilgang mx-1 roller-og-tilgang-knap"
+                onClick={() => onToolButtonClick(tilgang)}
+              >
+                {tilgang}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        {project.projectDescriptionUserList.slice(0, PEOPLE_LIMIT).map(user => (
+          <div className="col-2" key={user.useruuid}>
+            <img
+              alt=""
+              className="employeephoto"
+              src={`data:image/jpeg;base64,${getEmployeePhoto(user.useruuid)}`}
+            />
+          </div>
+        ))}
+        <Counter project={project} />
       </div>
     </div>
-    {/* Employee photos */}
-    <div className="row h-25 align-items-center overflow-hidden ">
-      <EmployeePhotos
-        project={project}
-        getEmployeePhoto={getEmployeePhoto}
-      />
-    </div>
-  </div>
-);
+  )
+}
+
+// const Vertical = ({project, onToolButtonClick, getClientLogo, getEmployeePhoto}) => (
+//   <div className="container">
+//     {/* Client photo + Project title and date */}
+//     <div className="row overflow-hidden align-items-end ">
+//       <ClientPhoto
+//         project={project}
+//         getClientLogo={getClientLogo}
+//       />
+//       <div >
+//         <ProjectTitle project={project} />
+//         <ProjectDate project={project} />
+//       </div>
+//     </div>
+//     {/* Projektbeskrivelse + roller og tilgang */}
+//     <div className="row align-items-center overflow-hidden">
+//       <div className="col-8 right-border">
+//         <ProjectDescription project={project} />
+//       </div>
+//       <div className="col-4 roller-og-tilgang">
+//         <Roller
+//           project={project}
+//           onToolButtonClick={onToolButtonClick}
+//         />
+//         <Tilgang project={project} />
+//       </div>
+//     </div>
+//     {/* Employee photos */}
+//     <div className="row align-items-center overflow-hidden ">
+//       <EmployeePhotos
+//         project={project}
+//         getEmployeePhoto={getEmployeePhoto}
+//       />
+//     </div>
+//   </div>
+// );
 
 const Horizontal = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => (
   <div className="container">
@@ -71,7 +135,7 @@ const Horizontal = ({ project, onToolButtonClick, getClientLogo, getEmployeePhot
       </div>
       <div className="col-8">
         <ProjectTitle project={project} />
-        {/* <ProjectDate project={project} /> */}
+        <ProjectDate project={project} />
         <ProjectDescription project={project} />
         <EmployeePhotos
           project={project}
@@ -91,30 +155,30 @@ const ClientPhoto = ({ project, getClientLogo }) => (
   </Card>
 )
 
-const ProjectTitle = ({ project }) => (
-  <Card className="bg-transparent border-0 text-ellipsis-project-name">
-    <Card.Body>
-      <h1>{project.name}</h1>
-      <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
-    </Card.Body>
-  </Card>
-)
-
-// const ProjectTitle = ({ project }) => (
+// const ProjectTitle = ({project}) => (
 //   <Card className="bg-transparent border-0 text-ellipsis-project-name">
 //     <Card.Body>
 //       <h1>{project.name}</h1>
-//     </Card.Body>
-//   </Card>
-// )
-
-// const ProjectDate = ({ project }) => (
-//   <Card className="bg-transparent border-0 ">
-//     <Card.Body>
 //       <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
 //     </Card.Body>
 //   </Card>
 // )
+
+const ProjectTitle = ({ project }) => (
+  <Card className="bg-transparent border-0 text-ellipsis-project-name">
+    <Card.Body>
+      <h1>{project.name}</h1>
+    </Card.Body>
+  </Card>
+)
+
+const ProjectDate = ({ project }) => (
+  <Card className="bg-transparent border-0 ">
+    <Card.Body>
+      <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
+    </Card.Body>
+  </Card>
+)
 
 const ProjectDescription = ({ project }) => (
   <Card className="bg-transparent border-0">
@@ -188,7 +252,7 @@ const Counter = ({ project }) => {
     return (
       <div className="col-2 my-2">
         <div className="counter rounded-circle bg-light">
-          <h3>{project.projectDescriptionUserList.length - PEOPLE_LIMIT}</h3>
+          <h3>+{project.projectDescriptionUserList.length - PEOPLE_LIMIT}</h3>
         </div>
       </div>
     )
