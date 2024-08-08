@@ -1,137 +1,130 @@
 import styled from "styled-components"
 
-export const Wrapper = styled.div`
-    .container {
-        max-width: 75vw;
-    }
 
+export const Wrapper = styled.div`
+
+@media screen and (orientation: portrait) {
     .card-body > .row {
         height: auto;
-    }
-
-    .mr-5 {
-        margin-right: 1rem;
-    }
-
-    .counter > h3 {
-        font-size: 2.5rem;
-    }
-
-    .row {
-        height: 33vh; 
-    }
-
-    .right-border {
-        border-right: 0.5rem solid #ebe7e1; 
     }
 
     .card-img {
         width: 66%;
     }
 
-    h1 {
-        color: #192434;
-        font-size: 8rem;
-        font-weight: 800;
-        background-color: transparent;
+    .row {
+        ${'' /* height: 33vh;  */}
     }
+}
 
-    h2 {
-        color: #192434;
-        font-size: 3rem;
-        font-weight: 450;
-    }
+* {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
-    h3 {
-        color: #192434;
-        font-size: 3rem;
-        font-weight: 100;
-        line-height: 1.5;
-    }
+.container, .container-fluid {
+    height: 99vh;
+}
 
-    .text-ellipsis-project-description {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 25; /* Adjust the number of lines to show */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-    }
+.right-border {
+    border-right: 0.5em solid lightgray;
+}
 
-    .text-ellipsis-project-name {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1; /* Adjust the number of lines to show */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-    }
-    
-    .ydelser-og-tools{
-        padding-left: 2vh;
-        overflow: hidden;
-        height: 100%;
-    }
+.left-border {
+    border-left: 0.5em solid lightgray;
+}
 
-    .ydelser-og-tools-knap{
-        border: none;
-        margin-right: 1rem;
-        margin-top: 1rem;
-        font-size: 2.25rem;
-        font-weight: 325;
-    }
+h1, h2, h3, h4, h5, h6 {
+    color: #192434;
+    font-weight: normal;
+    line-height: 1.75;
+}
 
-    .counter {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+h1 {
+    font-weight: 600;
+}
 
-    .ydelser{
-        color: #374B05;
-        background-color: #eaf3ff;
-    }
+.text-ellipsis-project-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; /* Adjust the number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.75;
+}
 
+.text-ellipsis-project-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* Adjust the number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
 
-    .tools{
-        color: #FF7201;
-        background-color: #eaf3ff;
-    }
+.roller-og-tilgang{
+    overflow: hidden;
+    ${'' /* height: 100%; */}
+}
 
-  
-    .employeephoto {
-        object-fit: cover;
-        height: 18rem;
-        width: 18rem;
-        border-radius: 50%;
-    }
+.roller-og-tilgang-knap{
+    ${'' /* border-radius: 1em; */}
+    border: none;
+    margin-top: 0.75em;
+    ${'' /* font-size: 1.25em; */}
+    font-weight: 300;
+}
 
-    .counter {
-        background-color: #eee;
-        // margin-left: 1rem;
-    }
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7.5em;
+    width: 7.5em;
+}
+
+.roller{
+    color: #374B05;
+    background-color: #eaf3ff;
+}
 
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      display: none; /* Hide the default icons */
-    }
+.tilgang{
+    color: #FF7201;
+    background-color: #eaf3ff;
+}
 
-    .carousel-indicators {
-        margin: 0;
-    }
-    
-    .carousel-indicators button {
-        background-color: #E3DDD5;
-        margin: 0; /* Space between line segments */
-        border: none;
-        width: 15vw;
-        padding: 1px;
-    }
+.employeephoto {
+    object-fit: cover;
+    height: 7.5em;
+    width: 7.5em;
+    border-radius: 50%;
+}
 
-    
-    .carousel-indicators .active, .button {
-        background: linear-gradient(to right, #E3DDD5, #455977);
-    }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none; /* Hide the default icons */
+}
 
+.carousel-indicators {
+    margin: 0;
+}
+
+.carousel-indicators button {
+    background-color: lightgray;
+    margin: 0; /* Space between line segments */
+    border: none;
+    width: 4%;
+}
+
+
+.carousel-indicators .active, .button {
+    background: linear-gradient(to right, #e3ddd5, #455977);
+    border-radius: 10px;
+    width: 10%;
+    padding: 1px 40px;
+}
 `

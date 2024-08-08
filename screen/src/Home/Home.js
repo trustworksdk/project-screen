@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 // import { ArrowIosBack } from '@styled-icons/evaicons-solid/ArrowIosBack';
 import { useToolContext } from "../Contexts/ToolContext";
 import { Carousel } from "react-bootstrap";
-import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants } from "../Components/API";
+import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants, getEvents } from "../Components/API";
 import HomeCard from "./HomeCard";
+import Calendar from "../Components/Calendar";
 
 const MILLISECONDS_PER_SLIDE = 10 * 1000 * 1000
 const MILLISECONDS_PER_DAY = 60 * 60 * 24 * 1000
@@ -19,14 +20,18 @@ const Home = () => {
     const [employees, setEmployeeList] = useState([]);
     const [consultants, setConsultants] = useState([]);
     const [clientList, setClientList] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [isPortrait, setOrientation] = useState(window.matchMedia("(orientation: portrait)").matches)
 
-    setInterval(() => navigate(0), 10000)
+    setInterval(() => navigate(0), 5000)
+    window.addEventListener("resize", () => setOrientation(window.matchMedia("(orientation: portrait)").matches))
 
     useEffect(() => {
         getProjects(setProjects);
+        getEvents(setEvents)
         getConsultants(setConsultants);
     }, []);
-  
+
     useEffect(() => {
         if (projects.length > 0 && consultants.length > 0) {
             // Create a Set of active consultant IDs
@@ -118,6 +123,9 @@ const Home = () => {
     return (
         <Wrapper className="body::before">
             <Carousel data-wrap>
+                <Carousel.Item key="calendar" interval={MILLISECONDS_PER_SLIDE}>
+                    <Calendar events={events} isPortrait={isPortrait} />
+                </Carousel.Item>
                 {activeProjects.map((project, index) => (
                     <Carousel.Item key={index} interval={MILLISECONDS_PER_SLIDE}>
                         <HomeCard
@@ -125,6 +133,7 @@ const Home = () => {
                             onToolButtonClick={handleToolButtonClick}
                             getClientLogo={getClientLogo}
                             getEmployeePhoto={getEmployeePhoto}
+                            isPortrait={isPortrait}
                         />
                     </Carousel.Item>
                 ))}
