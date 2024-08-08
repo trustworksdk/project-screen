@@ -23,7 +23,7 @@ const Calendar = ({ events, isPortrait }) => {
             <Event key={index} event={event} />
           ))}
         </div>
-        <div className="row my-3 justify-content-center align-items-end">
+        <div className="row mt-auto mb-3 justify-content-center align-items-end">
           <div className="col">
             <InfoCard />
           </div>
@@ -57,11 +57,11 @@ const Event = ({ event }) => {
 
 const InfoCard = () => (
   <Card >
-    <Card.Title className="pt-3 ps-3 m-0">
+    <Card.Title className="pt-3 ps-3">
       Nedtælling
     </Card.Title>
 
-    <Card.Body className="pt-0 ms-auto me-3">
+    <Card.Body className="ms-auto me-3">
       <p className="display-2 text-end">100</p>
       dage til julefrokost
     </Card.Body>

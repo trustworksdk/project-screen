@@ -23,7 +23,7 @@ const Home = () => {
     const [events, setEvents] = useState([]);
     const [isPortrait, setOrientation] = useState(window.matchMedia("(orientation: portrait)").matches)
 
-    setInterval(() => navigate(0), 5000)
+    // setInterval(() => navigate(0), 10000)
     window.addEventListener("resize", () => setOrientation(window.matchMedia("(orientation: portrait)").matches))
 
     useEffect(() => {
