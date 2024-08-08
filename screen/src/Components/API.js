@@ -35,6 +35,7 @@ export async function getProjects(setProjects) {
     //   throw new Error(`HTTP error! Status: ${response.status}`);
     // }
     // const data = await response.json()
+    
     const data = require('./projects.json');
 
     const sortedProjects = data.sort((a, b) => {

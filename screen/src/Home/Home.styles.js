@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
+    ${'' /* line-height: 1.75; */}
 }
 
 .container, .container-fluid {
@@ -29,31 +30,24 @@ export const Wrapper = styled.div`
 }
 
 .right-border {
-    border-right: 0.5em solid lightgray;
+    border-right: 0.5em solid #eee;
 }
 
 .left-border {
     border-left: 0.5em solid lightgray;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #192434;
-    font-weight: normal;
-    line-height: 1.75;
-}
-
 h1 {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .text-ellipsis-project-description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5; /* Adjust the number of lines to show */
+    -webkit-line-clamp: 15; /* Adjust the number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    line-height: 1.75;
 }
 
 .text-ellipsis-project-name {
@@ -111,20 +105,20 @@ h1 {
 
 .carousel-indicators {
     margin: 0;
+    padding: 0 5%;
 }
 
 .carousel-indicators button {
     background-color: lightgray;
     margin: 0; /* Space between line segments */
     border: none;
-    width: 4%;
+    width: 100%;
 }
 
 
 .carousel-indicators .active, .button {
     background: linear-gradient(to right, #e3ddd5, #455977);
     border-radius: 10px;
-    width: 10%;
-    padding: 1px 40px;
+    padding: 0.1em 5vw;
 }
 `

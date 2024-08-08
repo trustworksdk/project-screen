@@ -8,9 +8,10 @@ import { getProjects, getClientLogoUudid, getEmployeePhotoUuid, getConsultants, 
 import HomeCard from "./HomeCard";
 import Calendar from "../Components/Calendar";
 
-const MILLISECONDS_PER_SLIDE = 10 * 1000 * 1000
+const SECONDS_PER_SLIDE = 5000
+const MILLISECONDS_PER_SLIDE = SECONDS_PER_SLIDE * 1000
 const MILLISECONDS_PER_DAY = 60 * 60 * 24 * 1000
-const REFRESH_RATE = MILLISECONDS_PER_DAY / 4
+const REFRESH_PER_DAY = MILLISECONDS_PER_DAY / 4
 
 const Home = () => {
     const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { formatDate } from "../Components/utils";
 
-const PEOPLE_LIMIT = 5
+const PEOPLE_LIMIT = 11
 
 const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto, isPortrait }) => {
   if (isPortrait) {
@@ -23,22 +23,20 @@ const HomeCard = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto,
 
 const Vertical = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto }) => {
   return (
-    <div className="container py-4 d-flex flex-column justify-content-between">
-      <div className="row w-75 mb-2 mx-auto ">
+    <div className="container d-flex flex-column justify-content-around">
+      <div className="row mx-auto ">
         <img
           src={`data:image/jpeg;base64,${getClientLogo(project.clientuuid)}`}
         />
       </div>
       <div className="row">
-        <h1 className="text-ellipsis-project-name">
+        <h1 className="display-1 lh-sm text-ellipsis-project-name">
           {project.name}
         </h1>
-        <h2>
+        <h2 className="lh-lg mb-5">
           {formatDate(project.from)} - {formatDate(project.to)}
         </h2>
-      </div>
-      <div className="row h-100">
-        <div className="col-8 right-border text-ellipsis-project-description">
+        <div className="col-8 right-border lh-lg text-ellipsis-project-description">
           {project.description}
         </div>
         <div className="col-4">
@@ -53,7 +51,7 @@ const Vertical = ({ project, onToolButtonClick, getClientLogo, getEmployeePhoto 
               </button>
             ))}
           </div>
-          <div className="mt-auto">
+          <div className="pt-5">
             <h2>Tilgang</h2>
             {project.toolsList.map((tilgang, index) => (
               <button
@@ -173,15 +171,15 @@ const ProjectTitle = ({ project }) => (
 )
 
 const ProjectDate = ({ project }) => (
-  <Card className="bg-transparent border-0 ">
+  <Card className="bg-transparent border-0">
     <Card.Body>
-      <h2>{formatDate(project.from)} - {formatDate(project.to)}</h2>
+      <h2 >{formatDate(project.from)} - {formatDate(project.to)}</h2>
     </Card.Body>
   </Card>
 )
 
 const ProjectDescription = ({ project }) => (
-  <Card className="bg-transparent border-0">
+  <Card className="py-5 bg-transparent border-0 lh-lg">
     <Card.Body>
       <p className="text-ellipsis-project-description">{project.description}</p>
     </Card.Body>
@@ -189,7 +187,7 @@ const ProjectDescription = ({ project }) => (
 )
 
 const Roller = ({ project }) => (
-  <Card className="roller bg-transparent border-0 ">
+  <Card className="py-5 roller bg-transparent border-0 ">
     <Card.Body>
       <Card.Title>
         <h2>Roller</h2>
@@ -208,10 +206,10 @@ const Roller = ({ project }) => (
   </Card>
 )
 const Tilgang = ({ project, onToolButtonClick }) => (
-  <Card className="tilgang bg-transparent border-0">
+  <Card className="py-5 tilgang bg-transparent border-0">
     <Card.Body>
       <Card.Title>
-        <h2>Tilgang</h2>
+        <h2 style={{color: "#374B05"}}>Tilgang</h2>
       </Card.Title>
       <Card.Text>
         {project.toolsList.map((tilgang, index) => (
@@ -230,10 +228,10 @@ const Tilgang = ({ project, onToolButtonClick }) => (
 
 const EmployeePhotos = ({ project, getEmployeePhoto }) => (
   <Card className="bg-transparent border-0">
-    <Card.Body className="">
-      <div className='d-flex'>
+    <Card.Body>
+      <div className="row">
         {project.projectDescriptionUserList.slice(0, PEOPLE_LIMIT).map(user => (
-          <div className=' col-2' key={user.useruuid}>
+          <div className="col-2" key={user.useruuid}>
             <img
               alt=""
               className="employeephoto"

@@ -12,18 +12,20 @@ const getIcon = {
 }
 
 const Calendar = ({ events, isPortrait }) => {
-  const numberOfEvents = isPortrait ? 12 : 7
+  const numberOfEvents = isPortrait ? 30 : 10
   return (
     <Styling className="body::before">
-      <div className="container d-flex flex-column">
-        <h1 style={{ color: "black" }}>Trustworks Kalender</h1>
+      <div className="container py-5 d-flex flex-column justify-content-around">
+        <h1 className="display-1" style={{ color: "black" }}>
+          Trustworks Kalender
+        </h1>
         <div className="list-group overflow-hidden ">
           {/* {events.map((event, index) => ( */}
           {events.slice(0, numberOfEvents).map((event, index) => (
             <Event key={index} event={event} />
           ))}
         </div>
-        <div className="row mt-auto mb-3 justify-content-center align-items-end">
+        <div className="row mt-">
           <div className="col">
             <InfoCard />
           </div>
